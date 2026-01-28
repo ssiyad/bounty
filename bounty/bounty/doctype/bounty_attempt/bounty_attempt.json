@@ -13,6 +13,10 @@
   "category",
   "severity",
   "pub_comments",
+  "solution_tab",
+  "solution_pr",
+  "solution_rca",
+  "solution_post",
   "rewards_tab",
   "is_eligible_for_rewards",
   "publish_tab",
@@ -98,12 +102,32 @@
    "options": "Bounty Hunter",
    "reqd": 1,
    "set_only_once": 1
+  },
+  {
+   "fieldname": "solution_tab",
+   "fieldtype": "Tab Break",
+   "label": "Solution"
+  },
+  {
+   "fieldname": "solution_pr",
+   "fieldtype": "Data",
+   "label": "Pull Request"
+  },
+  {
+   "fieldname": "solution_rca",
+   "fieldtype": "Data",
+   "label": "Root Cause Analysis"
+  },
+  {
+   "fieldname": "solution_post",
+   "fieldtype": "Data",
+   "label": "Post"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-28 21:50:14.553976",
+ "modified": "2026-01-28 22:07:56.471477",
  "modified_by": "Administrator",
  "module": "Bounty",
  "name": "Bounty Attempt",
