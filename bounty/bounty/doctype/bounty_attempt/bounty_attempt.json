@@ -10,6 +10,7 @@
   "content",
   "evaluation_tab",
   "status",
+  "target",
   "category",
   "severity",
   "pub_comments",
@@ -122,12 +123,18 @@
    "fieldname": "solution_post",
    "fieldtype": "Data",
    "label": "Post"
+  },
+  {
+   "fieldname": "target",
+   "fieldtype": "Link",
+   "label": "Target",
+   "options": "Bounty Target"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-28 22:07:56.471477",
+ "modified": "2026-01-28 22:15:11.964517",
  "modified_by": "Administrator",
  "module": "Bounty",
  "name": "Bounty Attempt",
