@@ -93,6 +93,7 @@
   {
    "fieldname": "hunter",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Hunter",
    "options": "Bounty Hunter",
    "reqd": 1,
@@ -102,7 +103,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-28 16:19:17.966075",
+ "modified": "2026-01-28 17:07:53.841317",
  "modified_by": "Administrator",
  "module": "Bounty",
  "name": "Bounty Attempt",
