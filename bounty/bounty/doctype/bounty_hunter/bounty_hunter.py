@@ -46,3 +46,12 @@ class BountyHunter(Document):
 		if self.username == self.user.username:
 			frappe.throw("Username must be different from real name.")
 
+
+def permission_query(user_id: str | None=None):
+	user_id = user_id or frappe.session.user
+	return "(`tabBounty Hunter`.user_id = {0})".format(frappe.db.escape(user_id))
+
+
+def has_permission(doc: BountyHunter, ptype="read", user:str | None=None):
+	user_id = user or frappe.session.user
+	return doc.user_id == user_id
