@@ -103,7 +103,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-28 17:07:53.841317",
+ "modified": "2026-01-28 21:50:14.553976",
  "modified_by": "Administrator",
  "module": "Bounty",
  "name": "Bounty Attempt",
@@ -163,6 +163,7 @@
    "title": "Rejected"
   }
  ],
+ "title_field": "title",
  "track_changes": 1,
  "track_seen": 1,
  "track_views": 1
