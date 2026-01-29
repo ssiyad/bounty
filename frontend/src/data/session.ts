@@ -31,7 +31,7 @@ export const session = reactive({
     onSuccess() {
       userResource.reset();
       session.user = sessionUser();
-      router.replace('/login');
+      router.replace("/login");
     },
   }),
   user: sessionUser(),

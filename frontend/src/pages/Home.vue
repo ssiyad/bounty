@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Button, Textarea, TextInput } from "frappe-ui";
 import { ref } from "vue";
+import { Button, Textarea, TextInput } from "frappe-ui";
 
 const title = ref("");
 const content = ref("");
@@ -18,8 +18,8 @@ const submit = () => {};
 					<span class="text-gray-900 font-medium">Frappe</span> product?
 				</p>
 				<p>
-					<span class="text-gray-900 font-medium">Report</span> it and get
-					<span class="text-gray-900 font-medium">rewarded</span>!
+					<span class="text-gray-900 font-medium">Report</span> it and earn
+					<span class="text-gray-900 font-medium">rewards</span>!
 				</p>
 			</div>
 			<TextInput v-model="title" type="text" placeholder="Title" class="mb-2" />

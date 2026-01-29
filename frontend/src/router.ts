@@ -20,22 +20,22 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach(async (to, from, next) => {
-  let isLoggedIn = session.isLoggedIn;
-
-  try {
-    await userResource.promise;
-  } catch (error) {
-    isLoggedIn = false;
-  }
-
-  if (!isLoggedIn && to.name !== "Login") {
-    next({ name: "Login" });
-  } //
-  else if (isLoggedIn && to.name === "Login") {
-    next({ name: "Home" });
-  } //
-  else next();
-});
+// router.beforeEach(async (to, from, next) => {
+//   let isLoggedIn = session.isLoggedIn;
+//
+//   try {
+//     await userResource.promise;
+//   } catch (error) {
+//     isLoggedIn = false;
+//   }
+//
+//   if (!isLoggedIn && to.name !== "Login") {
+//     next({ name: "Login" });
+//   } //
+//   else if (isLoggedIn && to.name === "Login") {
+//     next({ name: "Home" });
+//   } //
+//   else next();
+// });
 
 export default router;
