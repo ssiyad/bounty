@@ -5,23 +5,42 @@ import { createRouter, createWebHistory } from "vue-router";
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: () => import("@/pages/Home.vue"),
-  },
-  {
-    path: "/attempts",
-    name: "Attempts",
-    component: () => import("@/pages/Attempts.vue"),
-  },
-  {
-    path: "/attempts/:id",
-    name: "Attempt",
-    component: () => import("@/pages/Attempt.vue"),
-  },
-  {
-    path: "/leaderboard",
-    name: "Leaderboard",
-    component: () => import("@/pages/Leaderboard.vue"),
+    children: [
+      {
+        path: "",
+        name: "Home",
+        component: () => import("@/pages/Home.vue"),
+      },
+      {
+        path: "attempts",
+        children: [
+          {
+            path: "",
+            name: "Attempts",
+            component: () => import("@/pages/Attempts.vue"),
+          },
+          {
+            path: ":id",
+            name: "Attempt",
+            component: () => import("@/pages/Attempt.vue"),
+          },
+        ],
+        meta: {
+          breadcrumb: "Attempts",
+        },
+      },
+      {
+        path: "leaderboard",
+        name: "Leaderboard",
+        component: () => import("@/pages/Leaderboard.vue"),
+        meta: {
+          breadcrumb: "Leaderboard",
+        },
+      },
+    ],
+    meta: {
+      breadcrumb: "Bounty",
+    },
   },
   {
     name: "Login",

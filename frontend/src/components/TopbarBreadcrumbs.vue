@@ -1,22 +1,23 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { Avatar } from "frappe-ui";
-import { session } from "../data/session";
-import { hunterResource } from "../data/hunter";
+import { useRoute } from "vue-router";
+import { Breadcrumbs } from "frappe-ui";
 
-const hunter = computed(() => {
-	if (session.isLoggedIn && hunterResource.data) {
-		return hunterResource.data.display_name;
-	}
-	return "Hunter";
+const route = useRoute();
+
+const breadcrumbs = computed(() => {
+	return route.matched
+		.filter((r) => r.meta?.breadcrumb)
+		.map((r) => ({
+			label:
+				typeof r.meta.breadcrumb === "function"
+					? r.meta.breadcrumb(route)
+					: r.meta.breadcrumb,
+			route: r.path,
+		}));
 });
 </script>
 
 <template>
-	<div class="flex items-center gap-2">
-		<Avatar :label="hunter" size="lg" />
-		<p class="font-medium">
-			{{ hunter }}
-		</p>
-	</div>
+	<Breadcrumbs :items="breadcrumbs" />
 </template>
