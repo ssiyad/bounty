@@ -10,6 +10,7 @@
 		"lint": "biome check --write ."
 	},
 	"dependencies": {
+		"date-fns": "^4.1.0",
 		"feather-icons": "^4.29.2",
 		"frappe-ui": "^0.1.261",
 		"socket.io-client": "^4.7.2",
