@@ -17,7 +17,9 @@ const isHome = computed(() => route.path === "/");
 			<RouterLink to="/leaderboard">
 				<Button label="Leaderboard" icon-left="trending-up" />
 			</RouterLink>
-			<Button label="Attempts" icon-left="crosshair" />
+			<RouterLink to="/attempts">
+				<Button label="Attempts" icon-left="crosshair" />
+			</RouterLink>
 			<TopbarAccount />
 			<RouterLink to="/">
 				<Button label="Report" icon-left="file-text" variant="solid" :disabled="isHome" />
