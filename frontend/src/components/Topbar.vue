@@ -9,7 +9,9 @@ import TopbarBreadcrumbs from "./TopbarBreadcrumbs.vue";
 		<TopbarBreadcrumbs />
 		<div class="space-x-2">
 			<Button label="Help" icon-left="info" />
-			<Button label="Leaderboard" icon-left="trending-up" />
+			<RouterLink to="/leaderboard">
+				<Button label="Leaderboard" icon-left="trending-up" />
+			</RouterLink>
 			<Button label="Attempts" icon-left="crosshair" />
 			<TopbarAccount />
 		</div>
