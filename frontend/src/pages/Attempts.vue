@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Badge } from "frappe-ui";
+import { statusTheme } from "../utils/badgeThemes";
 
 const attempts = [
 	{ title: "Attempt 1", status: "Pending", date: "2024-06-01" },
@@ -8,19 +9,6 @@ const attempts = [
 	{ title: "Attempt 4", status: "Accepted", date: "2024-06-04" },
 	{ title: "Attempt 5", status: "Pending", date: "2024-06-05" },
 ];
-
-const statusTheme = (status: string) => {
-	switch (status) {
-		case "Accepted":
-			return "green";
-		case "Rejected":
-			return "red";
-		case "Pending":
-			return "orange";
-		default:
-			return "gray";
-	}
-};
 </script>
 
 <template>

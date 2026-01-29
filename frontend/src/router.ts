@@ -14,6 +14,11 @@ const routes = [
     component: () => import("@/pages/Attempts.vue"),
   },
   {
+    path: "/attempts/:id",
+    name: "Attempt",
+    component: () => import("@/pages/Attempt.vue"),
+  },
+  {
     path: "/leaderboard",
     name: "Leaderboard",
     component: () => import("@/pages/Leaderboard.vue"),
