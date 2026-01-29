@@ -1,7 +1,12 @@
 <script setup lang="ts">
+import { computed } from "vue";
+import { useRoute } from "vue-router";
 import { Button } from "frappe-ui";
 import TopbarAccount from "./TopbarAccount.vue";
 import TopbarBreadcrumbs from "./TopbarBreadcrumbs.vue";
+
+const route = useRoute();
+const isHome = computed(() => route.path === "/");
 </script>
 
 <template>
@@ -14,6 +19,9 @@ import TopbarBreadcrumbs from "./TopbarBreadcrumbs.vue";
 			</RouterLink>
 			<Button label="Attempts" icon-left="crosshair" />
 			<TopbarAccount />
+			<RouterLink to="/">
+				<Button label="Report" icon-left="file-text" variant="solid" :disabled="isHome" />
+			</RouterLink>
 		</div>
 	</div>
 </template>
