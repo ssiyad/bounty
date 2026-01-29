@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { Badge } from "frappe-ui";
+import { Badge, usePageMeta } from "frappe-ui";
 import { statusTheme } from "../utils/badgeThemes";
+import { pageTitle } from "../utils/page";
 
 const attempts = [
 	{ title: "Attempt 1", status: "Pending", date: "2024-06-01" },
@@ -9,6 +10,10 @@ const attempts = [
 	{ title: "Attempt 4", status: "Accepted", date: "2024-06-04" },
 	{ title: "Attempt 5", status: "Pending", date: "2024-06-05" },
 ];
+
+usePageMeta(() => ({
+	title: pageTitle("Attempts"),
+}));
 </script>
 
 <template>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Avatar } from "frappe-ui";
+import { Avatar, usePageMeta } from "frappe-ui";
+import { pageTitle } from "../utils/page";
 
 const leaderboard = [
 	{ name: "Alice", score: 150 },
@@ -18,6 +19,10 @@ const leaderboard = [
 	{ name: "Peggy", score: 2 },
 	{ name: "Sybil", score: 1 },
 ];
+
+usePageMeta(() => ({
+	title: pageTitle("Leaderboard"),
+}));
 </script>
 
 <template>

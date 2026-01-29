@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useRoute } from "vue-router";
-import { Badge, createDocumentResource } from "frappe-ui";
+import { Badge, createDocumentResource, usePageMeta } from "frappe-ui";
 import { statusTheme, categoryTheme, severityTheme } from "../utils/badgeThemes";
+import { pageTitle } from "../utils/page";
 
 const route = useRoute();
 const attemptId = route.params.id as string;
@@ -14,6 +15,10 @@ const attemptResource = createDocumentResource({
 });
 
 const attempt = computed(() => attemptResource.doc);
+
+usePageMeta(() => ({
+	title: pageTitle(attempt.value.title),
+}));
 </script>
 
 <template>

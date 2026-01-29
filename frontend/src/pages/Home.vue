@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { Button, Textarea, TextInput } from "frappe-ui";
+import { Button, Textarea, TextInput, usePageMeta } from "frappe-ui";
+import { pageTitle } from "../utils/page";
 
 const title = ref("");
 const content = ref("");
 
 const cancel = () => (content.value = "");
 const submit = () => {};
+
+usePageMeta(() => ({
+	title: pageTitle("Report an Issue"),
+}));
 </script>
 
 <template>
