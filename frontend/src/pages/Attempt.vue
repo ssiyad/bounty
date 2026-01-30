@@ -13,6 +13,7 @@ const attemptId = route.params.id as string;
 const attemptResource = createDocumentResource({
 	doctype: "Bounty Attempt",
 	name: attemptId,
+	cache: ["Attempt", attemptId],
 	auto: !!attemptId,
 	whitelistedMethods: {
 		chat: {
