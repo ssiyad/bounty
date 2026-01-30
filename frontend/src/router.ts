@@ -37,6 +37,14 @@ const routes = [
           breadcrumb: "Leaderboard",
         },
       },
+      {
+        path: "account",
+        name: "Account",
+        component: () => import("@/pages/Account.vue"),
+        meta: {
+          breadcrumb: "Account",
+        },
+      },
     ],
     meta: {
       breadcrumb: "Bounty",

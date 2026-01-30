@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Button } from "frappe-ui";
-import TopbarAccount from "./TopbarAccount.vue";
 import TopbarBreadcrumbs from "./TopbarBreadcrumbs.vue";
 </script>
 
@@ -15,7 +14,9 @@ import TopbarBreadcrumbs from "./TopbarBreadcrumbs.vue";
 			<RouterLink to="/attempts">
 				<Button label="Attempts" icon-left="crosshair" />
 			</RouterLink>
-			<TopbarAccount />
+			<RouterLink to="/account">
+				<Button label="Account" icon-left="user" />
+			</RouterLink>
 		</div>
 	</div>
 </template>
