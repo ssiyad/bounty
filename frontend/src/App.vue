@@ -5,7 +5,7 @@ import Topbar from "./components/Topbar.vue";
 
 <template>
 	<FrappeUIProvider>
-		<div>
+		<div class="h-screen w-screen flex flex-col overflow-hidden">
 			<Topbar />
 			<RouterView />
 		</div>

@@ -45,9 +45,9 @@ usePageMeta(() => ({
 </script>
 
 <template>
-	<div class="container mx-auto py-16">
-		<div v-if="attempt" class="flex divide-x">
-			<div class="pr-4">
+	<div class="size-full">
+		<div v-if="attempt" class="flex divide-x size-full">
+			<div class="container mx-auto py-8 overflow-y-auto">
 				<div class="text-3xl font-medium mb-4">
 					{{ attempt.title }}
 				</div>
@@ -63,7 +63,7 @@ usePageMeta(() => ({
 					"
 				/>
 			</div>
-			<div class="w-64 shrink-0 pl-4 py-4 space-y-4">
+			<div class="w-72 shrink-0 px-4 py-4 space-y-4">
 				<div v-if="target" class="flex items-center justify-between">
 					<p class="text-sm">Target</p>
 					<a :href="target.repository" target="_blank">

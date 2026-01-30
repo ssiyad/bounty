@@ -45,7 +45,7 @@ const isReplyOpen = ref(false);
 						'bg-surface-gray-2': message.sent_or_received === 'Received',
 						'bg-surface-blue-1 ml-auto mr-0': message.sent_or_received === 'Sent',
 					}"
-					class="max-w-lg w-max leading-relaxed px-4 py-2 rounded-lg text-ink-gray-8"
+					class="max-w-2xl w-max leading-relaxed px-4 py-2 rounded-lg text-ink-gray-8"
 				>
 					{{ message.content }}
 				</div>
