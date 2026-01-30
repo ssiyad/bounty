@@ -26,7 +26,7 @@ usePageMeta(() => ({
 </script>
 
 <template>
-	<div class="container mx-auto max-w-3xl py-16">
+	<div class="container mx-auto py-8">
 		<div class="divide-y">
 			<div class="flex justify-between items-center font-medium pb-4">
 				<p class="ml-9">Hunter</p>
