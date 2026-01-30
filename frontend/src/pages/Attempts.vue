@@ -28,18 +28,21 @@ usePageMeta(() => ({
 				<div class="w-1/4 text-end">Date</div>
 				<div class="w-1/4 text-end">Status</div>
 			</div>
-			<div
+			<RouterLink
 				v-for="attempt in attemptsResource.data"
-				:key="attempt.name"
-				class="flex py-4 cursor-pointer"
-				@click="router.push({ name: 'Attempt', params: { id: attempt.name } })"
+				:to="{
+					name: 'Attempt',
+					params: { id: attempt.name },
+				}"
 			>
-				<div class="w-1/2">{{ attempt.title }}</div>
-				<div class="w-1/4 text-end">{{ formatDate(attempt.creation, "PPP") }}</div>
-				<div class="w-1/4 text-end">
-					<Badge :label="attempt.status" :theme="statusTheme(attempt.status)" />
+				<div :key="attempt.name" class="flex py-4 cursor-pointer">
+					<div class="w-1/2">{{ attempt.title }}</div>
+					<div class="w-1/4 text-end">{{ formatDate(attempt.creation, "PPP") }}</div>
+					<div class="w-1/4 text-end">
+						<Badge :label="attempt.status" :theme="statusTheme(attempt.status)" />
+					</div>
 				</div>
-			</div>
+			</RouterLink>
 		</div>
 	</div>
 </template>

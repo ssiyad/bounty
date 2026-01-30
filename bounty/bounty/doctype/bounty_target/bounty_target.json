@@ -6,7 +6,8 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "repository"
+  "repository",
+  "logo"
  ],
  "fields": [
   {
@@ -15,6 +16,11 @@
    "in_list_view": 1,
    "label": "Repository",
    "reqd": 1
+  },
+  {
+   "fieldname": "logo",
+   "fieldtype": "Attach Image",
+   "label": "Logo"
   }
  ],
  "grid_page_length": 50,
@@ -25,7 +31,7 @@
    "link_fieldname": "target"
   }
  ],
- "modified": "2026-01-28 22:16:28.372773",
+ "modified": "2026-01-30 17:51:53.018050",
  "modified_by": "Administrator",
  "module": "Bounty",
  "name": "Bounty Target",
