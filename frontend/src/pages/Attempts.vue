@@ -25,10 +25,10 @@ usePageMeta(() => ({
 	<div class="container mx-auto py-8">
 		<div class="divide-y">
 			<div class="flex pb-4 font-medium">
-				<div class="w-1/2">Title</div>
-				<div class="w-1/4 text-end">Target</div>
-				<div class="w-1/4 text-end">Date</div>
-				<div class="w-1/4 text-end">Status</div>
+				<div class="grow">Title</div>
+				<div class="w-[180px] text-end">Target</div>
+				<div class="w-[200px] text-end">Date</div>
+				<div class="w-[150px] text-end">Status</div>
 			</div>
 			<RouterLink
 				v-for="attempt in attemptsResource.data"
@@ -39,8 +39,8 @@ usePageMeta(() => ({
 				class="block"
 			>
 				<div :key="attempt.name" class="flex py-4 cursor-pointer">
-					<div class="w-1/2">{{ attempt.title }}</div>
-					<div class="w-1/4 text-end">
+					<div class="grow">{{ attempt.title }}</div>
+					<div class="w-[180px] text-end">
 						<Target
 							v-if="attempt.target"
 							:target="attempt.target"
@@ -48,8 +48,8 @@ usePageMeta(() => ({
 						/>
 						<span v-else>&mdash;</span>
 					</div>
-					<div class="w-1/4 text-end">{{ formatDate(attempt.creation, "PPP") }}</div>
-					<div class="w-1/4 text-end">
+					<div class="w-[200px] text-end">{{ formatDate(attempt.creation, "PPP") }}</div>
+					<div class="w-[150px] text-end">
 						<Badge :label="attempt.status" :theme="statusTheme(attempt.status)" />
 					</div>
 				</div>
