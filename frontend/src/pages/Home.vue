@@ -40,14 +40,14 @@ usePageMeta(() => ({
 <template>
 	<div class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
 		<div class="max-w-3xl mx-auto min-w-[700px]">
-			<div class="mb-8 space-y-2 text-2xl text-gray-800 font-medium">
+			<div class="mb-8 space-y-2 text-2xl text-ink-gray-8 font-medium">
 				<p>
-					Found a <span class="text-gray-900 font-semibold">security</span> issue with a
-					<span class="text-gray-900 font-semibold">Frappe</span> product?
+					Found a <span class="text-ink-gray-9 font-semibold">security</span> issue with
+					a <span class="text-ink-gray-9 font-semibold">Frappe</span> product?
 				</p>
 				<p>
-					<span class="text-gray-900 font-semibold">Report</span> it and earn
-					<span class="text-gray-900 font-semibold">rewards</span>!
+					<span class="text-ink-gray-9 font-semibold">Report</span> it and earn
+					<span class="text-ink-gray-9 font-semibold">rewards</span>!
 				</p>
 			</div>
 			<TextInput v-model="title" type="text" placeholder="Title" class="mb-2" />
