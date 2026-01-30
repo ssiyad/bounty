@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useRoute } from "vue-router";
-import { Avatar, Badge, Button, createDocumentResource, usePageMeta } from "frappe-ui";
+import { Avatar, Badge, createDocumentResource, usePageMeta } from "frappe-ui";
+import Chat from "../components/attempt/Chat.vue";
 import { statusTheme, categoryTheme, severityTheme } from "../utils/badgeThemes";
 import { pageTitle } from "../utils/page";
 
@@ -18,7 +19,12 @@ const attemptResource = createDocumentResource({
 			auto: true,
 			initialData: [],
 		},
-		reply: "reply",
+		reply: {
+			method: "reply",
+			onSuccess: (messages: any[]) => {
+				attemptResource.chat.setData(messages);
+			},
+		},
 	},
 });
 
@@ -48,32 +54,14 @@ usePageMeta(() => ({
 				<p class="leading-relaxed mb-8">
 					{{ attempt.content }}
 				</p>
-				<hr />
-				<div class="space-y-4 py-4">
-					<div class="w-max ml-auto mr-0 flex gap-4 text-sm text-center">
-						<div class="flex items-center gap-2">
-							<div class="bg-surface-gray-2 size-4 border rounded-full"></div>
-							<p>Frappe</p>
-						</div>
-						<div class="flex items-center gap-2">
-							<div class="bg-surface-blue-1 size-4 border rounded-full"></div>
-							<p>You</p>
-						</div>
-						<Button label="Reply" variant="outline" />
-					</div>
-					<div v-for="message in attemptResource.chat.data" :key="message.content">
-						<div
-							:class="{
-								'bg-surface-gray-2': message.sent_or_received === 'Received',
-								'bg-surface-blue-1 ml-auto mr-0':
-									message.sent_or_received === 'Sent',
-							}"
-							class="max-w-lg w-max leading-relaxed px-4 py-2 rounded-lg text-ink-gray-8"
-						>
-							{{ message.content }}
-						</div>
-					</div>
-				</div>
+				<Chat
+					:messages="attemptResource.chat.data"
+					@reply="
+						attemptResource.reply.submit({
+							content: $event,
+						})
+					"
+				/>
 			</div>
 			<div class="w-64 shrink-0 pl-4 py-4 space-y-4">
 				<div v-if="target" class="flex items-center justify-between">

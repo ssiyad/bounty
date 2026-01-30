@@ -15,7 +15,7 @@ class BountyAttempt(Document):
 		Chat = frappe.qb.DocType("Communication")
 		return (
 			frappe.qb.from_(Chat)
-			.select(Chat.name)
+			.select(Chat.name.as_("id"))
 			.select(Chat.content)
 			.select(Chat.communication_date.as_("date"))
 			.select(Chat.sent_or_received)
