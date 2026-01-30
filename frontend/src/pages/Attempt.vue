@@ -12,6 +12,14 @@ const attemptResource = createDocumentResource({
 	doctype: "Bounty Attempt",
 	name: attemptId,
 	auto: !!attemptId,
+	whitelistedMethods: {
+		chat: {
+			method: "chat",
+			auto: true,
+			initialData: [],
+		},
+		reply: "reply",
+	},
 });
 
 const attempt = computed(() => attemptResource.doc);
@@ -24,35 +32,6 @@ const targetResource = createDocumentResource({
 });
 
 const target = computed(() => targetResource.doc);
-
-const chat = [
-	{
-		content: "Hello, how can I help you?",
-		sent_or_received: "Received",
-		date: "2024-01-01",
-	},
-	{
-		content: "I have a question about my order.",
-		sent_or_received: "Sent",
-		date: "2024-01-01",
-	},
-	{
-		content:
-			"This is a very long text message to demonstrate how the chat bubbles will handle larger amounts of text. It should wrap properly and still look good in the UI.",
-		sent_or_received: "Sent",
-		date: "2024-01-01",
-	},
-	{
-		content: "Sure, can you provide your order number?",
-		sent_or_received: "Received",
-		date: "2024-01-01",
-	},
-	{
-		content: "Yes, it's 12345.",
-		sent_or_received: "Sent",
-		date: "2024-01-01",
-	},
-].reverse();
 
 usePageMeta(() => ({
 	title: pageTitle(attempt.value?.title),
@@ -82,7 +61,7 @@ usePageMeta(() => ({
 						</div>
 						<Button label="Reply" variant="outline" />
 					</div>
-					<div v-for="message in chat" :key="message.content">
+					<div v-for="message in attemptResource.chat.data" :key="message.content">
 						<div
 							:class="{
 								'bg-surface-gray-2': message.sent_or_received === 'Received',
