@@ -19,7 +19,7 @@ const target = createDocumentResource({
 </script>
 
 <template>
-	<a v-if="target.doc" :href="target.doc.repository" target="_blank">
+	<a v-if="target.doc" :href="target.doc.repository" target="_blank" class="block w-max">
 		<div class="flex items-center gap-2">
 			<img
 				v-if="target.doc.logo"
