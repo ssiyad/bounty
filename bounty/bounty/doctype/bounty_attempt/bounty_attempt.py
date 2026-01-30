@@ -10,6 +10,12 @@ from frappe.core.doctype.communication.communication import Communication
 
 
 class BountyAttempt(Document):
+	def before_validate(self):
+		self.ensure_hunter()
+
+	def ensure_hunter(self):
+		self.hunter = hunter_id(frappe.session.user)
+
 	@frappe.whitelist()
 	def chat(self):
 		Chat = frappe.qb.DocType("Communication")

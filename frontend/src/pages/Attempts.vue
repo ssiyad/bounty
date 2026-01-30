@@ -1,17 +1,15 @@
 <script setup lang="ts">
 import { formatDate } from "date-fns";
-import { useRouter } from "vue-router";
 import { Badge, createListResource, usePageMeta } from "frappe-ui";
 import Target from "../components/Target.vue";
 import { statusTheme } from "../utils/badgeThemes";
 import { pageTitle } from "../utils/page";
 
-const router = useRouter();
-
 const attemptsResource = createListResource({
 	doctype: "Bounty Attempt",
 	cache: ["Attempts"],
 	fields: ["name", "title", "creation", "status", "target"],
+	orderBy: "creation desc",
 	pageLength: 99999,
 	auto: true,
 });
