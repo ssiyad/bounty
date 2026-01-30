@@ -38,6 +38,8 @@ class BountyHunter(Document):
 		self.prevent_real_name()
 
 	def prevent_duplicate(self):
+		if not self.has_value_changed("user_id"):
+			return
 		exists = frappe.db.exists({"doctype": "Bounty Hunter","user_id": self.user.name})
 		if exists:
 			frappe.throw(f"Bounty Hunter {self.user.full_name} already exists.")

@@ -12,3 +12,15 @@ export const hunterResource = createResource({
     },
   }),
 });
+
+export const hunterSaveResource = createResource({
+  url: "frappe.client.save",
+  method: "POST",
+  auto: false,
+  makeParams: (data: any) => ({
+    doc: data,
+  }),
+  onSuccess: (data: any) => {
+    hunterResource.setData(data);
+  },
+});

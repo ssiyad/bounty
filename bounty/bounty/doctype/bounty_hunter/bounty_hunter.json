@@ -8,7 +8,12 @@
  "field_order": [
   "user_id",
   "username",
-  "display_name"
+  "display_name",
+  "bio",
+  "social_github",
+  "social_linkedin",
+  "company",
+  "location"
  ],
  "fields": [
   {
@@ -32,6 +37,31 @@
    "options": "User",
    "reqd": 1,
    "unique": 1
+  },
+  {
+   "fieldname": "bio",
+   "fieldtype": "Small Text",
+   "label": "Bio"
+  },
+  {
+   "fieldname": "social_github",
+   "fieldtype": "Data",
+   "label": "GitHub"
+  },
+  {
+   "fieldname": "social_linkedin",
+   "fieldtype": "Data",
+   "label": "LinkedIn"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Data",
+   "label": "Company"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Data",
+   "label": "Location"
   }
  ],
  "grid_page_length": 50,
@@ -42,7 +72,7 @@
    "link_fieldname": "hunter"
   }
  ],
- "modified": "2026-01-28 16:37:33.710453",
+ "modified": "2026-01-31 02:25:22.064501",
  "modified_by": "Administrator",
  "module": "Bounty",
  "name": "Bounty Hunter",
