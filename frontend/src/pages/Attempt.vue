@@ -40,7 +40,7 @@ usePageMeta(() => ({
 	<div class="size-full">
 		<div v-if="attempt" class="flex divide-x size-full">
 			<div class="container mx-auto py-8 overflow-y-auto">
-				<div class="text-3xl font-medium mb-4">
+				<div class="text-3xl font-semibold mb-4">
 					{{ attempt.title }}
 				</div>
 				<p class="leading-relaxed mb-8">
