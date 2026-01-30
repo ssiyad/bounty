@@ -19,7 +19,13 @@ const target = createDocumentResource({
 </script>
 
 <template>
-	<a v-if="target.doc" :href="target.doc.repository" target="_blank" class="block w-max">
+	<a
+		v-if="target.doc"
+		:href="target.doc.repository"
+		target="_blank"
+		class="block w-max"
+		@click="$event.stopPropagation()"
+	>
 		<div class="flex items-center gap-2">
 			<img
 				v-if="target.doc.logo"
