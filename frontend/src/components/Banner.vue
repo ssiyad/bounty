@@ -14,11 +14,11 @@ withDefaults(
 	<div
 		class="px-4 py-3 border-b"
 		:class="{
-			'bg-gray-100 text-gray-800': variant === 'default',
-			'bg-blue-100 text-blue-800': variant === 'info',
-			'bg-yellow-100 text-yellow-800': variant === 'warning',
-			'bg-red-100 text-red-800': variant === 'error',
-			'bg-green-100 text-green-800': variant === 'success',
+			'bg-surface-gray-1 text-ink-gray-9': variant === 'default',
+			'bg-surface-blue-1 text-ink-blue-3': variant === 'info',
+			'bg-surface-orange-1 text-ink-red-4': variant === 'warning',
+			'bg-surface-red-1 text-ink-red-4': variant === 'error',
+			'bg-surface-green-1 text-ink-green-3': variant === 'success',
 		}"
 	>
 		<p class="leading-relaxed">

@@ -7,6 +7,12 @@ import { pageTitle } from "../utils/page";
 usePageMeta(() => ({
 	title: pageTitle("Account"),
 }));
+
+function toggleTheme() {
+	const currentTheme = document.documentElement.getAttribute("data-theme");
+	const newTheme = currentTheme === "dark" ? "light" : "dark";
+	document.documentElement.setAttribute("data-theme", newTheme);
+}
 </script>
 
 <template>
@@ -21,13 +27,15 @@ usePageMeta(() => ({
 						{{ hunterResource.data?.user_id }}
 					</p>
 				</div>
-				<Button
-					label="Logout"
-					variant="subtle"
-					theme="red"
-					icon-left="log-out"
-					@click="session.logout.submit()"
-				/>
+				<div class="flex gap-2">
+					<Button label="Toggle Theme" icon-left="moon" @click="toggleTheme()" />
+					<Button
+						label="Logout"
+						theme="red"
+						icon-left="log-out"
+						@click="session.logout.submit()"
+					/>
+				</div>
 			</div>
 			<div class="max-w-md space-y-6">
 				<div class="space-y-2">
