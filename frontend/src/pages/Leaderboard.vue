@@ -26,18 +26,20 @@ usePageMeta(() => ({
 </script>
 
 <template>
-	<div class="container mx-auto py-8">
-		<div class="divide-y">
-			<div class="flex justify-between items-center font-medium pb-4">
-				<p class="ml-9">Hunter</p>
-				<p>Score</p>
-			</div>
-			<div v-for="hunter in leaderboard" class="py-4 flex justify-between items-center">
-				<div class="flex items-center gap-2">
-					<Avatar :label="hunter.name" size="lg" />
-					<p>{{ hunter.name }}</p>
+	<div class="overflow-auto">
+		<div class="container mx-auto py-8">
+			<div class="divide-y">
+				<div class="flex justify-between items-center font-medium pb-4">
+					<p class="ml-9">Hunter</p>
+					<p>Score</p>
 				</div>
-				<p>{{ hunter.score }}</p>
+				<div v-for="hunter in leaderboard" class="py-4 flex justify-between items-center">
+					<div class="flex items-center gap-2">
+						<Avatar :label="hunter.name" size="lg" />
+						<p>{{ hunter.name }}</p>
+					</div>
+					<p>{{ hunter.score }}</p>
+				</div>
 			</div>
 		</div>
 	</div>
