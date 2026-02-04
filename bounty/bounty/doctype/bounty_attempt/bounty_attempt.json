@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "UUID",
+ "autoname": "hash",
  "creation": "2026-01-28 16:12:29.131997",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -134,11 +134,11 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-28 22:15:11.964517",
+ "modified": "2026-02-04 19:07:04.640360",
  "modified_by": "Administrator",
  "module": "Bounty",
  "name": "Bounty Attempt",
- "naming_rule": "UUID",
+ "naming_rule": "Random",
  "owner": "Administrator",
  "permissions": [
   {
