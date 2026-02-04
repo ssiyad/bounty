@@ -5,7 +5,7 @@
 				<div class="w-12 px-4 py-3"></div>
 				<div class="w-56 px-4 py-3">Parent</div>
 				<div class="grow px-4 py-3">Name</div>
-				<div class="w-20 px-4 py-3">Line</div>
+				<div class="w-20 px-4 py-3 text-end">Line</div>
 				<div class="w-56 px-4 py-3 text-end">Args</div>
 			</div>
 			<div
@@ -13,7 +13,7 @@
 				v-for="(endpoint, index) in unusedEndpoints.data"
 				:key="endpoint.id"
 			>
-				<div class="w-12 px-4 py-3">{{ index + 1 }}</div>
+				<div class="w-12 px-4 py-3 flex items-center justify-center">{{ index + 1 }}</div>
 				<div class="w-56 px-4 py-3 truncate">{{ endpoint.parent }}</div>
 				<a
 					:href="githubLink(endpoint)"
@@ -22,7 +22,7 @@
 				>
 					{{ endpoint.name }}
 				</a>
-				<div class="w-20 px-4 py-3">{{ endpoint.line_number }}</div>
+				<div class="w-20 px-4 py-3 text-end">{{ endpoint.line_number }}</div>
 				<div class="w-56 px-4 py-3 text-end text-wrap">
 					{{ endpoint.args.join(", ") }}
 				</div>
