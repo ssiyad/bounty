@@ -10,7 +10,7 @@ from bounty.sherlock.lens._function import FrappeFunction
 from ._module import FrappeModule
 
 
-def functions():
+def functions(target: str):
 	target = frappe.get_doc("Bounty Target", "Cloud")
 	functions: list[FrappeFunction] = []
 	for root, _, files in os.walk(target.source_path):
@@ -22,8 +22,8 @@ def functions():
 	return functions
 
 
-def endpoints():
-	all_functions = functions()
+def endpoints(target: str):
+	all_functions = functions(target)
 	endpoints: list[FrappeFunction] = []
 	for function in all_functions:
 		if any(c.isupper() for c in function.id):
@@ -34,8 +34,8 @@ def endpoints():
 	return endpoints
 
 
-def used_endpoints() -> list[str]:
-	target = frappe.get_doc("Bounty Target", "Cloud")
+def used_endpoints(target: str) -> list[str]:
+	target = frappe.get_doc("Bounty Target", target)
 	extensions = ["vue", "js", "ts"]
 	pattern = re.compile(r"url: [\'|\"](.*)[\'|\"]")
 	used_endpoints = set()
@@ -54,12 +54,20 @@ def used_endpoints() -> list[str]:
 
 @frappe.whitelist()
 @caching.redis_cache(ttl=60 * 60)
-def unused_endpoints():
-	all_endpoints = endpoints()
-	all_used_endpoints = used_endpoints()
+def unused_endpoints(target: str):
+	target_doc = frappe.get_doc("Bounty Target", target)
+	all_endpoints = endpoints(target)
+	all_used_endpoints = used_endpoints(target)
 	unused_endpoints: list[FrappeFunction] = []
-	print(all_used_endpoints)
 	for endpoint in all_endpoints:
 		if endpoint.id not in all_used_endpoints:
 			unused_endpoints.append(endpoint)
-	return [endpoint.to_json() for endpoint in unused_endpoints]
+	unused_endpoints_ = []
+	for endpoint in unused_endpoints:
+		unused_endpoints_.append(
+			{
+				**endpoint.to_json(),
+				**target_doc.search_history(endpoint.id),
+			}
+		)
+	return unused_endpoints_
