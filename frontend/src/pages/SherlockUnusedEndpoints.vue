@@ -15,13 +15,11 @@
 			>
 				<div class="w-12 px-4 py-3 flex items-center justify-center">{{ index + 1 }}</div>
 				<div class="w-56 px-4 py-3 truncate">{{ endpoint.parent }}</div>
-				<a
-					:href="githubLink(endpoint)"
-					target="_blank"
-					class="block grow px-4 py-3 font-medium"
-				>
-					{{ endpoint.name }}
-				</a>
+				<div class="grow px-4 py-3 font-medium">
+					<a :href="githubLink(endpoint)" target="_blank">
+						{{ endpoint.name }}
+					</a>
+				</div>
 				<div class="w-20 px-4 py-3 text-end">{{ endpoint.line_number }}</div>
 				<div class="w-56 px-4 py-3 text-end text-wrap">
 					{{ endpoint.args.join(", ") }}
