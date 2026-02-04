@@ -45,6 +45,27 @@ const routes = [
           breadcrumb: "Account",
         },
       },
+      {
+        path: "sherlock",
+        children: [
+          {
+            path: "",
+            name: "Sherlock",
+            component: () => import("@/pages/Sherlock.vue"),
+          },
+          {
+            path: "unused-endpoints",
+            name: "SherlockUnusedEndpoints",
+            component: () => import("@/pages/SherlockUnusedEndpoints.vue"),
+            meta: {
+              breadcrumb: "Unused Endpoints",
+            },
+          },
+        ],
+        meta: {
+          breadcrumb: "Sherlock",
+        },
+      },
     ],
     meta: {
       breadcrumb: "Bounty",
