@@ -7,7 +7,9 @@
  "engine": "InnoDB",
  "field_order": [
   "repository",
-  "logo"
+  "logo",
+  "backend_source",
+  "frontend_sources"
  ],
  "fields": [
   {
@@ -21,6 +23,19 @@
    "fieldname": "logo",
    "fieldtype": "Attach Image",
    "label": "Logo"
+  },
+  {
+   "fieldname": "backend_source",
+   "fieldtype": "Data",
+   "label": "Backend Source",
+   "reqd": 1
+  },
+  {
+   "fieldname": "frontend_sources",
+   "fieldtype": "Table",
+   "label": "Frontend Sources",
+   "options": "Target Frontend Source",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
@@ -31,7 +46,7 @@
    "link_fieldname": "target"
   }
  ],
- "modified": "2026-01-30 17:51:53.018050",
+ "modified": "2026-02-04 15:19:50.276612",
  "modified_by": "Administrator",
  "module": "Bounty",
  "name": "Bounty Target",
