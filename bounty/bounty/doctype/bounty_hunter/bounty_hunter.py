@@ -60,11 +60,8 @@ def has_permission(doc: BountyHunter, ptype="read", user: str | None = None):
 
 
 def from_user(user: User, method: str | None = None) -> BountyHunter:
-	return frappe.get_doc(
-		{
-			"doctype": "Bounty Hunter",
-			"user_id": user.name,
-			"username": frappe.mock("name"),
-			"display_name": frappe.mock("name"),
-		}
-	).save()
+	hunter = frappe.new_doc("Bounty Hunter")
+	hunter.user_id = user.name
+	hunter.username = frappe.mock("name")
+	hunter.display_name = frappe.mock("name")
+	return hunter.insert()
