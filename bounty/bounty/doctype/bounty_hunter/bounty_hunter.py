@@ -64,4 +64,4 @@ def from_user(user: User, method: str | None = None) -> BountyHunter:
 	hunter.user_id = user.name
 	hunter.username = randomname.get_name()
 	hunter.display_name = randomname.get_name()
-	return hunter.insert()
+	return hunter.insert(ignore_permissions=True)
