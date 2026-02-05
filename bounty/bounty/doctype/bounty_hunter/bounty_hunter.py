@@ -62,6 +62,6 @@ def has_permission(doc: BountyHunter, ptype="read", user: str | None = None):
 def from_user(user: User, method: str | None = None) -> BountyHunter:
 	hunter = frappe.new_doc("Bounty Hunter")
 	hunter.user_id = user.name
-	hunter.username = frappe.mock("name")
-	hunter.display_name = frappe.mock("name")
+	hunter.username = randomname.get_name()
+	hunter.display_name = randomname.get_name()
 	return hunter.insert()
