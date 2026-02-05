@@ -60,6 +60,7 @@ def has_permission(doc: BountyHunter, ptype="read", user: str | None = None):
 
 
 def from_user(user: User, method: str | None = None) -> BountyHunter:
+	user.add_roles("Bounty Hunter")
 	hunter = frappe.new_doc("Bounty Hunter")
 	hunter.user_id = user.name
 	hunter.username = randomname.get_name()
