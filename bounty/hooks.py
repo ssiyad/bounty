@@ -6,7 +6,10 @@ app_email = "hello@ssiyad.com"
 app_license = "gpl-3.0"
 
 website_route_rules = [
-	{"from_route": "/b/<path:app_path>", "to_route": "b"},
+	{
+		"from_route": "/b/<path:app_path>",
+		"to_route": "b",
+	},
 ]
 
 permission_query_conditions = {
