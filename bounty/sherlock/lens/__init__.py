@@ -61,4 +61,4 @@ def unused_endpoints(target: str):
 	for endpoint in all_endpoints:
 		if endpoint.id not in all_used_endpoints:
 			unused_endpoints.append(endpoint)
-	return unused_endpoints
+	return [endpoint.to_json() for endpoint in unused_endpoints]
