@@ -55,19 +55,10 @@ def used_endpoints(target: str) -> list[str]:
 @frappe.whitelist()
 @caching.redis_cache(ttl=60 * 60)
 def unused_endpoints(target: str):
-	target_doc = frappe.get_doc("Bounty Target", target)
 	all_endpoints = endpoints(target)
 	all_used_endpoints = used_endpoints(target)
 	unused_endpoints: list[FrappeFunction] = []
 	for endpoint in all_endpoints:
 		if endpoint.id not in all_used_endpoints:
 			unused_endpoints.append(endpoint)
-	unused_endpoints_ = []
-	for endpoint in unused_endpoints:
-		unused_endpoints_.append(
-			{
-				**endpoint.to_json(),
-				**target_doc.search_history(endpoint.id),
-			}
-		)
-	return unused_endpoints_
+	return unused_endpoints
