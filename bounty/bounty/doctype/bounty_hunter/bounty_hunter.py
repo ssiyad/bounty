@@ -40,7 +40,7 @@ class BountyHunter(Document):
 	def prevent_duplicate(self):
 		if not self.has_value_changed("user_id"):
 			return
-		exists = frappe.db.exists({"doctype": "Bounty Hunter","user_id": self.user.name})
+		exists = frappe.db.exists({"doctype": "Bounty Hunter", "user_id": self.user.name})
 		if exists:
 			frappe.throw(f"Bounty Hunter {self.user.full_name} already exists.")
 
@@ -49,11 +49,22 @@ class BountyHunter(Document):
 			frappe.throw("Username must be different from real name.")
 
 
-def permission_query(user_id: str | None=None):
+def permission_query(user_id: str | None = None):
 	user_id = user_id or frappe.session.user
 	return "(`tabBounty Hunter`.user_id = {0})".format(frappe.db.escape(user_id))
 
 
-def has_permission(doc: BountyHunter, ptype="read", user:str | None=None):
+def has_permission(doc: BountyHunter, ptype="read", user: str | None = None):
 	user_id = user or frappe.session.user
 	return doc.user_id == user_id
+
+
+def from_user(user: User, method: str | None = None) -> BountyHunter:
+	return frappe.get_doc(
+		{
+			"doctype": "Bounty Hunter",
+			"user_id": user.name,
+			"username": frappe.mock("name"),
+			"display_name": frappe.mock("name"),
+		}
+	).save()
