@@ -44,9 +44,13 @@
   {
    "link_doctype": "Bounty Attempt",
    "link_fieldname": "target"
+  },
+  {
+   "link_doctype": "Sentinel Job",
+   "link_fieldname": "reference_docname"
   }
  ],
- "modified": "2026-02-04 15:19:50.276612",
+ "modified": "2026-02-06 15:51:00.398275",
  "modified_by": "Administrator",
  "module": "Bounty",
  "name": "Bounty Target",

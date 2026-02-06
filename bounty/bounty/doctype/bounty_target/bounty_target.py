@@ -1,14 +1,15 @@
 # Copyright (c) 2026, Sabu Siyad and contributors
 # For license information, please see license.txt
 
-import os
 import pathlib
+import shutil
 
 import frappe
 import frappe.utils
 import git
 from frappe.model.document import Document
-from frappe.utils import caching
+
+from bounty.bounty.doctype.sentinel_job.sentinel_job import schedule_job
 
 
 class BountyTarget(Document):
@@ -26,12 +27,14 @@ class BountyTarget(Document):
 
 	@frappe.whitelist()
 	def get_code(self):
+		schedule_job("Sync Code", self.doctype, self.name, "_get_code")
+
+	def _get_code(self):
 		self.clean_up()
 		git.Repo.clone_from(self.repository, self.source_path)
 
 	def clean_up(self):
-		if os.path.exists(self.source_path):
-			os.rmdir(self.source_path)
+		shutil.rmtree(self.source_path, ignore_errors=True)
 
 	def search_history(self, query: str):
 		commit, user = None, None
