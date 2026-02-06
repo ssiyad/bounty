@@ -26,10 +26,10 @@ class BountyTarget(Document):
 		return git.Repo(self.source_path)
 
 	@frappe.whitelist()
-	def get_code(self):
+	def sync_code(self):
 		schedule_job("Sync Code", self.doctype, self.name, "_get_code")
 
-	def _get_code(self):
+	def _sync_code(self):
 		self.clean_up()
 		git.Repo.clone_from(self.repository, self.source_path)
 
