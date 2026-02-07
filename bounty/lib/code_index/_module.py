@@ -1,9 +1,11 @@
 import ast
+import os
 import pathlib
 
 from ._class import get_classes
 from ._function import get_functions
 from ._import import get_imports
+
 
 class FrappeModule:
 	def __init__(self, base_path: str, root: str, file: str):
@@ -19,7 +21,7 @@ class FrappeModule:
 		self.functions = get_functions(self.path_relative, self.id, self.tree.body)
 
 	def get_tree(self):
-		with open(self.path, "r") as f:
+		with open(self.path) as f:
 			return ast.parse(f.read())
 
 	def to_json(self):
@@ -30,7 +32,21 @@ class FrappeModule:
 			"path_relative": self.path_relative,
 			"id": self.id,
 			"name": self.name,
-			"imports": [x.to_json() for x in self.imports],
-			"classes": [x.to_json() for x in self.classes],
-			"functions": [x.to_json() for x in self.functions],
+			# "imports": [x.to_json() for x in self.imports],
+			# "classes": [x.to_json() for x in self.classes],
+			# "functions": [x.to_json() for x in self.functions],
 		}
+
+
+# def get_modules(base_paths: list[str]):
+# 	for base_path in base_paths:
+# 		for root, _, files in os.walk(base_path):
+# 			for file in files:
+# 				if not file.endswith(".py"):
+# 					continue
+# 				# yield {
+# 				# 	"identifier": "foobar",
+# 				# 	"path": "foobar",
+# 				# 	"name": "foobar",
+# 				# }
+# 				# yield FrappeModule(base_path, root, file)

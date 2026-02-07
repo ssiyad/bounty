@@ -3,8 +3,11 @@
 
 frappe.ui.form.on("Bounty Target", {
 	refresh(frm) {
-		[["↓", "Sync Code", "sync_code"]].forEach(([icon, label, action]) => {
-			frm.add_custom_button(icon + " " + __(label), () => {
+		[
+			["Sync Code", "sync_code"],
+			["Index Code", "index_code"],
+		].forEach(([label, action]) => {
+			frm.add_custom_button(__(label), () => {
 				frm.call(action).then(() => {
 					frm.refresh();
 				});
