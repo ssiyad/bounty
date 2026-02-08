@@ -5,6 +5,7 @@ frappe.ui.form.on("Bounty Target", {
 	refresh(frm) {
 		[
 			["Sync Code", "sync_code"],
+			["Index Logs", "index_logs"],
 			["Index Code", "index_code"],
 		].forEach(([label, action]) => {
 			frm.add_custom_button(__(label), () => {

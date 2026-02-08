@@ -11,6 +11,7 @@ import git
 from frappe.model.document import Document
 
 from bounty.bounty.doctype.sentinel_job.sentinel_job import schedule_job
+from bounty.sherlock.doctype.sherlock_git_commit.sherlock_git_commit import SherlockGitCommit
 from bounty.sherlock.doctype.sherlock_python_module.sherlock_python_module import SherlockPythonModule
 
 
@@ -51,6 +52,15 @@ class BountyTarget(Document):
 	def _sync_code(self):
 		self.clean_up()
 		git.Repo.clone_from(self.repository, self.source_path)
+
+	@frappe.whitelist()
+	def index_logs(self):
+		schedule_job("Index Logs", self.doctype, self.name, "_index_logs")
+
+	def _index_logs(self):
+		for commit in self.source_repo.iter_commits("develop"):
+			SherlockGitCommit.from_object(self.name, commit)
+			frappe.db.commit()
 
 	@frappe.whitelist()
 	def index_code(self):
