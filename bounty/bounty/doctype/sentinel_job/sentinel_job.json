@@ -12,7 +12,10 @@
   "reference_docname",
   "column_break_ghdu",
   "started_on",
-  "finished_on"
+  "finished_on",
+  "section_break_bvec",
+  "error",
+  "traceback"
  ],
  "fields": [
   {
@@ -27,6 +30,7 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
    "options": "Pending\nSuccess\nFailure",
    "reqd": 1
@@ -35,6 +39,7 @@
    "fieldname": "reference_doctype",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Reference Doctype",
    "options": "DocType",
    "reqd": 1
@@ -43,6 +48,7 @@
    "fieldname": "reference_docname",
    "fieldtype": "Dynamic Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Reference Docname",
    "options": "reference_doctype",
    "reqd": 1
@@ -60,12 +66,26 @@
    "fieldname": "finished_on",
    "fieldtype": "Datetime",
    "label": "Finished On"
+  },
+  {
+   "fieldname": "section_break_bvec",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "error",
+   "fieldtype": "Small Text",
+   "label": "Error"
+  },
+  {
+   "fieldname": "traceback",
+   "fieldtype": "Code",
+   "label": "Traceback"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-02-06 15:48:50.632469",
+ "modified": "2026-02-08 17:52:25.106069",
  "modified_by": "Administrator",
  "module": "Bounty",
  "name": "Sentinel Job",

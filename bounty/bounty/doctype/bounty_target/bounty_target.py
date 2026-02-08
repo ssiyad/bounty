@@ -11,6 +11,7 @@ import git
 from frappe.model.document import Document
 
 from bounty.bounty.doctype.sentinel_job.sentinel_job import schedule_job
+from bounty.sherlock.doctype.sherlock_python_module.sherlock_python_module import SherlockPythonModule
 
 
 class BountyTarget(Document):
@@ -45,7 +46,7 @@ class BountyTarget(Document):
 
 	@frappe.whitelist()
 	def sync_code(self):
-		schedule_job("Sync Code", self.doctype, self.name, "_get_code")
+		schedule_job("Sync Code", self.doctype, self.name, "_sync_code")
 
 	def _sync_code(self):
 		self.clean_up()
@@ -72,11 +73,12 @@ class BountyTarget(Document):
 					}
 				):
 					continue
-				m = frappe.new_doc(d)
+				m: SherlockPythonModule = frappe.new_doc(d)
 				m.path = p
 				m.revision = self.last_commit
 				m.source = self.name
 				m.save()
+				m.index_classes()
 
 	def clean_up(self):
 		shutil.rmtree(self.source_path, ignore_errors=True)

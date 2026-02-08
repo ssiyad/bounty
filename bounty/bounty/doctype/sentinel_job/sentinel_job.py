@@ -1,7 +1,7 @@
 # Copyright (c) 2026, Sabu Siyad and contributors
 # For license information, please see license.txt
 
-from collections.abc import Callable
+import traceback
 
 import frappe
 import frappe.utils
@@ -16,9 +16,18 @@ def m_(doctype: str, docname: str, method_name: str, sentinel_id: str, **kwargs)
 	doc = frappe.get_doc(doctype, docname)
 	job = frappe.get_doc("Sentinel Job", sentinel_id)
 	try:
-		getattr(doc, method_name)(**kwargs)
+		job.output = str(getattr(doc, method_name)(**kwargs))
 		job.status = "Success"
-	except:
+	except Exception as e:
+		tb = traceback.format_exc()
+		frappe.log_error(
+			title=e,
+			message=tb,
+			reference_doctype=doctype,
+			reference_name=docname,
+		)
+		job.error = str(e)
+		job.traceback = tb
 		job.status = "Failure"
 	finally:
 		job.finished_on = frappe.utils.now_datetime()
@@ -38,5 +47,6 @@ def schedule_job(title: str, doctype: str, docname: str, method: str, **kwargs):
 		docname=docname,
 		method_name=method,
 		sentinel_id=job.name,
+		enqueue_after_commit=True,
 		**kwargs,
 	)

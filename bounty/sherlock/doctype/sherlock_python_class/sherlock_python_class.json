@@ -1,40 +1,32 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "hash",
- "creation": "2026-02-06 18:34:23.416780",
+ "creation": "2026-02-07 20:17:59.445943",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "identifier",
-  "module_name",
+  "class_name",
   "path",
   "references_tab",
+  "source",
   "revision",
-  "source"
+  "module"
  ],
  "fields": [
-  {
-   "fieldname": "identifier",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Identifier",
-   "reqd": 1,
-   "set_only_once": 1
-  },
-  {
-   "fieldname": "path",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Path",
-   "reqd": 1,
-   "set_only_once": 1
-  },
   {
    "fieldname": "references_tab",
    "fieldtype": "Tab Break",
    "label": "References"
+  },
+  {
+   "fieldname": "source",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Source",
+   "options": "Bounty Target",
+   "reqd": 1,
+   "set_only_once": 1
   },
   {
    "fieldname": "revision",
@@ -45,39 +37,43 @@
    "set_only_once": 1
   },
   {
-   "fieldname": "source",
+   "fieldname": "module",
    "fieldtype": "Link",
-   "label": "Source",
-   "options": "Bounty Target",
+   "in_list_view": 1,
+   "label": "Module",
+   "options": "Sherlock Python Module",
    "reqd": 1,
    "set_only_once": 1
   },
   {
-   "fieldname": "module_name",
+   "fieldname": "identifier",
    "fieldtype": "Data",
-   "in_list_view": 1,
+   "label": "Identifier",
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "class_name",
+   "fieldtype": "Data",
    "label": "Name",
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "path",
+   "fieldtype": "Data",
+   "label": "Path",
    "reqd": 1,
    "set_only_once": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
- "links": [
-  {
-   "link_doctype": "Sentinel Job",
-   "link_fieldname": "reference_docname"
-  },
-  {
-   "link_doctype": "Sherlock Python Class",
-   "link_fieldname": "module"
-  }
- ],
- "modified": "2026-02-07 22:41:25.679526",
+ "links": [],
+ "modified": "2026-02-07 21:56:52.382681",
  "modified_by": "Administrator",
  "module": "Sherlock",
- "name": "Sherlock Python Module",
- "naming_rule": "Random",
+ "name": "Sherlock Python Class",
  "owner": "Administrator",
  "permissions": [
   {
