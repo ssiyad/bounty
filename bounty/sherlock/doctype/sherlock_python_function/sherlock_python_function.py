@@ -5,6 +5,7 @@ import ast
 
 import frappe
 from frappe.model.document import Document
+from frappe.query_builder import Order
 
 
 class SherlockPythonFunction(Document):
@@ -76,6 +77,7 @@ class SherlockPythonFunction(Document):
 	def before_validate(self):
 		self.set_whitelisted()
 		self.set_guest_access()
+		self.set_last_seen_commit()
 
 	def set_whitelisted(self):
 		decorators = ["frappe.whitelist()", "frappe.whitelist(allow_guest=True)"]
@@ -83,3 +85,22 @@ class SherlockPythonFunction(Document):
 
 	def set_guest_access(self):
 		self.guest_access = any("allow_guest=True" in x.decorator_name for x in self.decorators)
+
+	def set_last_seen_commit(self):
+		Commit = frappe.qb.DocType("Sherlock Git Commit")
+		commit = (
+			frappe.qb.from_(Commit)
+			.select(Commit.revision)
+			.select(Commit.author_name)
+			.where(Commit.source == self.source)
+			.where(Commit.diff.like(f"%{self.identifier}%"))
+			.orderby(Commit.date, order=Order.desc)
+			.limit(1)
+			.run(as_dict=True)
+		)
+		if commit:
+			self.last_seen_commit = commit[0].revision
+			self.last_author = commit[0].author_name
+		else:
+			self.last_seen_commit = None
+			self.last_author = None

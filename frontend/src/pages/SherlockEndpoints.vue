@@ -2,7 +2,7 @@
 import { ref, watch } from "vue";
 import {
 	Avatar,
-	Badge,
+	Badge as Badge,
 	Checkbox,
 	Select,
 	createDocumentResource,
@@ -61,7 +61,7 @@ const githubLink = (endpoint: any) => {
 </script>
 
 <template>
-	<div class="px-4 py-3 border-b flex items-center justify-between">
+	<div class="px-4 py-2 border-b flex items-center justify-between">
 		<div>
 			<Select
 				:options="
@@ -99,36 +99,51 @@ const githubLink = (endpoint: any) => {
 	<div class="overflow-y-auto">
 		<div class="w-full divide-y leading-relaxed">
 			<div class="flex divide-x font-medium">
-				<div class="w-12 px-4 py-3"></div>
-				<div class="w-56 px-4 py-3">Path</div>
-				<div class="grow px-4 py-3">Name</div>
-				<div class="w-20 px-4 py-3 text-end">Line</div>
-				<div class="w-56 px-4 py-3 text-end">Arguments</div>
+				<div class="w-12 px-4 py-2"></div>
+				<div class="w-56 px-4 py-2">Path</div>
+				<div class="grow px-4 py-2">Name</div>
+				<div class="w-20 px-4 py-2 text-end">Line</div>
+				<div class="w-56 px-4 py-2 text-end">Arguments</div>
 			</div>
 			<div
 				class="flex divide-x truncate"
 				v-for="(endpoint, index) in endpoints.data"
 				:key="endpoint.name"
 			>
-				<div class="w-12 px-4 py-3 flex items-center justify-center">
+				<div class="w-12 px-4 py-2 flex items-center justify-center">
 					{{ index + 1 }}
 				</div>
-				<div class="w-56 px-4 py-3 truncate">{{ endpoint.path }}</div>
-				<div class="grow px-4 py-3 font-medium">
+				<div class="w-56 px-4 py-2 truncate">{{ endpoint.path }}</div>
+				<div class="grow px-4 py-2 font-medium">
 					<div class="flex items-center justify-between">
 						<a :href="githubLink(endpoint)" target="_blank">
 							{{ endpoint.function_name }}
 						</a>
-						<Badge
-							v-if="endpoint.guest_access"
-							theme="orange"
-							variant="outline"
-							label="Guest"
-						/>
+						<div class="space-x-2">
+							<Badge
+								v-if="endpoint.guest_access"
+								theme="orange"
+								variant="outline"
+								label="Guest"
+							/>
+							<a
+								:href="
+									source.doc.repository + '/commit/' + endpoint.last_seen_commit
+								"
+								target="_blank"
+							>
+								<Badge v-if="endpoint.last_seen_commit">
+									{{ endpoint.last_seen_commit.slice(0, 7) }}
+								</Badge>
+							</a>
+							<Badge v-if="endpoint.last_author">
+								{{ endpoint.last_author }}
+							</Badge>
+						</div>
 					</div>
 				</div>
-				<div class="w-20 px-4 py-3 text-end">{{ endpoint.line_number }}</div>
-				<div class="w-56 px-4 py-3 text-end text-wrap">{{ endpoint.arguments }}</div>
+				<div class="w-20 px-4 py-2 text-end">{{ endpoint.line_number }}</div>
+				<div class="w-56 px-4 py-2 text-end text-wrap">{{ endpoint.arguments }}</div>
 			</div>
 		</div>
 	</div>

@@ -17,12 +17,15 @@
   "source",
   "revision",
   "module_id",
-  "class_id"
+  "class_id",
+  "search_tab",
+  "last_seen_commit",
+  "last_author"
  ],
  "fields": [
   {
    "fieldname": "identifier",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "in_list_view": 1,
    "label": "Identifier",
    "reqd": 1,
@@ -30,7 +33,7 @@
   },
   {
    "fieldname": "path",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Path",
@@ -109,12 +112,27 @@
    "fieldname": "guest_access",
    "fieldtype": "Check",
    "label": "Guest Access"
+  },
+  {
+   "fieldname": "search_tab",
+   "fieldtype": "Tab Break",
+   "label": "Search"
+  },
+  {
+   "fieldname": "last_seen_commit",
+   "fieldtype": "Data",
+   "label": "Last Seen Commit"
+  },
+  {
+   "fieldname": "last_author",
+   "fieldtype": "Data",
+   "label": "Last Author"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-02-09 15:22:57.675678",
+ "modified": "2026-02-09 16:57:26.367224",
  "modified_by": "Administrator",
  "module": "Sherlock",
  "name": "Sherlock Python Function",
