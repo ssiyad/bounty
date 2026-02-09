@@ -9,6 +9,7 @@
   "function_name",
   "path",
   "decorators",
+  "whitelisted",
   "references_tab",
   "source",
   "revision",
@@ -82,12 +83,18 @@
    "fieldtype": "Link",
    "label": "Class",
    "options": "Sherlock Python Class"
+  },
+  {
+   "default": "0",
+   "fieldname": "whitelisted",
+   "fieldtype": "Check",
+   "label": "Whitelisted"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-02-09 14:07:55.081423",
+ "modified": "2026-02-09 14:14:19.389973",
  "modified_by": "Administrator",
  "module": "Sherlock",
  "name": "Sherlock Python Function",

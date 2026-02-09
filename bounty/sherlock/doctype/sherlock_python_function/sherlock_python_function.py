@@ -70,3 +70,10 @@ class SherlockPythonFunction(Document):
 					},
 				)
 		return d.save()
+
+	def before_validate(self):
+		self.set_whitelisted()
+
+	def set_whitelisted(self):
+		decorators = ["frappe.whitelist()", "frappe.whitelist(allow_guest=True)"]
+		self.whitelisted = any(x.decorator_name in decorators for x in self.decorators)
