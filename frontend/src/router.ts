@@ -54,6 +54,14 @@ const routes = [
             component: () => import("@/pages/Sherlock.vue"),
           },
           {
+            path: "endpoints",
+            name: "SherlockEndpoints",
+            component: () => import("@/pages/SherlockEndpoints.vue"),
+            meta: {
+              breadcrumb: "Endpoints",
+            },
+          },
+          {
             path: "unused-endpoints",
             name: "SherlockUnusedEndpoints",
             component: () => import("@/pages/SherlockUnusedEndpoints.vue"),

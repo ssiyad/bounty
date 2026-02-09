@@ -37,6 +37,8 @@ class SherlockPythonFunction(Document):
 		d.identifier = identifier
 		d.function_name = node.name
 		d.path = path
+		d.line_number = node.lineno
+		d.arguments = ", ".join(arg.arg for arg in node.args.args)
 		for decorator in node.decorator_list:
 			if isinstance(decorator, ast.Name):
 				d.append(

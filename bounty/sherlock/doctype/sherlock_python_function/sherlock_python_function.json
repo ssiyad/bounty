@@ -8,6 +8,8 @@
   "identifier",
   "function_name",
   "path",
+  "line_number",
+  "arguments",
   "decorators",
   "whitelisted",
   "references_tab",
@@ -89,12 +91,23 @@
    "fieldname": "whitelisted",
    "fieldtype": "Check",
    "label": "Whitelisted"
+  },
+  {
+   "fieldname": "line_number",
+   "fieldtype": "Data",
+   "label": "Line Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "arguments",
+   "fieldtype": "Small Text",
+   "label": "Arguments"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-02-09 14:14:19.389973",
+ "modified": "2026-02-09 14:27:41.883678",
  "modified_by": "Administrator",
  "module": "Sherlock",
  "name": "Sherlock Python Function",
