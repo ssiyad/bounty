@@ -119,7 +119,7 @@ const githubLink = (endpoint: any) => {
 						<a :href="githubLink(endpoint)" target="_blank">
 							{{ endpoint.function_name }}
 						</a>
-						<div class="space-x-2">
+						<div class="flex items-center gap-2">
 							<Badge
 								v-if="endpoint.guest_access"
 								theme="orange"
