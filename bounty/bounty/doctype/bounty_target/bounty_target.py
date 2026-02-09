@@ -47,7 +47,7 @@ class BountyTarget(Document):
 
 	@frappe.whitelist()
 	def sync_code(self):
-		schedule_job("Sync Code", self.doctype, self.name, "_sync_code")
+		frappe.enqueue_doc(self.doctype, self.name, "_sync_code", queue="long", now=True)
 
 	def _sync_code(self):
 		self.clean_up()
@@ -55,16 +55,16 @@ class BountyTarget(Document):
 
 	@frappe.whitelist()
 	def index_logs(self):
-		schedule_job("Index Logs", self.doctype, self.name, "_index_logs")
+		frappe.enqueue_doc(self.doctype, self.name, "_index_logs", queue="long", now=True)
 
 	def _index_logs(self):
 		for commit in self.source_repo.iter_commits("develop"):
-			SherlockGitCommit.from_object(self.name, commit)
+			SherlockGitCommit.from_object(self.source_repo, self.name, commit)
 			frappe.db.commit()
 
 	@frappe.whitelist()
 	def index_code(self):
-		schedule_job("Index Code", self.doctype, self.name, "_index_code")
+		frappe.enqueue_doc(self.doctype, self.name, "_index_code", queue="long", now=True)
 
 	def _index_code(self):
 		base_path = pathlib.Path(self.source_path).joinpath(self.backend_source)

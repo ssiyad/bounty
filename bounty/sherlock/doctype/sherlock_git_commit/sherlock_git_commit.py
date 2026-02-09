@@ -4,12 +4,12 @@
 import frappe
 import frappe.utils
 from frappe.model.document import Document
-from git import Commit
+from git import Commit, Repo
 
 
 class SherlockGitCommit(Document):
 	@staticmethod
-	def from_object(source: str, commit: Commit):
+	def from_object(repo: Repo, source: str, commit: Commit):
 		doctype = "Sherlock Git Commit"
 		if frappe.db.exists(
 			{
@@ -26,5 +26,5 @@ class SherlockGitCommit(Document):
 		d.message = commit.message
 		d.author_name = commit.author.name
 		d.author_email = commit.author.email
-		d.diff = "".join(d.diff.decode("utf-8") for d in commit.diff(create_patch=True))
+		d.diff = repo.git.diff(commit.hexsha + "^!")
 		return d.save()
