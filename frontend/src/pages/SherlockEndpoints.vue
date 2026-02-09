@@ -2,7 +2,8 @@
 import { ref, watch } from "vue";
 import {
 	Avatar,
-	Button,
+	Badge,
+	Checkbox,
 	Select,
 	createDocumentResource,
 	createListResource,
@@ -16,6 +17,7 @@ usePageMeta(() => ({
 }));
 
 const sourceName = ref("");
+const guestAccess = ref(false);
 
 const endpoints = createListResource({
 	doctype: "Sherlock Python Function",
@@ -40,17 +42,18 @@ const source = createDocumentResource({
 	auto: false,
 });
 
-watch(sourceName, () => {
-	source.reload();
-	endpoints.fetch();
+watch(sourceName, (s) => {
+	if (s) {
+		source.reload();
+		endpoints.filters.revision = source.doc.last_commit;
+		endpoints.fetch();
+	}
 });
 
-const openCommit = (commit: string) => {
-	if (commit) {
-		const url = source.doc.repository + "/commit/" + commit;
-		window.open(url, "_blank");
-	}
-};
+watch(guestAccess, (b) => {
+	endpoints.filters.guest_access = b ? 1 : undefined;
+	endpoints.reload();
+});
 
 const githubLink = (endpoint: any) => {
 	return `${source.doc.repository}/blob/develop/${endpoint.path}#L${endpoint.line_number}`;
@@ -58,35 +61,40 @@ const githubLink = (endpoint: any) => {
 </script>
 
 <template>
-	<div class="px-4 py-3 border-b">
-		<Select
-			:options="
-				sources.data?.map((source) => ({
-					label: source.name,
-					value: source.name,
-					logo: source.logo,
-				}))
-			"
-			v-model="sourceName"
-			class="w-max"
-			placeholder="Source"
-		>
-			<template #prefix>
-				<LucideCodeXml class="size-4" />
-			</template>
-			<template #option="{ option }">
-				<div class="flex items-center gap-2">
-					<img
-						v-if="option.logo"
-						class="flex size-4 items-center justify-center rounded-[5px]"
-						:src="option.logo"
-						:alt="option.logo"
-					/>
-					<Avatar v-else :label="option.label" shape="square" size="xs" />
-					<span>{{ option.label }}</span>
-				</div>
-			</template>
-		</Select>
+	<div class="px-4 py-3 border-b flex items-center justify-between">
+		<div>
+			<Select
+				:options="
+					sources.data?.map((source) => ({
+						label: source.name,
+						value: source.name,
+						logo: source.logo,
+					}))
+				"
+				v-model="sourceName"
+				class="w-max"
+				placeholder="Source"
+			>
+				<template #prefix>
+					<LucideCodeXml class="size-4" />
+				</template>
+				<template #option="{ option }">
+					<div class="flex items-center gap-2">
+						<img
+							v-if="option.logo"
+							class="flex size-4 items-center justify-center rounded-[5px]"
+							:src="option.logo"
+							:alt="option.logo"
+						/>
+						<Avatar v-else :label="option.label" shape="square" size="xs" />
+						<span>{{ option.label }}</span>
+					</div>
+				</template>
+			</Select>
+		</div>
+		<div>
+			<Checkbox v-model="guestAccess" label="Guest Access" />
+		</div>
 	</div>
 	<div class="overflow-y-auto">
 		<div class="w-full divide-y leading-relaxed">
@@ -111,18 +119,12 @@ const githubLink = (endpoint: any) => {
 						<a :href="githubLink(endpoint)" target="_blank">
 							{{ endpoint.function_name }}
 						</a>
-						<div
-							class="flex items-center gap-2"
-							v-if="endpoint.last_user || endpoint.last_commit"
-						>
-							<Button
-								icon="git-branch"
-								variant="ghost"
-								v-if="endpoint.last_commit"
-								@click="openCommit(endpoint.last_commit)"
-							/>
-							{{ endpoint.last_user }}
-						</div>
+						<Badge
+							v-if="endpoint.guest_access"
+							theme="orange"
+							variant="outline"
+							label="Guest"
+						/>
 					</div>
 				</div>
 				<div class="w-20 px-4 py-3 text-end">{{ endpoint.line_number }}</div>

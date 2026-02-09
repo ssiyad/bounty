@@ -12,6 +12,7 @@
   "arguments",
   "decorators",
   "whitelisted",
+  "guest_access",
   "references_tab",
   "source",
   "revision",
@@ -102,12 +103,18 @@
    "fieldname": "arguments",
    "fieldtype": "Small Text",
    "label": "Arguments"
+  },
+  {
+   "default": "0",
+   "fieldname": "guest_access",
+   "fieldtype": "Check",
+   "label": "Guest Access"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-02-09 14:27:41.883678",
+ "modified": "2026-02-09 15:22:57.675678",
  "modified_by": "Administrator",
  "module": "Sherlock",
  "name": "Sherlock Python Function",

@@ -75,7 +75,11 @@ class SherlockPythonFunction(Document):
 
 	def before_validate(self):
 		self.set_whitelisted()
+		self.set_guest_access()
 
 	def set_whitelisted(self):
 		decorators = ["frappe.whitelist()", "frappe.whitelist(allow_guest=True)"]
 		self.whitelisted = any(x.decorator_name in decorators for x in self.decorators)
+
+	def set_guest_access(self):
+		self.guest_access = any("allow_guest=True" in x.decorator_name for x in self.decorators)
