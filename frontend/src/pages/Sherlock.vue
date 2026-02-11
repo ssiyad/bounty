@@ -1,24 +1,45 @@
-<template>
-	<div class="overflow-y-auto">
-		<pre>
-		{{ JSON.stringify(lens, null, 2) }}
-	</pre
-		>
-	</div>
-</template>
-
 <script setup lang="ts">
-import { Button, createResource, Textarea, TextInput, usePageMeta } from "frappe-ui";
-import { hunterResource, hunterSaveResource } from "../data/hunter";
-import { session } from "../data/session";
+import { createListResource, usePageMeta } from "frappe-ui";
+import Target from "../components/Target.vue";
 import { pageTitle } from "../utils/page";
 
 usePageMeta(() => ({
 	title: pageTitle("Sherlock"),
 }));
 
-const lens = createResource({
-	url: "bounty.sherlock.lens.modules",
+const sources = createListResource({
+	doctype: "Bounty Target",
 	auto: true,
+	fields: ["*"],
+	pageLength: 99999,
 });
 </script>
+
+<template>
+	<div class="overflow-y-auto">
+		<div class="w-full divide-y leading-relaxed">
+			<div class="flex divide-x font-medium">
+				<div class="w-12 px-4 py-2"></div>
+				<div class="w-56 px-4 py-2">Source</div>
+				<div class="grow px-4 py-2 text-end">Repository</div>
+			</div>
+			<div
+				class="flex divide-x truncate"
+				v-for="(source, index) in sources.data"
+				:key="source.name"
+			>
+				<div class="w-12 px-4 py-2 flex items-center justify-center">
+					{{ index + 1 }}
+				</div>
+				<div class="w-56 px-4 py-2">
+					<Target :target="source.name" />
+				</div>
+				<div class="grow px-4 py-2 text-end">
+					<a :href="source.repository" target="_blank">
+						{{ source.repository }}
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
