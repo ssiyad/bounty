@@ -19,14 +19,8 @@ const target = createDocumentResource({
 </script>
 
 <template>
-	<a
-		v-if="target.doc"
-		:href="target.doc.repository"
-		target="_blank"
-		class="block w-max"
-		@click="$event.stopPropagation()"
-	>
-		<div class="flex items-center gap-2">
+	<div class="w-max">
+		<div v-if="target.doc" class="flex items-center gap-2">
 			<img
 				v-if="target.doc.logo"
 				class="flex size-6 items-center justify-center rounded-[5px]"
@@ -38,5 +32,8 @@ const target = createDocumentResource({
 				{{ target.doc.name }}
 			</div>
 		</div>
-	</a>
+		<div v-else>
+			{{ props.target }}
+		</div>
+	</div>
 </template>

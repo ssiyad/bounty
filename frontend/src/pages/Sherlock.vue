@@ -32,7 +32,16 @@ const sources = createListResource({
 					{{ index + 1 }}
 				</div>
 				<div class="w-56 px-4 py-2">
-					<Target :target="source.name" />
+					<RouterLink
+						:to="{
+							name: 'SherlockSource',
+							params: {
+								source: source.name,
+							},
+						}"
+					>
+						<Target :target="source.name" />
+					</RouterLink>
 				</div>
 				<div class="grow px-4 py-2 text-end">
 					<a :href="source.repository" target="_blank">

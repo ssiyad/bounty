@@ -1,22 +1,15 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import {
-	Avatar,
-	Badge as Badge,
-	Checkbox,
-	Select,
-	createDocumentResource,
-	createListResource,
-	usePageMeta,
-} from "frappe-ui";
-import LucideCodeXml from "~icons/lucide/code-xml";
+import { useRoute } from "vue-router";
+import { Badge, createDocumentResource, createListResource, usePageMeta } from "frappe-ui";
 import { pageTitle } from "../utils/page";
 
 usePageMeta(() => ({
 	title: pageTitle("Unused Functions"),
 }));
 
-const sourceName = ref("");
+const route = useRoute();
+const sourceId = route.params.source as string;
 const guestAccess = ref(false);
 
 const endpoints = createListResource({
@@ -24,30 +17,16 @@ const endpoints = createListResource({
 	fields: ["*"],
 	filters: {
 		whitelisted: 1,
-		source: sourceName,
+		source: sourceId,
 	},
 	pageLength: 99999,
-});
-
-const sources = createListResource({
-	doctype: "Bounty Target",
 	auto: true,
-	fields: ["*"],
-	pageLength: 99999,
 });
 
 const source = createDocumentResource({
 	doctype: "Bounty Target",
-	name: sourceName,
-	auto: false,
-});
-
-watch(sourceName, (s) => {
-	if (s) {
-		source.reload();
-		endpoints.filters.revision = source.doc.last_commit;
-		endpoints.fetch();
-	}
+	name: sourceId,
+	auto: true,
 });
 
 watch(guestAccess, (b) => {
@@ -61,46 +40,11 @@ const githubLink = (endpoint: any) => {
 </script>
 
 <template>
-	<div class="px-4 py-2 border-b flex items-center justify-between">
-		<div>
-			<Select
-				:options="
-					sources.data?.map((source) => ({
-						label: source.name,
-						value: source.name,
-						logo: source.logo,
-					}))
-				"
-				v-model="sourceName"
-				class="w-max"
-				placeholder="Source"
-			>
-				<template #prefix>
-					<LucideCodeXml class="size-4" />
-				</template>
-				<template #option="{ option }">
-					<div class="flex items-center gap-2">
-						<img
-							v-if="option.logo"
-							class="flex size-4 items-center justify-center rounded-[5px]"
-							:src="option.logo"
-							:alt="option.logo"
-						/>
-						<Avatar v-else :label="option.label" shape="square" size="xs" />
-						<span>{{ option.label }}</span>
-					</div>
-				</template>
-			</Select>
-		</div>
-		<div>
-			<Checkbox v-model="guestAccess" label="Guest Access" />
-		</div>
-	</div>
 	<div class="overflow-y-auto">
 		<div class="w-full divide-y leading-relaxed">
 			<div class="flex divide-x font-medium">
 				<div class="w-12 px-4 py-2"></div>
-				<div class="w-56 px-4 py-2">Path</div>
+				<div class="w-96 px-4 py-2">Path</div>
 				<div class="grow px-4 py-2">Name</div>
 				<div class="w-20 px-4 py-2 text-end">Line</div>
 				<div class="w-56 px-4 py-2 text-end">Arguments</div>
@@ -113,7 +57,7 @@ const githubLink = (endpoint: any) => {
 				<div class="w-12 px-4 py-2 flex items-center justify-center">
 					{{ index + 1 }}
 				</div>
-				<div class="w-56 px-4 py-2 truncate">{{ endpoint.path }}</div>
+				<div class="w-96 px-4 py-2 truncate">{{ endpoint.path }}</div>
 				<div class="grow px-4 py-2 font-medium">
 					<div class="flex items-center justify-between">
 						<a :href="githubLink(endpoint)" target="_blank">

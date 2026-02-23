@@ -54,21 +54,29 @@ const routes = [
             component: () => import("@/pages/Sherlock.vue"),
           },
           {
-            path: "endpoints",
+            path: ":source",
+            name: "SherlockSource",
+            component: () => import("@/pages/SherlockSource.vue"),
+            meta: {
+              breadcrumb: (route: any) => route.params.source,
+            },
+          },
+          {
+            path: ":source/endpoints",
             name: "SherlockEndpoints",
-            component: () => import("@/pages/SherlockEndpoints.vue"),
+            component: () => import("@/pages/SherlockSourceEndpoints.vue"),
             meta: {
               breadcrumb: "Endpoints",
             },
           },
-          {
-            path: "unused-endpoints",
-            name: "SherlockUnusedEndpoints",
-            component: () => import("@/pages/SherlockUnusedEndpoints.vue"),
-            meta: {
-              breadcrumb: "Unused Endpoints",
-            },
-          },
+          // {
+          //   path: "unused-endpoints",
+          //   name: "SherlockUnusedEndpoints",
+          //   component: () => import("@/pages/SherlockUnusedEndpoints.vue"),
+          //   meta: {
+          //     breadcrumb: "Unused Endpoints",
+          //   },
+          // },
         ],
         meta: {
           breadcrumb: "Sherlock",
