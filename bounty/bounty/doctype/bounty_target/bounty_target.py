@@ -1,8 +1,10 @@
 # Copyright (c) 2026, Sabu Siyad and contributors
 # For license information, please see license.txt
 
+import enum
 import os
 import pathlib
+import re
 import shutil
 
 import frappe
@@ -89,6 +91,38 @@ class BountyTarget(Document):
 				m.source = self.name
 				m.save()
 				m.index_classes()
+		self._index_endpoint_usages()
+
+	def _index_endpoint_usages(self):
+		extensions = ("vue", "js", "ts")
+		pattern = re.compile(r"url: [\'|\"](.*)[\'|\"]")
+		for source in self.frontend_sources:
+			for root, _, files in os.walk(pathlib.Path(self.source_path).joinpath(source.directory)):
+				for file in files:
+					if file.split(".")[-1] not in extensions:
+						continue
+					with open(os.path.join(root, file)) as source_code:
+						for line_number, line in enumerate(source_code):
+							if match := pattern.search(line):
+								method = match.group(1).removeprefix("/api/method/")
+								if frappe.db.exists(
+									{
+										"doctype": "Sherlock Endpoint",
+										"identifier": method,
+										"source": self.name,
+										"revision": self.last_commit,
+									}
+								):
+									continue
+								usage = frappe.new_doc("Sherlock Endpoint Usage")
+								usage.file = str(
+									pathlib.Path(root).joinpath(file).relative_to(self.source_path)
+								)
+								usage.line_number = line_number
+								usage.identifier = method
+								usage.source_id = self.name
+								usage.revision = self.last_commit
+								usage.insert()
 
 	def clean_up(self):
 		shutil.rmtree(self.source_path, ignore_errors=True)
