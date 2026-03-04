@@ -83,9 +83,6 @@ const routes = [
         },
       },
     ],
-    meta: {
-      breadcrumb: "Bounty",
-    },
   },
   {
     name: "Login",
