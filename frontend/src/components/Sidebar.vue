@@ -9,6 +9,7 @@ import MoneyIcon from "~icons/lucide/hand-coins";
 import MoonIcon from "~icons/lucide/moon";
 import SettingsIcon from "~icons/lucide/settings";
 import UserIcon from "~icons/lucide/user";
+import { session } from "../data/session";
 
 const route = useRoute();
 
@@ -28,7 +29,7 @@ const isActiveRoute = (name: string) => {
 		disable-collapse
 		:header="{
 			title: 'Bounty',
-			subtitle: 'Sabu Siyad',
+			subtitle: session.user!,
 			menuItems: [
 				{
 					label: 'Toggle Theme',
