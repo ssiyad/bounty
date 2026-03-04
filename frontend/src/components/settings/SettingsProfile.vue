@@ -15,7 +15,7 @@ const hunter = createDocumentResource({
 			<p class="text-lg font-medium">Profile</p>
 			<Button
 				label="Save"
-				variant="solid"
+				variant="subtle"
 				icon-left="save"
 				:loading="hunter.save.loading"
 				@click="hunter.save.submit(hunter.doc)"
