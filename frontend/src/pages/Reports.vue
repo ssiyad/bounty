@@ -1,23 +1,18 @@
 <script setup lang="ts">
 import { formatDate } from "date-fns";
-import { Badge, Button, createListResource, usePageMeta } from "frappe-ui";
+import { Badge, Button, createListResource } from "frappe-ui";
 import Target from "../components/Target.vue";
 import { statusTheme } from "../utils/badgeThemes";
-import { pageTitle } from "../utils/page";
 import PageLayout from "../layouts/PageLayout.vue";
 
 const attemptsResource = createListResource({
 	doctype: "Bounty Attempt",
-	cache: ["Attempts"],
+	cache: ["Reports"],
 	fields: ["name", "title", "creation", "status", "target"],
 	orderBy: "creation desc",
 	pageLength: 99999,
 	auto: true,
 });
-
-usePageMeta(() => ({
-	title: pageTitle("Attempts"),
-}));
 </script>
 
 <template>
@@ -35,7 +30,7 @@ usePageMeta(() => ({
 			<RouterLink
 				v-for="attempt in attemptsResource.data"
 				:to="{
-					name: 'Attempt',
+					name: 'Report',
 					params: { id: attempt.name },
 				}"
 				class="block"
