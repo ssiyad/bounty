@@ -2,7 +2,7 @@ import { createResource } from "frappe-ui";
 import router from "@/router";
 
 export const userResource = createResource({
-  url: "frappe.auth.get_logged_user",
+  url: "/api/method/frappe.auth.get_logged_user",
   cache: "User",
   auto: true,
   onError(error) {

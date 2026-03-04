@@ -5,11 +5,8 @@ import Sidebar from "./components/Sidebar.vue";
 
 <template>
 	<FrappeUIProvider>
-		<div class="h-screen w-screen flex overflow-hidden">
-			<Sidebar />
-			<div class="flex flex-col overflow-hidden grow">
-				<RouterView />
-			</div>
+		<div class="h-screen w-screen">
+			<RouterView />
 		</div>
 	</FrappeUIProvider>
 </template>
