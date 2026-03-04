@@ -2,14 +2,14 @@
 # For license information, please see license.txt
 
 import frappe
-from frappe.query_builder import Order
 import frappe.utils
 from frappe import _
-from frappe.model.document import Document
 from frappe.core.doctype.communication.communication import Communication
+from frappe.model.document import Document
+from frappe.query_builder import Order
 
 
-class BountyAttempt(Document):
+class BountyReport(Document):
 	def before_validate(self):
 		self.ensure_hunter()
 
@@ -51,12 +51,12 @@ class BountyAttempt(Document):
 		return self.chat()
 
 
-def permission_query(user_id: str | None=None):
+def permission_query(user_id: str | None = None):
 	user_id = user_id or frappe.session.user
 	return "(`tabBounty Attempt`.hunter = {0})".format(frappe.db.escape(hunter_id(user_id)))
 
 
-def has_permission(doc: BountyHunter, ptype="read", user:str | None=None):
+def has_permission(doc: BountyHunter, ptype="read", user: str | None = None):
 	user_id = user or frappe.session.user
 	return doc.hunter == hunter_id(user_id)
 

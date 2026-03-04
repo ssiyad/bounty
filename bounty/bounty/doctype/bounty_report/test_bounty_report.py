@@ -13,9 +13,9 @@ IGNORE_TEST_RECORD_DEPENDENCIES = []  # eg. ["User"]
 
 
 
-class IntegrationTestBountyAttempt(IntegrationTestCase):
+class IntegrationTestBountyReport(IntegrationTestCase):
 	"""
-	Integration tests for BountyAttempt.
+	Integration tests for BountyReport.
 	Use this class for testing interactions between multiple components.
 	"""
 
