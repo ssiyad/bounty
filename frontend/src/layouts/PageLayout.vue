@@ -10,7 +10,7 @@ import Topbar from "../components/Topbar.vue";
 		</Topbar>
 		<Banner
 			message="This is a work in progress. You may encounter rough edges."
-			variant="info"
+			variant="warning"
 		/>
 		<slot />
 	</div>
