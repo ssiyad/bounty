@@ -1,22 +1,12 @@
 <script setup lang="ts">
-import { Button } from "frappe-ui";
 import TopbarBreadcrumbs from "./TopbarBreadcrumbs.vue";
 </script>
 
 <template>
 	<div class="px-4 py-3 flex items-center justify-between border-b">
 		<TopbarBreadcrumbs />
-		<div class="space-x-2">
-			<Button label="Help" icon-left="info" />
-			<RouterLink to="/leaderboard">
-				<Button label="Leaderboard" icon-left="trending-up" />
-			</RouterLink>
-			<RouterLink to="/attempts">
-				<Button label="Attempts" icon-left="crosshair" />
-			</RouterLink>
-			<RouterLink to="/account">
-				<Button label="Account" icon-left="user" />
-			</RouterLink>
+		<div class="flex items-center gap-2">
+			<slot />
 		</div>
 	</div>
 </template>
