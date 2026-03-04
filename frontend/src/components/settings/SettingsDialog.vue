@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { Dialog, Sidebar } from "frappe-ui";
 import UserIcon from "~icons/lucide/user";
 import AppearanceIcon from "~icons/lucide/eye";
 import BankingIcon from "~icons/lucide/credit-card";
 import SettingsProfile from "./SettingsProfile.vue";
+import Upcoming from "../Upcoming.vue";
 
 withDefaults(
 	defineProps<{
@@ -20,6 +21,19 @@ defineEmits<{
 }>();
 
 const active = ref("profile");
+
+const activeComponent = computed(() => {
+	switch (active.value) {
+		case "profile":
+			return SettingsProfile;
+		case "appearance":
+			return Upcoming;
+		case "banking":
+			return Upcoming;
+		default:
+			return Upcoming;
+	}
+});
 </script>
 
 <template>
@@ -61,7 +75,7 @@ const active = ref("profile");
 					]"
 				/>
 				<div class="grow">
-					<SettingsProfile />
+					<component :is="activeComponent" />
 				</div>
 			</div>
 		</template>
