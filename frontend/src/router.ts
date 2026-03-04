@@ -32,9 +32,14 @@ const routes = [
         component: () => import("@/pages/Leaderboard.vue"),
       },
       {
-        path: "account",
-        name: "Account",
-        component: () => import("@/pages/Account.vue"),
+        path: "rewards",
+        name: "Rewards",
+        component: () => import("@/pages/Upcoming.vue"),
+      },
+      {
+        path: "published",
+        name: "Published",
+        component: () => import("@/pages/Upcoming.vue"),
       },
     ],
   },

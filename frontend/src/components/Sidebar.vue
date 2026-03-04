@@ -104,13 +104,19 @@ const isSettingsDialogOpen = ref(false);
 					},
 					{
 						label: 'Rewards',
-						to: '',
 						icon: MoneyIcon,
+						to: {
+							name: 'Rewards',
+						},
+						isActive: isActiveRoute('Rewards'),
 					},
 					{
 						label: 'Published',
-						to: '',
 						icon: GlobeIcon,
+						to: {
+							name: 'Published',
+						},
+						isActive: isActiveRoute('Published'),
 					},
 				],
 			},
