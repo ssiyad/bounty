@@ -19,10 +19,16 @@ const leaderboard = [
 	{ name: "Peggy", score: 2 },
 	{ name: "Sybil", score: 1 },
 ];
+
+const breadcrumbs = [
+	{
+		label: "Leaderboard",
+	},
+];
 </script>
 
 <template>
-	<PageLayout>
+	<PageLayout :breadcrumbs="breadcrumbs">
 		<div class="overflow-auto">
 			<div class="divide-y">
 				<div class="h-12.5 px-5 py-4 flex justify-between items-center font-medium">

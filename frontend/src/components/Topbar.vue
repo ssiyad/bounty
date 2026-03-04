@@ -1,10 +1,19 @@
 <script setup lang="ts">
-import TopbarBreadcrumbs from "./TopbarBreadcrumbs.vue";
+import { Breadcrumbs, BreadcrumbsProps } from "frappe-ui";
+
+withDefaults(
+	defineProps<{
+		breadcrumbs?: BreadcrumbsProps["items"];
+	}>(),
+	{
+		breadcrumbs: () => [],
+	},
+);
 </script>
 
 <template>
 	<div class="h-12.5 px-4 py-3 flex items-center justify-between border-b">
-		<TopbarBreadcrumbs />
+		<Breadcrumbs :items="breadcrumbs" />
 		<div class="flex items-center gap-2">
 			<slot />
 		</div>

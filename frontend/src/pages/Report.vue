@@ -5,13 +5,12 @@ import { Badge, createDocumentResource, usePageMeta } from "frappe-ui";
 import Chat from "../components/attempt/Chat.vue";
 import Target from "../components/Target.vue";
 import { statusTheme, categoryTheme, severityTheme } from "../utils/badgeThemes";
-import { pageTitle } from "../utils/page";
 import PageLayout from "../layouts/PageLayout.vue";
 
 const route = useRoute();
 const id = route.params.id as string;
 
-const attemptResource = createDocumentResource({
+const reportResource = createDocumentResource({
 	doctype: "Bounty Attempt",
 	name: id,
 	cache: ["Report", id],
@@ -25,66 +24,68 @@ const attemptResource = createDocumentResource({
 		reply: {
 			method: "reply",
 			onSuccess: (messages: any[]) => {
-				attemptResource.chat.setData(messages);
+				reportResource.chat.setData(messages);
 			},
 		},
 	},
 });
 
-const attempt = computed(() => attemptResource.doc);
+const report = computed(() => reportResource.doc);
 
-usePageMeta(() => ({
-	title: pageTitle(attempt.value?.title),
-}));
+const breadcrumbs = computed(() => [
+	{
+		label: "Reports",
+		route: {
+			name: "Reports",
+		},
+	},
+	{
+		label: reportResource.doc?.title,
+	},
+]);
 </script>
 
 <template>
-	<PageLayout class="size-full">
-		<div v-if="attempt" class="flex divide-x size-full">
+	<PageLayout class="size-full" :breadcrumbs="breadcrumbs">
+		<div v-if="report" class="flex divide-x size-full">
 			<div class="px-5 py-8 overflow-y-auto">
 				<div class="text-3xl font-semibold mb-4">
-					{{ attempt.title }}
+					{{ report.title }}
 				</div>
 				<p class="leading-relaxed mb-8">
-					{{ attempt.content }}
+					{{ report.content }}
 				</p>
 				<Chat
-					:messages="attemptResource.chat.data"
+					:messages="reportResource.chat.data"
 					@reply="
-						attemptResource.reply.submit({
+						reportResource.reply.submit({
 							content: $event,
 						})
 					"
 				/>
 			</div>
 			<div class="w-72 shrink-0 px-4 py-4 space-y-4">
-				<div v-if="attempt.target" class="flex items-center justify-between">
+				<div v-if="report.target" class="flex items-center justify-between">
 					<p class="text-sm">Target</p>
-					<Target :target="attempt.target" />
+					<Target :target="report.target" />
 				</div>
-				<hr v-if="attempt.target" />
+				<hr v-if="report.target" />
 				<div class="flex items-center justify-between">
 					<p class="text-sm">Status</p>
 					<div>
-						<Badge :label="attempt.status" :theme="statusTheme(attempt.status)" />
+						<Badge :label="report.status" :theme="statusTheme(report.status)" />
 					</div>
 				</div>
 				<div class="flex items-center justify-between">
 					<p class="text-sm">Category</p>
 					<div>
-						<Badge
-							:label="attempt.category"
-							:theme="categoryTheme(attempt.category)"
-						/>
+						<Badge :label="report.category" :theme="categoryTheme(report.category)" />
 					</div>
 				</div>
 				<div class="flex items-center justify-between">
 					<p class="text-sm">Severity</p>
 					<div>
-						<Badge
-							:label="attempt.severity"
-							:theme="severityTheme(attempt.severity)"
-						/>
+						<Badge :label="report.severity" :theme="severityTheme(report.severity)" />
 					</div>
 				</div>
 			</div>

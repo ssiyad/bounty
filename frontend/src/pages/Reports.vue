@@ -13,10 +13,16 @@ const attemptsResource = createListResource({
 	pageLength: 99999,
 	auto: true,
 });
+
+const breadcrumbs = [
+	{
+		label: "Reports",
+	},
+];
 </script>
 
 <template>
-	<PageLayout>
+	<PageLayout :breadcrumbs="breadcrumbs">
 		<template #actions>
 			<Button label="Report" icon-left="plus" variant="solid" />
 		</template>
