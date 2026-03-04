@@ -33,7 +33,7 @@ import UserIcon from "~icons/lucide/user";
 				label: '',
 				items: [
 					{
-						label: 'Notifications',
+						label: 'Inbox',
 						to: '',
 						icon: InboxIcon,
 					},
