@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import { useRoute } from "vue-router";
 import { createDocumentResource, Sidebar as USidebar } from "frappe-ui";
 import BugIcon from "~icons/lucide/bug";
@@ -30,10 +31,12 @@ const toggleTheme = () => {
 const isActiveRoute = (name: string) => {
 	return route.matched.some((record) => record.name === name);
 };
+
+const isSettingsDialogOpen = ref(false);
 </script>
 
 <template>
-	<SettingsDialog />
+	<SettingsDialog v-model="isSettingsDialogOpen" />
 	<USidebar
 		disable-collapse
 		:header="{
@@ -63,8 +66,8 @@ const isActiveRoute = (name: string) => {
 					},
 					{
 						label: 'Settings',
-						to: '',
 						icon: SettingsIcon,
+						onClick: () => (isSettingsDialogOpen = true),
 					},
 				],
 			},

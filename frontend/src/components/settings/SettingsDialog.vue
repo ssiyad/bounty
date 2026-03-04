@@ -6,12 +6,26 @@ import AppearanceIcon from "~icons/lucide/eye";
 import BankingIcon from "~icons/lucide/credit-card";
 import SettingsProfile from "./SettingsProfile.vue";
 
+withDefaults(
+	defineProps<{
+		modelValue: boolean;
+	}>(),
+	{
+		modelValue: false,
+	},
+);
+
+defineEmits<{
+	(e: "update:modelValue", value: boolean): void;
+}>();
+
 const active = ref("profile");
 </script>
 
 <template>
 	<Dialog
-		:model-value="true"
+		:model-value="modelValue"
+		@update:model-value="$emit('update:modelValue', $event)"
 		:options="{
 			size: '4xl',
 		}"
