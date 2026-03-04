@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useRoute } from "vue-router";
 import { Sidebar as USidebar } from "frappe-ui";
 import BugIcon from "~icons/lucide/bug";
 import ChartIcon from "~icons/lucide/trending-up";
@@ -9,10 +10,16 @@ import MoonIcon from "~icons/lucide/moon";
 import SettingsIcon from "~icons/lucide/settings";
 import UserIcon from "~icons/lucide/user";
 
+const route = useRoute();
+
 const toggleTheme = () => {
 	const currentTheme = document.documentElement.getAttribute("data-theme");
 	const newTheme = currentTheme === "dark" ? "light" : "dark";
 	document.documentElement.setAttribute("data-theme", newTheme);
+};
+
+const isActiveRoute = (name: string) => {
+	return route.matched.some((record) => record.name === name);
 };
 </script>
 
@@ -55,13 +62,19 @@ const toggleTheme = () => {
 				items: [
 					{
 						label: 'Leaderboard',
-						to: '',
 						icon: ChartIcon,
+						to: {
+							name: 'Leaderboard',
+						},
+						isActive: isActiveRoute('Leaderboard'),
 					},
 					{
 						label: 'Reports',
-						to: '',
 						icon: BugIcon,
+						to: {
+							name: 'Reports',
+						},
+						isActive: isActiveRoute('Reports'),
 					},
 					{
 						label: 'Rewards',
