@@ -40,7 +40,7 @@ import SettingsProfile from "./SettingsProfile.vue";
 						},
 					]"
 				/>
-				<div class="p-4">
+				<div class="grow">
 					<SettingsProfile />
 				</div>
 			</div>

@@ -1,14 +1,12 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:username",
+ "autoname": "field:user",
  "creation": "2026-01-28 16:12:05.865393",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "user_id",
-  "username",
-  "display_name",
+  "user",
   "bio",
   "social_github",
   "social_linkedin",
@@ -16,28 +14,6 @@
   "location"
  ],
  "fields": [
-  {
-   "fieldname": "username",
-   "fieldtype": "Data",
-   "label": "Username",
-   "reqd": 1,
-   "unique": 1
-  },
-  {
-   "fieldname": "display_name",
-   "fieldtype": "Data",
-   "label": "Display Name",
-   "reqd": 1
-  },
-  {
-   "fieldname": "user_id",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "User",
-   "options": "User",
-   "reqd": 1,
-   "unique": 1
-  },
   {
    "fieldname": "bio",
    "fieldtype": "Small Text",
@@ -62,17 +38,26 @@
    "fieldname": "location",
    "fieldtype": "Data",
    "label": "Location"
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "User",
+   "options": "User",
+   "reqd": 1,
+   "unique": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [
   {
-   "link_doctype": "Bounty Attempt",
+   "link_doctype": "Bounty Report",
    "link_fieldname": "hunter"
   }
  ],
- "modified": "2026-01-31 02:25:22.064501",
+ "modified": "2026-03-04 23:46:10.217885",
  "modified_by": "Administrator",
  "module": "Bounty",
  "name": "Bounty Hunter",
@@ -117,5 +102,5 @@
  "sort_field": "creation",
  "sort_order": "DESC",
  "states": [],
- "title_field": "display_name"
+ "title_field": "user"
 }
