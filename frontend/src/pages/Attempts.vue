@@ -20,38 +20,32 @@ usePageMeta(() => ({
 </script>
 
 <template>
-	<div class="container mx-auto py-8">
-		<div class="divide-y">
-			<div class="flex pb-4 font-medium">
-				<div class="grow">Title</div>
-				<div class="w-[180px] text-end">Target</div>
-				<div class="w-[200px] text-end">Date</div>
-				<div class="w-[150px] text-end">Status</div>
-			</div>
-			<RouterLink
-				v-for="attempt in attemptsResource.data"
-				:to="{
-					name: 'Attempt',
-					params: { id: attempt.name },
-				}"
-				class="block"
-			>
-				<div :key="attempt.name" class="flex py-4 cursor-pointer">
-					<div class="grow">{{ attempt.title }}</div>
-					<div class="w-[180px] text-end">
-						<Target
-							v-if="attempt.target"
-							:target="attempt.target"
-							class="ml-auto mr-0"
-						/>
-						<span v-else>&mdash;</span>
-					</div>
-					<div class="w-[200px] text-end">{{ formatDate(attempt.creation, "PPP") }}</div>
-					<div class="w-[150px] text-end">
-						<Badge :label="attempt.status" :theme="statusTheme(attempt.status)" />
-					</div>
-				</div>
-			</RouterLink>
+	<div class="divide-y">
+		<div class="flex h-12 px-5 py-4 font-medium">
+			<div class="grow">Title</div>
+			<div class="w-[180px] text-end">Target</div>
+			<div class="w-[200px] text-end">Date</div>
+			<div class="w-[150px] text-end">Status</div>
 		</div>
+		<RouterLink
+			v-for="attempt in attemptsResource.data"
+			:to="{
+				name: 'Attempt',
+				params: { id: attempt.name },
+			}"
+			class="block"
+		>
+			<div :key="attempt.name" class="flex h-12 px-5 py-4 cursor-pointer">
+				<div class="grow">{{ attempt.title }}</div>
+				<div class="w-[180px] text-end">
+					<Target v-if="attempt.target" :target="attempt.target" class="ml-auto mr-0" />
+					<span v-else>&mdash;</span>
+				</div>
+				<div class="w-[200px] text-end">{{ formatDate(attempt.creation, "PPP") }}</div>
+				<div class="w-[150px] text-end">
+					<Badge :label="attempt.status" :theme="statusTheme(attempt.status)" />
+				</div>
+			</div>
+		</RouterLink>
 	</div>
 </template>
