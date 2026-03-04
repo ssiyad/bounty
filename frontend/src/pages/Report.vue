@@ -11,7 +11,7 @@ const route = useRoute();
 const id = route.params.id as string;
 
 const reportResource = createDocumentResource({
-	doctype: "Bounty Attempt",
+	doctype: "Bounty Report",
 	name: id,
 	cache: ["Report", id],
 	auto: !!id,
