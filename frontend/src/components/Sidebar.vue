@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import { createDocumentResource, Sidebar as USidebar } from "frappe-ui";
 import BugIcon from "~icons/lucide/bug";
@@ -22,11 +22,23 @@ const user = createDocumentResource({
 	auto: true,
 });
 
+const applyTheme = (theme: string) => {
+	document.documentElement.setAttribute("data-theme", theme);
+	localStorage.setItem("theme", theme);
+};
+
 const toggleTheme = () => {
 	const currentTheme = document.documentElement.getAttribute("data-theme");
 	const newTheme = currentTheme === "dark" ? "light" : "dark";
-	document.documentElement.setAttribute("data-theme", newTheme);
+	applyTheme(newTheme);
 };
+
+onMounted(() => {
+	const savedTheme = localStorage.getItem("theme");
+	if (savedTheme) {
+		applyTheme(savedTheme);
+	}
+});
 
 const isActiveRoute = (name: string) => {
 	return route.matched.some((record) => record.name === name);
