@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BreadcrumbsProps } from "frappe-ui";
+import { type BreadcrumbsProps, Button } from "frappe-ui";
 import Banner from "../components/Banner.vue";
 import Sidebar from "../components/Sidebar.vue";
 import Topbar from "../components/Topbar.vue";
@@ -24,7 +24,11 @@ withDefaults(
 			<Banner
 				message="This is a work in progress. You may encounter rough edges."
 				variant="warning"
-			/>
+			>
+				<a href="https://github.com/ssiyad/bounty/issues" target="_blank" rel="noopener">
+					<Button label="Report an Issue" variant="ghost" icon-right="external-link" />
+				</a>
+			</Banner>
 			<slot />
 		</div>
 	</div>
