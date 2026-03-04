@@ -37,8 +37,8 @@ const routes = [
         component: () => import("@/pages/Upcoming.vue"),
       },
       {
-        path: "published",
-        name: "Published",
+        path: "Advisories",
+        name: "advisories",
         component: () => import("@/pages/Upcoming.vue"),
       },
     ],

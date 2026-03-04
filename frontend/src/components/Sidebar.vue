@@ -111,12 +111,12 @@ const isSettingsDialogOpen = ref(false);
 						isActive: isActiveRoute('Rewards'),
 					},
 					{
-						label: 'Published',
+						label: 'Advisories',
 						icon: GlobeIcon,
 						to: {
-							name: 'Published',
+							name: 'advisories',
 						},
-						isActive: isActiveRoute('Published'),
+						isActive: isActiveRoute('Advisories'),
 					},
 				],
 			},
