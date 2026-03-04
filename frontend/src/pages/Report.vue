@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useRoute } from "vue-router";
-import { Badge, createDocumentResource, usePageMeta } from "frappe-ui";
-import Chat from "../components/attempt/Chat.vue";
+import { Badge, createDocumentResource } from "frappe-ui";
+import Chat from "../components/report/Chat.vue";
 import Target from "../components/Target.vue";
 import { statusTheme, categoryTheme, severityTheme } from "../utils/badgeThemes";
 import PageLayout from "../layouts/PageLayout.vue";
