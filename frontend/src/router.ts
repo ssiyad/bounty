@@ -23,30 +23,18 @@ const routes = [
             path: ":id",
             name: "Report",
             component: () => import("@/pages/Report.vue"),
-            meta: {
-              breadcrumb: (route: any) => route.params.id,
-            },
           },
         ],
-        meta: {
-          breadcrumb: "Reports",
-        },
       },
       {
         path: "leaderboard",
         name: "Leaderboard",
         component: () => import("@/pages/Leaderboard.vue"),
-        meta: {
-          breadcrumb: "Leaderboard",
-        },
       },
       {
         path: "account",
         name: "Account",
         component: () => import("@/pages/Account.vue"),
-        meta: {
-          breadcrumb: "Account",
-        },
       },
     ],
   },
