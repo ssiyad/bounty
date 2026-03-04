@@ -12,7 +12,7 @@ withDefaults(
 
 <template>
 	<div
-		class="px-4 py-3 border-b"
+		class="px-5 py-3 border-b"
 		:class="{
 			'bg-surface-gray-1 text-ink-gray-9': variant === 'default',
 			'bg-surface-blue-1 text-ink-blue-3': variant === 'info',
