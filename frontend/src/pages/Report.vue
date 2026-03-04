@@ -6,15 +6,16 @@ import Chat from "../components/attempt/Chat.vue";
 import Target from "../components/Target.vue";
 import { statusTheme, categoryTheme, severityTheme } from "../utils/badgeThemes";
 import { pageTitle } from "../utils/page";
+import PageLayout from "../layouts/PageLayout.vue";
 
 const route = useRoute();
-const attemptId = route.params.id as string;
+const id = route.params.id as string;
 
 const attemptResource = createDocumentResource({
 	doctype: "Bounty Attempt",
-	name: attemptId,
-	cache: ["Attempt", attemptId],
-	auto: !!attemptId,
+	name: id,
+	cache: ["Report", id],
+	auto: !!id,
 	whitelistedMethods: {
 		chat: {
 			method: "chat",
@@ -38,9 +39,9 @@ usePageMeta(() => ({
 </script>
 
 <template>
-	<div class="size-full">
+	<PageLayout class="size-full">
 		<div v-if="attempt" class="flex divide-x size-full">
-			<div class="container mx-auto py-8 overflow-y-auto">
+			<div class="px-5 py-8 overflow-y-auto">
 				<div class="text-3xl font-semibold mb-4">
 					{{ attempt.title }}
 				</div>
@@ -88,5 +89,5 @@ usePageMeta(() => ({
 				</div>
 			</div>
 		</div>
-	</div>
+	</PageLayout>
 </template>
