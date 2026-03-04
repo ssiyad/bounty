@@ -48,7 +48,7 @@ const breadcrumbs = computed(() => [
 <template>
 	<PageLayout class="size-full" :breadcrumbs="breadcrumbs">
 		<div v-if="report" class="flex divide-x size-full">
-			<div class="px-5 py-8 overflow-y-auto">
+			<div class="grow px-5 py-8 overflow-y-auto">
 				<div class="text-3xl font-semibold mb-4">
 					{{ report.title }}
 				</div>
