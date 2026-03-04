@@ -14,7 +14,7 @@ class BountyReport(Document):
 		self.ensure_hunter()
 
 	def ensure_hunter(self):
-		self.hunter = hunter_id(frappe.session.user)
+		self.hunter = frappe.session.user
 
 	@frappe.whitelist()
 	def chat(self):
@@ -33,8 +33,8 @@ class BountyReport(Document):
 
 	@frappe.whitelist()
 	def reply(self, content: str):
-		from_user = frappe.session.user
-		hunter = hunter_id(from_user)
+		from_user = str(frappe.session.user)
+		user = frappe.get_doc("User", from_user)
 		doc: Communication = frappe.new_doc("Communication")
 		doc.subject = self.get_title()
 		doc.content = content
@@ -45,25 +45,17 @@ class BountyReport(Document):
 		doc.communication_medium = "Chat"
 		doc.reference_doctype = self.doctype
 		doc.reference_name = self.name
-		doc.sender_full_name = frappe.db.get_value("Bounty Hunter", hunter, "display_name")
+		doc.sender_full_name = user.full_name
 		doc.user = from_user
 		doc.insert(ignore_permissions=True)
 		return self.chat()
 
 
-def permission_query(user_id: str | None = None):
-	user_id = user_id or frappe.session.user
-	return "(`tabBounty Attempt`.hunter = {0})".format(frappe.db.escape(hunter_id(user_id)))
+def permission_query(user: str | None = None):
+	user = user or frappe.session.user
+	return "(`tabBounty Attempt`.hunter = {0})".format(frappe.db.escape(user))
 
 
 def has_permission(doc: BountyHunter, ptype="read", user: str | None = None):
-	user_id = user or frappe.session.user
-	return doc.hunter == hunter_id(user_id)
-
-
-def hunter_id(user_id: str):
-	id = frappe.db.get_value("Bounty Hunter", {"user_id": user_id})
-	if not id:
-		message = _("Bounty Hunter profile not found.")
-		frappe.throw(message, frappe.ValidationError)
-	return id
+	user = user or frappe.session.user
+	return doc.hunter == user
