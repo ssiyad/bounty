@@ -5,11 +5,12 @@ import BugIcon from "~icons/lucide/bug";
 import ChartIcon from "~icons/lucide/trending-up";
 import GlobeIcon from "~icons/lucide/globe";
 import InboxIcon from "~icons/lucide/inbox";
+import LogoutIcon from "~icons/lucide/log-out";
 import MoneyIcon from "~icons/lucide/hand-coins";
 import SettingsIcon from "~icons/lucide/settings";
 import SunIcon from "~icons/lucide/sun";
-import UserIcon from "~icons/lucide/user";
 import { session } from "../data/session";
+import SettingsDialog from "./settings/SettingsDialog.vue";
 
 const route = useRoute();
 
@@ -32,6 +33,7 @@ const isActiveRoute = (name: string) => {
 </script>
 
 <template>
+	<SettingsDialog />
 	<USidebar
 		disable-collapse
 		:header="{
@@ -45,7 +47,7 @@ const isActiveRoute = (name: string) => {
 				},
 				{
 					label: 'Logout',
-					icon: UserIcon,
+					icon: LogoutIcon,
 					onClick: () => session.logout.submit(),
 				},
 			],
