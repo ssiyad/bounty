@@ -8,6 +8,12 @@ import MoneyIcon from "~icons/lucide/hand-coins";
 import MoonIcon from "~icons/lucide/moon";
 import SettingsIcon from "~icons/lucide/settings";
 import UserIcon from "~icons/lucide/user";
+
+const toggleTheme = () => {
+	const currentTheme = document.documentElement.getAttribute("data-theme");
+	const newTheme = currentTheme === "dark" ? "light" : "dark";
+	document.documentElement.setAttribute("data-theme", newTheme);
+};
 </script>
 
 <template>
@@ -20,7 +26,7 @@ import UserIcon from "~icons/lucide/user";
 				{
 					label: 'Toggle Theme',
 					icon: MoonIcon,
-					onClick: () => {},
+					onClick: toggleTheme,
 				},
 				{
 					label: 'Logout',
