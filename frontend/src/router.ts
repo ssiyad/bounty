@@ -48,43 +48,6 @@ const routes = [
           breadcrumb: "Account",
         },
       },
-      {
-        path: "sherlock",
-        children: [
-          {
-            path: "",
-            name: "Sherlock",
-            component: () => import("@/pages/Sherlock.vue"),
-          },
-          {
-            path: ":source",
-            name: "SherlockSource",
-            component: () => import("@/pages/SherlockSource.vue"),
-            meta: {
-              breadcrumb: (route: any) => route.params.source,
-            },
-          },
-          {
-            path: ":source/endpoints",
-            name: "SherlockEndpoints",
-            component: () => import("@/pages/SherlockSourceEndpoints.vue"),
-            meta: {
-              breadcrumb: "Endpoints",
-            },
-          },
-          // {
-          //   path: "unused-endpoints",
-          //   name: "SherlockUnusedEndpoints",
-          //   component: () => import("@/pages/SherlockUnusedEndpoints.vue"),
-          //   meta: {
-          //     breadcrumb: "Unused Endpoints",
-          //   },
-          // },
-        ],
-        meta: {
-          breadcrumb: "Sherlock",
-        },
-      },
     ],
   },
   {
@@ -99,22 +62,20 @@ const router = createRouter({
   routes,
 });
 
-// router.beforeEach(async (to, from, next) => {
-//   let isLoggedIn = session.isLoggedIn;
-//
-//   try {
-//     await userResource.promise;
-//   } catch (error) {
-//     isLoggedIn = false;
-//   }
-//
-//   if (!isLoggedIn && to.name !== "Login") {
-//     next({ name: "Login" });
-//   } //
-//   else if (isLoggedIn && to.name === "Login") {
-//     next({ name: "Home" });
-//   } //
-//   else next();
-// });
+router.beforeEach(async (to, from, next) => {
+  let isLoggedIn = session.isLoggedIn;
+
+  try {
+    await userResource.promise;
+  } catch (error) {
+    isLoggedIn = false;
+  }
+
+  if (!isLoggedIn && to.name !== "Login") {
+    next({ name: "Login" });
+  } else if (isLoggedIn && to.name === "Login") {
+    next({ name: "Home" });
+  } else next();
+});
 
 export default router;
