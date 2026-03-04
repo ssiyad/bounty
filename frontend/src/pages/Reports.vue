@@ -6,7 +6,7 @@ import { statusTheme } from "../utils/badgeThemes";
 import PageLayout from "../layouts/PageLayout.vue";
 
 const attemptsResource = createListResource({
-	doctype: "Bounty Attempt",
+	doctype: "Bounty Report",
 	cache: ["Reports"],
 	fields: ["name", "title", "creation", "status", "target"],
 	orderBy: "creation desc",

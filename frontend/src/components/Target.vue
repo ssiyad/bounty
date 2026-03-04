@@ -25,11 +25,11 @@ const target = createDocumentResource({
 				v-if="target.doc.logo"
 				class="flex size-6 items-center justify-center rounded-[5px]"
 				:src="target.doc.logo"
-				:alt="target.doc.name"
+				:alt="target.doc.title"
 			/>
 			<Avatar v-else :label="target.name" shape="square" />
 			<div class="font-medium">
-				{{ target.doc.name }}
+				{{ target.doc.title }}
 			</div>
 		</div>
 		<div v-else>
