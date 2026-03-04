@@ -12,21 +12,21 @@ const routes = [
         component: () => import("@/pages/Home.vue"),
       },
       {
-        path: "attempts",
+        path: "reports",
         children: [
           {
             path: "",
-            name: "Attempts",
-            component: () => import("@/pages/Attempts.vue"),
+            name: "Reports",
+            component: () => import("@/pages/Reports.vue"),
           },
           {
             path: ":id",
-            name: "Attempt",
-            component: () => import("@/pages/Attempt.vue"),
+            name: "Report",
+            component: () => import("@/pages/Report.vue"),
           },
         ],
         meta: {
-          breadcrumb: "Attempts",
+          breadcrumb: "Reports",
         },
       },
       {
