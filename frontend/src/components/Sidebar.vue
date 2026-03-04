@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import { Sidebar as USidebar } from "frappe-ui";
+import { createDocumentResource, Sidebar as USidebar } from "frappe-ui";
 import BugIcon from "~icons/lucide/bug";
 import ChartIcon from "~icons/lucide/trending-up";
 import GlobeIcon from "~icons/lucide/globe";
@@ -12,6 +12,13 @@ import UserIcon from "~icons/lucide/user";
 import { session } from "../data/session";
 
 const route = useRoute();
+
+const user = createDocumentResource({
+	doctype: "User",
+	name: session.user!,
+	cache: ["User", session.user!],
+	auto: true,
+});
 
 const toggleTheme = () => {
 	const currentTheme = document.documentElement.getAttribute("data-theme");
@@ -29,7 +36,7 @@ const isActiveRoute = (name: string) => {
 		disable-collapse
 		:header="{
 			title: 'Bounty',
-			subtitle: session.user!,
+			subtitle: user.doc?.full_name,
 			menuItems: [
 				{
 					label: 'Toggle Theme',
@@ -39,6 +46,7 @@ const isActiveRoute = (name: string) => {
 				{
 					label: 'Logout',
 					icon: UserIcon,
+					onClick: () => session.logout.submit(),
 				},
 			],
 		}"
