@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import { Dialog, Sidebar } from "frappe-ui";
 import UserIcon from "~icons/lucide/user";
 import AppearanceIcon from "~icons/lucide/eye";
 import BankingIcon from "~icons/lucide/credit-card";
 import SettingsProfile from "./SettingsProfile.vue";
+
+const active = ref("profile");
 </script>
 
 <template>
@@ -14,7 +17,7 @@ import SettingsProfile from "./SettingsProfile.vue";
 		}"
 	>
 		<template #body>
-			<div class="h-[512px] flex">
+			<div class="h-[600px] flex">
 				<Sidebar
 					disable-collapse
 					:sections="[
@@ -24,17 +27,20 @@ import SettingsProfile from "./SettingsProfile.vue";
 								{
 									label: 'Profile',
 									icon: UserIcon,
-									onClick: () => {},
+									isActive: active === 'profile',
+									onClick: () => (active = 'profile'),
 								},
 								{
 									label: 'Appearance',
 									icon: AppearanceIcon,
-									onClick: () => {},
+									isActive: active === 'appearance',
+									onClick: () => (active = 'appearance'),
 								},
 								{
 									label: 'Banking',
 									icon: BankingIcon,
-									onClick: () => {},
+									isActive: active === 'banking',
+									onClick: () => (active = 'banking'),
 								},
 							],
 						},
