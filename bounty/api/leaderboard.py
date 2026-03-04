@@ -13,6 +13,7 @@ def get_leaderboard():
 	Report = frappe.qb.DocType("Bounty Report")
 	Hunter = frappe.qb.DocType("Bounty Hunter")
 	User = frappe.qb.DocType("User")
+	Score = Count(Report.name)
 	return (
 		frappe.qb.from_(Report)
 		.inner_join(Hunter)
@@ -22,8 +23,8 @@ def get_leaderboard():
 		.where(Report.creation >= frappe.utils.add_to_date(frappe.utils.now(), days=-30))
 		.where(Report.status == "Accepted")
 		.groupby(Hunter.name)
-		.select(User.full_name.as_("name"), Count(Report.name).as_("score"))
-		.orderby(Count(Report.name), order=Order.desc)
+		.select(User.full_name.as_("name"), (Score * 13.2).as_("score"))
+		.orderby(Score, order=Order.desc)
 		.limit(10)
 		.run(as_dict=True)
 	)
