@@ -6,8 +6,8 @@ import ChartIcon from "~icons/lucide/trending-up";
 import GlobeIcon from "~icons/lucide/globe";
 import InboxIcon from "~icons/lucide/inbox";
 import MoneyIcon from "~icons/lucide/hand-coins";
-import MoonIcon from "~icons/lucide/moon";
 import SettingsIcon from "~icons/lucide/settings";
+import SunIcon from "~icons/lucide/sun";
 import UserIcon from "~icons/lucide/user";
 import { session } from "../data/session";
 
@@ -40,7 +40,7 @@ const isActiveRoute = (name: string) => {
 			menuItems: [
 				{
 					label: 'Toggle Theme',
-					icon: MoonIcon,
+					icon: SunIcon,
 					onClick: toggleTheme,
 				},
 				{
