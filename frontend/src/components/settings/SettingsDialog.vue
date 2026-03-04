@@ -3,7 +3,7 @@ import { computed, ref } from "vue";
 import { Dialog, Sidebar } from "frappe-ui";
 import UserIcon from "~icons/lucide/user";
 import AppearanceIcon from "~icons/lucide/eye";
-import BankingIcon from "~icons/lucide/credit-card";
+import PaymentIcon from "~icons/lucide/credit-card";
 import SettingsProfile from "./SettingsProfile.vue";
 import Upcoming from "../Upcoming.vue";
 
@@ -65,8 +65,8 @@ const activeComponent = computed(() => {
 									onClick: () => (active = 'appearance'),
 								},
 								{
-									label: 'Banking',
-									icon: BankingIcon,
+									label: 'Payments',
+									icon: PaymentIcon,
 									isActive: active === 'banking',
 									onClick: () => (active = 'banking'),
 								},
