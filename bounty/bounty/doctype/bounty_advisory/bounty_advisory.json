@@ -7,6 +7,7 @@
  "field_order": [
   "published",
   "target",
+  "severity",
   "report",
   "title",
   "content",
@@ -71,12 +72,20 @@
    "fieldname": "published",
    "fieldtype": "Check",
    "label": "Published"
+  },
+  {
+   "default": "Informational",
+   "fieldname": "severity",
+   "fieldtype": "Select",
+   "label": "Severity",
+   "options": "Informational\nLow\nMedium\nHigh\nCritical",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-03-05 11:36:47.878841",
+ "modified": "2026-03-05 23:37:03.825236",
  "modified_by": "Administrator",
  "module": "Bounty",
  "name": "Bounty Advisory",

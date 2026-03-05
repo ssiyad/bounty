@@ -73,9 +73,9 @@ class BountyReport(Document):
 
 def permission_query(user: str | None = None):
 	user = user or frappe.session.user
-	return "(`tabBounty Attempt`.hunter = {0})".format(frappe.db.escape(user))
+	return "(`tabBounty Report`.hunter = {0})".format(frappe.db.escape(user))
 
 
-def has_permission(doc: BountyHunter, ptype="read", user: str | None = None):
+def has_permission(doc, user=None, permission_type=None):
 	user = user or frappe.session.user
 	return doc.hunter == user
