@@ -23,12 +23,12 @@ const target = createDocumentResource({
 		<div v-if="target.doc" class="flex items-center gap-2">
 			<img
 				v-if="target.doc.logo"
-				class="flex size-6 items-center justify-center rounded-[5px]"
+				class="flex size-4 items-center justify-center rounded-[5px]"
 				:src="target.doc.logo"
 				:alt="target.doc.title"
 			/>
-			<Avatar v-else :label="target.name" shape="square" />
-			<div class="font-medium">
+			<Avatar v-else :label="target.name" shape="square" size="xs" />
+			<div>
 				{{ target.doc.title }}
 			</div>
 		</div>
