@@ -28,17 +28,3 @@ class BountyAdvisory(Document):
 			if target != self.target:
 				message = _("Target does not match the target in the report.")
 				frappe.throw(message)
-
-
-# TODO: Implement permissions based on the hunter of the related report.
-# NOTE: This will not work as expected.
-def permission_query(user: str | None = None):
-	return "(`tabBounty Advisory`.published = 1)"
-
-
-def has_permission(doc, user=None, permission_type=None):
-	user = user or frappe.session.user
-	if not doc.report:
-		return False
-	hunter = frappe.get_value("Bounty Report", doc.report, "hunter")
-	return hunter == user
