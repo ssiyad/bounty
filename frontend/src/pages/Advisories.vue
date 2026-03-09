@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import { Badge, Select, createResource, createListResource } from "frappe-ui";
+import { Badge, Select, Switch, createResource, createListResource } from "frappe-ui";
 import { formatDate } from "date-fns";
 import { severityTheme } from "../utils/badgeThemes";
 import Target from "../components/Target.vue";
@@ -8,6 +8,7 @@ import PageLayoutPublic from "../layouts/PageLayoutPublic.vue";
 
 const target = ref("");
 const severity = ref("");
+const myReports = ref(false);
 
 const targets = createListResource({
 	doctype: "Bounty Target",
@@ -28,10 +29,11 @@ const advisories = createResource({
 	makeParams: () => ({
 		target: target.value,
 		severity: severity.value,
+		my_reports: myReports.value,
 	}),
 });
 
-watch([target, severity], () => advisories.fetch());
+watch([target, severity, myReports], () => advisories.fetch());
 </script>
 
 <template>
@@ -43,44 +45,47 @@ watch([target, severity], () => advisories.fetch());
 		]"
 	>
 		<div class="mx-auto container py-12">
-			<div class="mb-4 flex flex-wrap gap-3">
-				<Select
-					v-model="target"
-					class="w-max"
-					placeholder="Target"
-					:options="
-						targets.data?.map((target) => ({
-							label: target.title,
-							value: target.name,
-						}))
-					"
-				>
-					<template #option="{ option }">
-						<Target :target="option.value" />
-					</template>
-				</Select>
-				<Select
-					v-model="severity"
-					class="w-max"
-					placeholder="Severity"
-					:options="severities.data"
-				>
-					<template #option="{ option }">
-						<div class="inline-flex gap-2 items-center">
-							<div
-								class="size-2 rounded-full"
-								:class="{
-									'bg-surface-gray-5': option.color == 'gray',
-									'bg-surface-red-5': option.color == 'red',
-									'bg-red-400': option.color == 'orange',
-									'bg-surface-green-3': option.color == 'green',
-									'bg-surface-blue-3': option.color == 'blue',
-								}"
-							></div>
-							{{ option.label }}
-						</div>
-					</template>
-				</Select>
+			<div class="mb-4 flex items-center justify-between">
+				<div class="space-x-2">
+					<Select
+						v-model="target"
+						class="w-max"
+						placeholder="Target"
+						:options="
+							targets.data?.map((target) => ({
+								label: target.title,
+								value: target.name,
+							}))
+						"
+					>
+						<template #option="{ option }">
+							<Target :target="option.value" />
+						</template>
+					</Select>
+					<Select
+						v-model="severity"
+						class="w-max"
+						placeholder="Severity"
+						:options="severities.data"
+					>
+						<template #option="{ option }">
+							<div class="inline-flex gap-2 items-center">
+								<div
+									class="size-2 rounded-full"
+									:class="{
+										'bg-surface-gray-5': option.color == 'gray',
+										'bg-surface-red-5': option.color == 'red',
+										'bg-red-400': option.color == 'orange',
+										'bg-surface-green-3': option.color == 'green',
+										'bg-surface-blue-3': option.color == 'blue',
+									}"
+								></div>
+								{{ option.label }}
+							</div>
+						</template>
+					</Select>
+				</div>
+				<Switch v-model="myReports" label="My Reports" class="border" />
 			</div>
 			<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
 				<div

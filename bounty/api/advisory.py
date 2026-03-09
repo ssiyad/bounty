@@ -4,15 +4,17 @@ from pypika import Not
 
 
 @frappe.whitelist()
-def get_advisories(target: str | None = None, severity: str | None = None):
+def get_advisories(target: str | None = None, severity: str | None = None, my_reports: bool = False):
 	Advisory = frappe.qb.DocType("Bounty Advisory")
-	CondTarget = Advisory.target == target if target else Not(Advisory.target.isnull())
-	CondSeverity = Advisory.severity == severity if severity else Not(Advisory.severity.isnull())
+	Report = frappe.qb.DocType("Bounty Report")
 	return (
 		frappe.qb.from_(Advisory)
+		.left_join(Report)
+		.on(Report.name == Advisory.report)
 		.where(Advisory.published == 1)
-		.where(CondTarget)
-		.where(CondSeverity)
+		.where((Advisory.target == target) if target else Not(Advisory.target.isnull()))
+		.where((Advisory.severity == severity) if severity else Not(Advisory.severity.isnull()))
+		.where(Report.owner == frappe.session.user if my_reports else Not(Report.owner.isnull()))
 		.select(
 			Advisory.name,
 			Advisory.title,
