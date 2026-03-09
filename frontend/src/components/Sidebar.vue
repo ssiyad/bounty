@@ -94,8 +94,11 @@ const isSettingsDialogOpen = ref(false);
 				items: [
 					{
 						label: 'Inbox',
-						to: '',
 						icon: InboxIcon,
+						to: {
+							name: 'Inbox',
+						},
+						isActive: isActiveRoute('Inbox'),
 						condition: () => session.isLoggedIn,
 					},
 					{

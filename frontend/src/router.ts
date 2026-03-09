@@ -12,6 +12,11 @@ const routes = [
         component: () => import("@/pages/Home.vue"),
       },
       {
+        path: "",
+        name: "Inbox",
+        component: () => import("@/pages/Upcoming.vue"),
+      },
+      {
         path: "reports",
         children: [
           {
