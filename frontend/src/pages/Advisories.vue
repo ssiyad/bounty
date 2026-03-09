@@ -90,6 +90,7 @@ watch([target, severity, myReports], () => advisories.fetch());
 			<div class="divide-y">
 				<RouterLink
 					v-for="advisory in advisories.data"
+					class="block"
 					:key="advisory.name"
 					:to="{
 						name: 'Advisory',
