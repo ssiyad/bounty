@@ -96,13 +96,16 @@ const isSettingsDialogOpen = ref(false);
 						label: 'Inbox',
 						to: '',
 						icon: InboxIcon,
+						condition: () => session.isLoggedIn,
 					},
 					{
 						label: 'Settings',
 						icon: SettingsIcon,
+						isActive: isSettingsDialogOpen,
 						onClick: () => (isSettingsDialogOpen = true),
+						condition: () => session.isLoggedIn,
 					},
-				],
+				].filter((item) => item.condition()),
 			},
 			{
 				label: '',
@@ -114,6 +117,7 @@ const isSettingsDialogOpen = ref(false);
 							name: 'Reports',
 						},
 						isActive: isActiveRoute('Reports'),
+						condition: () => session.isLoggedIn,
 					},
 					{
 						label: 'Rewards',
@@ -122,8 +126,9 @@ const isSettingsDialogOpen = ref(false);
 							name: 'Rewards',
 						},
 						isActive: isActiveRoute('Rewards'),
+						condition: () => session.isLoggedIn,
 					},
-				],
+				].filter((item) => item.condition()),
 			},
 		]"
 	/>

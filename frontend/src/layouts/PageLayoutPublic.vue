@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { type BreadcrumbsProps, Button } from "frappe-ui";
 import Banner from "../components/Banner.vue";
-import SidebarPublic from "../components/SidebarPublic.vue";
+import Sidebar from "../components/Sidebar.vue";
 import Topbar from "../components/Topbar.vue";
 
 withDefaults(
@@ -16,7 +16,7 @@ withDefaults(
 
 <template>
 	<div class="size-full flex overflow-hidden">
-		<SidebarPublic />
+		<Sidebar />
 		<div class="flex flex-col overflow-hidden grow">
 			<Topbar v-if="breadcrumbs.length" :breadcrumbs="breadcrumbs">
 				<slot name="actions" />
