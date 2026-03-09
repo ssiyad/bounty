@@ -87,32 +87,35 @@ watch([target, severity, myReports], () => advisories.fetch());
 				</div>
 				<Switch v-model="myReports" label="My Reports" class="border" />
 			</div>
-			<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+			<div class="divide-y">
 				<div
 					v-for="advisory in advisories.data"
 					:key="advisory.name"
-					class="flex flex-col justify-between rounded-lg border p-5"
+					class="flex items-center justify-between gap-4 px-5 py-4 -mx-5 hover:rounded-md transition-colors hover:bg-surface-gray-1 cursor-pointer"
 				>
-					<div>
-						<div class="mb-3 flex items-center justify-between">
-							<span class="font-mono text-sm text-ink-gray-5">
-								{{ advisory.frappe_reference }}
-							</span>
+					<div class="min-w-0 flex-1">
+						<span class="font-mono text-xs text-ink-gray-4">
+							{{ advisory.frappe_reference }}
+						</span>
+						<p class="mt-2 text-base font-medium text-ink-gray-9 truncate">
+							{{ advisory.title }}
+						</p>
+						<div
+							class="mt-2 flex flex-wrap items-center gap-1 text-sm text-ink-gray-5"
+						>
 							<Badge
 								:label="advisory.severity"
 								:theme="severityTheme(advisory.severity)"
 							/>
+							<span class="text-ink-gray-4">&middot;</span>
+							<span class="font-medium text-ink-gray-7">{{
+								advisory.reported_by
+							}}</span>
+							<span class="text-ink-gray-4">&middot;</span>
+							<span>{{ formatDate(advisory.published_on, "PPP") }}</span>
 						</div>
-						<p class="text-base font-medium text-ink-gray-9">
-							{{ advisory.title }}
-						</p>
 					</div>
-					<div class="mt-4 flex items-center justify-between">
-						<Target :target="advisory.target" />
-						<span class="text-sm text-ink-gray-5">
-							{{ formatDate(advisory.published_on, "PPP") }}
-						</span>
-					</div>
+					<Target :target="advisory.target" />
 				</div>
 			</div>
 		</div>

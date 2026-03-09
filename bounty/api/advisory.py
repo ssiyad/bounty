@@ -22,6 +22,7 @@ def get_advisories(target: str | None = None, severity: str | None = None, my_re
 			Advisory.target,
 			Advisory.frappe_reference,
 			Advisory.modified.as_("published_on"),
+			Report.owner.as_("reported_by"),
 		)
 		.orderby(Advisory.modified, order=Order.desc)
 		.run(as_dict=True)
