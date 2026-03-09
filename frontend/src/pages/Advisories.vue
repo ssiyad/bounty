@@ -88,35 +88,44 @@ watch([target, severity, myReports], () => advisories.fetch());
 				<Switch v-model="myReports" label="My Reports" class="border" />
 			</div>
 			<div class="divide-y">
-				<div
+				<RouterLink
 					v-for="advisory in advisories.data"
 					:key="advisory.name"
-					class="flex items-center justify-between gap-4 px-5 py-4 -mx-5 hover:rounded-md transition-colors hover:bg-surface-gray-1 cursor-pointer"
+					:to="{
+						name: 'Advisory',
+						params: {
+							id: advisory.name,
+						},
+					}"
 				>
-					<div class="min-w-0 flex-1">
-						<span class="font-mono text-xs text-ink-gray-4">
-							{{ advisory.frappe_reference }}
-						</span>
-						<p class="mt-2 text-base font-medium text-ink-gray-9 truncate">
-							{{ advisory.title }}
-						</p>
-						<div
-							class="mt-2 flex flex-wrap items-center gap-1 text-sm text-ink-gray-5"
-						>
-							<Badge
-								:label="advisory.severity"
-								:theme="severityTheme(advisory.severity)"
-							/>
-							<span class="text-ink-gray-4">&middot;</span>
-							<span class="font-medium text-ink-gray-7">{{
-								advisory.reported_by
-							}}</span>
-							<span class="text-ink-gray-4">&middot;</span>
-							<span>{{ formatDate(advisory.published_on, "PPP") }}</span>
+					<div
+						class="flex items-center justify-between gap-4 px-5 py-4 -mx-5 hover:rounded-md transition-colors hover:bg-surface-gray-1 cursor-pointer"
+					>
+						<div class="min-w-0 flex-1">
+							<span class="font-mono text-xs text-ink-gray-4">
+								{{ advisory.frappe_reference }}
+							</span>
+							<p class="mt-2 text-base font-medium text-ink-gray-9 truncate">
+								{{ advisory.title }}
+							</p>
+							<div
+								class="mt-2 flex flex-wrap items-center gap-1 text-sm text-ink-gray-5"
+							>
+								<Badge
+									:label="advisory.severity"
+									:theme="severityTheme(advisory.severity)"
+								/>
+								<span class="text-ink-gray-4">&middot;</span>
+								<span class="font-medium text-ink-gray-7">{{
+									advisory.reported_by
+								}}</span>
+								<span class="text-ink-gray-4">&middot;</span>
+								<span>{{ formatDate(advisory.published_on, "PPP") }}</span>
+							</div>
 						</div>
+						<Target :target="advisory.target" />
 					</div>
-					<Target :target="advisory.target" />
-				</div>
+				</RouterLink>
 			</div>
 		</div>
 	</PageLayoutPublic>

@@ -38,19 +38,21 @@ const routes = [
       },
       {
         path: "advisories",
-        name: "Advisories",
-        component: () => import("@/pages/Advisories.vue"),
         meta: {
           public: true,
         },
-      },
-      {
-        path: "advisories",
-        name: "Advisories",
-        component: () => import("@/pages/Advisories.vue"),
-        meta: {
-          public: true,
-        },
+        children: [
+          {
+            path: "",
+            name: "Advisories",
+            component: () => import("@/pages/Advisories.vue"),
+          },
+          {
+            path: ":id",
+            name: "Advisory",
+            component: () => import("@/pages/Advisory.vue"),
+          },
+        ],
       },
     ],
   },
