@@ -20,7 +20,7 @@ const target = createDocumentResource({
 
 <template>
 	<div class="w-max">
-		<div v-if="target.doc" class="flex items-center gap-2">
+		<div v-if="target?.doc" class="flex items-center gap-2">
 			<img
 				v-if="target.doc.logo"
 				class="flex size-4 items-center justify-center rounded-[5px]"

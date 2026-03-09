@@ -72,6 +72,27 @@ const isSettingsDialogOpen = ref(false);
 				label: '',
 				items: [
 					{
+						label: 'Leaderboard',
+						icon: ChartIcon,
+						to: {
+							name: 'Leaderboard',
+						},
+						isActive: isActiveRoute('Leaderboard'),
+					},
+					{
+						label: 'Advisories',
+						icon: GlobeIcon,
+						to: {
+							name: 'Advisories',
+						},
+						isActive: isActiveRoute('Advisories'),
+					},
+				],
+			},
+			{
+				label: '',
+				items: [
+					{
 						label: 'Inbox',
 						to: '',
 						icon: InboxIcon,
@@ -87,14 +108,6 @@ const isSettingsDialogOpen = ref(false);
 				label: '',
 				items: [
 					{
-						label: 'Leaderboard',
-						icon: ChartIcon,
-						to: {
-							name: 'Leaderboard',
-						},
-						isActive: isActiveRoute('Leaderboard'),
-					},
-					{
 						label: 'Reports',
 						icon: BugIcon,
 						to: {
@@ -109,14 +122,6 @@ const isSettingsDialogOpen = ref(false);
 							name: 'Rewards',
 						},
 						isActive: isActiveRoute('Rewards'),
-					},
-					{
-						label: 'Advisories',
-						icon: GlobeIcon,
-						to: {
-							name: 'advisories',
-						},
-						isActive: isActiveRoute('Advisories'),
 					},
 				],
 			},

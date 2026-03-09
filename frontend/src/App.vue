@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { FrappeUIProvider } from "frappe-ui";
-import Sidebar from "./components/Sidebar.vue";
 </script>
 
 <template>

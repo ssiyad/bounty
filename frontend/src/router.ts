@@ -44,6 +44,14 @@ const routes = [
           public: true,
         },
       },
+      {
+        path: "advisories",
+        name: "Advisories",
+        component: () => import("@/pages/Advisories.vue"),
+        meta: {
+          public: true,
+        },
+      },
     ],
   },
   {
