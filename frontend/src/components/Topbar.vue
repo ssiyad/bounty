@@ -17,13 +17,8 @@ withDefaults(
 		<Breadcrumbs :items="breadcrumbs" />
 		<div class="flex items-center gap-2">
 			<slot />
-			<a href="/login">
-				<Button
-					v-if="!session.isLoggedIn"
-					label="Login"
-					icon-left="log-in"
-					variant="solid"
-				/>
+			<a v-if="!session.isLoggedIn" href="/login">
+				<Button label="Login" icon-left="log-in" variant="solid" />
 			</a>
 		</div>
 	</div>
