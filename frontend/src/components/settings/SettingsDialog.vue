@@ -5,6 +5,7 @@ import UserIcon from "~icons/lucide/user";
 import AppearanceIcon from "~icons/lucide/eye";
 import PaymentIcon from "~icons/lucide/credit-card";
 import SettingsProfile from "./SettingsProfile.vue";
+import SettingsPreferences from "./SettingsPreferences.vue";
 import Upcoming from "../Upcoming.vue";
 
 withDefaults(
@@ -26,8 +27,8 @@ const activeComponent = computed(() => {
 	switch (active.value) {
 		case "profile":
 			return SettingsProfile;
-		case "appearance":
-			return Upcoming;
+		case "preferences":
+			return SettingsPreferences;
 		case "banking":
 			return Upcoming;
 		default:
@@ -59,10 +60,10 @@ const activeComponent = computed(() => {
 									onClick: () => (active = 'profile'),
 								},
 								{
-									label: 'Appearance',
+									label: 'Preferences',
 									icon: AppearanceIcon,
-									isActive: active === 'appearance',
-									onClick: () => (active = 'appearance'),
+									isActive: active === 'preferences',
+									onClick: () => (active = 'preferences'),
 								},
 								{
 									label: 'Payments',

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import { useRoute } from "vue-router";
 import { createDocumentResource, Sidebar as USidebar } from "frappe-ui";
 import BugIcon from "~icons/lucide/bug";
@@ -9,7 +9,6 @@ import InboxIcon from "~icons/lucide/inbox";
 import LogoutIcon from "~icons/lucide/log-out";
 import MoneyIcon from "~icons/lucide/hand-coins";
 import SettingsIcon from "~icons/lucide/settings";
-import SunIcon from "~icons/lucide/sun";
 import { session } from "../data/session";
 import SettingsDialog from "./settings/SettingsDialog.vue";
 
@@ -22,23 +21,6 @@ const user = createDocumentResource({
 	auto: true,
 });
 
-const applyTheme = (theme: string) => {
-	document.documentElement.setAttribute("data-theme", theme);
-	localStorage.setItem("theme", theme);
-};
-
-const toggleTheme = () => {
-	const currentTheme = document.documentElement.getAttribute("data-theme");
-	const newTheme = currentTheme === "dark" ? "light" : "dark";
-	applyTheme(newTheme);
-};
-
-onMounted(() => {
-	const savedTheme = localStorage.getItem("theme");
-	if (savedTheme) {
-		applyTheme(savedTheme);
-	}
-});
 
 const isActiveRoute = (name: string) => {
 	return route.matched.some((record) => record.name === name);
@@ -55,12 +37,6 @@ const isSettingsDialogOpen = ref(false);
 			title: 'Bounty',
 			subtitle: user?.doc?.full_name,
 			menuItems: [
-				{
-					label: 'Toggle Theme',
-					icon: SunIcon,
-					onClick: toggleTheme,
-					condition: () => true,
-				},
 				{
 					label: 'Logout',
 					icon: LogoutIcon,

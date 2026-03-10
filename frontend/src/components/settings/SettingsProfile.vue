@@ -11,7 +11,7 @@ const hunter = createDocumentResource({
 
 <template>
 	<div class="h-full overflow-y-auto p-4">
-		<div class="flex items-center justify-between mb-6">
+		<div class="h-7 flex items-center justify-between mb-6">
 			<p class="text-lg font-medium">Profile</p>
 			<Button
 				label="Save"
