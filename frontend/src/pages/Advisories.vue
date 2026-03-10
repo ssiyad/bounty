@@ -4,7 +4,7 @@ import { Badge, Select, Switch, createResource, createListResource } from "frapp
 import { formatDate } from "date-fns";
 import { severityTheme } from "../utils/badgeThemes";
 import Target from "../components/Target.vue";
-import PageLayoutPublic from "../layouts/PageLayoutPublic.vue";
+import PageLayout from "../layouts/PageLayout.vue";
 
 const target = ref("");
 const severity = ref("");
@@ -37,7 +37,7 @@ watch([target, severity, myReports], () => advisories.fetch());
 </script>
 
 <template>
-	<PageLayoutPublic
+	<PageLayout
 		:breadcrumbs="[
 			{
 				label: 'Advisories',
@@ -129,5 +129,5 @@ watch([target, severity, myReports], () => advisories.fetch());
 				</RouterLink>
 			</div>
 		</div>
-	</PageLayoutPublic>
+	</PageLayout>
 </template>

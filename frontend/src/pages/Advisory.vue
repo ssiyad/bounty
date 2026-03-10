@@ -5,7 +5,7 @@ import { Badge, createResource } from "frappe-ui";
 import { formatDate } from "date-fns";
 import { severityTheme } from "../utils/badgeThemes";
 import Target from "../components/Target.vue";
-import PageLayoutPublic from "../layouts/PageLayoutPublic.vue";
+import PageLayout from "../layouts/PageLayout.vue";
 
 const route = useRoute();
 const id = route.params.id as string;
@@ -33,7 +33,7 @@ const breadcrumbs = computed(() => [
 </script>
 
 <template>
-	<PageLayoutPublic :breadcrumbs="breadcrumbs">
+	<PageLayout :breadcrumbs="breadcrumbs">
 		<div v-if="advisory.data" class="mx-auto container py-12">
 			<div class="max-w-3xl mx-auto">
 				<span class="font-mono text-xs text-ink-gray-4">
@@ -101,5 +101,5 @@ const breadcrumbs = computed(() => [
 				</div>
 			</div>
 		</div>
-	</PageLayoutPublic>
+	</PageLayout>
 </template>
