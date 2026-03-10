@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Avatar, createDocumentResource } from "frappe-ui";
+import { Avatar, createResource } from "frappe-ui";
 
 const props = withDefaults(
 	defineProps<{
@@ -10,30 +10,35 @@ const props = withDefaults(
 	},
 );
 
-const target = createDocumentResource({
-	doctype: "Bounty Target",
-	name: props.target,
-	cache: ["Bounty Target", props.target],
+const target = createResource({
+	url: "bounty.api.target.get_target",
 	auto: !!props.target,
+	cache: ["target", props.target],
+	initialData: {
+		name: props.target,
+		title: props.target,
+		logo: "",
+		repository: "",
+	},
+	makeParams: () => ({
+		name: props.target,
+	}),
 });
 </script>
 
 <template>
 	<div class="w-max">
-		<div v-if="target?.doc" class="flex items-center gap-2">
+		<div class="flex items-center gap-2">
 			<img
-				v-if="target.doc.logo"
+				v-if="target.data.logo"
 				class="flex size-4 items-center justify-center rounded-[5px]"
-				:src="target.doc.logo"
-				:alt="target.doc.title"
+				:src="target.data.logo"
+				:alt="target.data.title"
 			/>
-			<Avatar v-else :label="target.name" shape="square" size="xs" />
+			<Avatar v-else :label="target.wtitle" shape="square" size="xs" />
 			<div>
-				{{ target.doc.title }}
+				{{ target.data.title }}
 			</div>
-		</div>
-		<div v-else>
-			{{ props.target }}
 		</div>
 	</div>
 </template>

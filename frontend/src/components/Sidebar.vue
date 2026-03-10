@@ -53,19 +53,21 @@ const isSettingsDialogOpen = ref(false);
 		disable-collapse
 		:header="{
 			title: 'Bounty',
-			subtitle: user.doc?.full_name,
+			subtitle: user?.doc?.full_name,
 			menuItems: [
 				{
 					label: 'Toggle Theme',
 					icon: SunIcon,
 					onClick: toggleTheme,
+					condition: () => true,
 				},
 				{
 					label: 'Logout',
 					icon: LogoutIcon,
 					onClick: () => session.logout.submit(),
+					condition: () => session.isLoggedIn,
 				},
-			],
+			].filter((item) => item.condition()),
 		}"
 		:sections="[
 			{

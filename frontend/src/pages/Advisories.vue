@@ -10,17 +10,16 @@ const target = ref("");
 const severity = ref("");
 const myReports = ref(false);
 
-const targets = createListResource({
-	doctype: "Bounty Target",
+const targets = createResource({
+	url: "bounty.api.target.get_targets",
 	auto: true,
-	cache: true,
-	fields: ["name", "title"],
+	cache: ["targets"],
 });
 
 const severities = createResource({
 	url: "bounty.api.severity.get_severities",
 	auto: true,
-	cache: true,
+	cache: ["severities"],
 });
 
 const advisories = createResource({

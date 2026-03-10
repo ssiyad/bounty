@@ -5,7 +5,7 @@ from frappe.utils.caching import redis_cache
 from pypika import Not
 
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def get_advisories(target: str | None = None, severity: str | None = None, my_reports: bool = False):
 	Advisory = frappe.qb.DocType("Bounty Advisory")
 	Report = frappe.qb.DocType("Bounty Report")
@@ -31,7 +31,7 @@ def get_advisories(target: str | None = None, severity: str | None = None, my_re
 	)
 
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 @redis_cache()
 def get_advisory(name: str):
 	Advisory = frappe.qb.DocType("Bounty Advisory")
