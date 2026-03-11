@@ -8,5 +8,42 @@ frappe.ui.form.on("Bounty Report", {
 				frm.refresh();
 			});
 		});
+
+		frm.timeline.timeline_actions_wrapper.find(".reply-btn").remove();
+		frm.timeline
+			.add_action_button(
+				"Reply",
+				() => {
+					const d = new frappe.ui.Dialog({
+						title: "Reply",
+						fields: [
+							{
+								fieldname: "info",
+								fieldtype: "HTML",
+								options:
+									'<p class="text-muted">What would you like to tell the reporter?</p>',
+							},
+							{
+								fieldname: "content",
+								fieldtype: "Small Text",
+								label: "Message",
+								reqd: 1,
+								placeholder: "Jot down your thoughts...",
+							},
+						],
+						primary_action_label: "Send",
+						primary_action(values) {
+							frm.call("reply", { content: values.content }).then(() => {
+								d.hide();
+								frm.refresh();
+							});
+						},
+					});
+					d.show();
+				},
+				"es-line-add",
+				"btn-secondary",
+			)
+			.addClass("reply-btn");
 	},
 });
