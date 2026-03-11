@@ -65,11 +65,13 @@ const gitHubUrl = computed(() => {
 					:label="advisory.data.severity"
 					:theme="severityTheme(advisory.data.severity)"
 				/>
-				<span class="text-ink-gray-4">&middot;</span>
-				<span class="font-medium text-ink-gray-7">{{ advisory.data.reported_by }}</span>
-				<span class="text-ink-gray-4">&middot;</span>
+				<span v-if="advisory.data.reported_by" class="text-ink-gray-4">&mdash;</span>
+				<span v-if="advisory.data.reported_by" class="font-medium text-ink-gray-7">{{
+					advisory.data.reported_by
+				}}</span>
+				<span class="text-ink-gray-4">&mdash;</span>
 				<Target :target="advisory.data.target" />
-				<span class="text-ink-gray-4">&middot;</span>
+				<span class="text-ink-gray-4">&mdash;</span>
 				<span>{{ formatDate(advisory.data.published_on, "PPP") }}</span>
 			</div>
 			<div

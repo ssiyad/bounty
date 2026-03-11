@@ -110,11 +110,13 @@ watch([target, severity, myReports], () => advisories.fetch());
 								:label="advisory.severity"
 								:theme="severityTheme(advisory.severity)"
 							/>
-							<span class="text-ink-gray-4">&middot;</span>
-							<span class="font-medium text-ink-gray-7">{{
-								advisory.reported_by
-							}}</span>
-							<span class="text-ink-gray-4">&middot;</span>
+							<span v-if="advisory.reported_by" class="text-ink-gray-4"
+								>&mdash;</span
+							>
+							<span v-if="advisory.reported_by" class="font-medium text-ink-gray-7">
+								{{ advisory.reported_by }}
+							</span>
+							<span class="text-ink-gray-4">&mdash;</span>
 							<span>{{ formatDate(advisory.published_on, "PPP") }}</span>
 						</div>
 					</div>

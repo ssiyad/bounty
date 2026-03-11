@@ -16,7 +16,7 @@ def get_advisories(target: str | None = None, severity: str | None = None, my_re
 		.where(Advisory.published == 1)
 		.where((Advisory.target == target) if target else Not(Advisory.target.isnull()))
 		.where((Advisory.severity == severity) if severity else Not(Advisory.severity.isnull()))
-		.where(Report.owner == frappe.session.user if my_reports else Not(Report.owner.isnull()))
+		.where(Report.owner == frappe.session.user if my_reports else Not(Advisory.name.isnull()))
 		.select(
 			Advisory.name,
 			Advisory.title,
