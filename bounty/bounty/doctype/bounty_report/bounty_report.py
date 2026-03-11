@@ -13,7 +13,8 @@ class BountyReport(Document):
 		self.ensure_hunter()
 
 	def ensure_hunter(self):
-		self.hunter = frappe.session.user
+		if self.is_new():
+			self.hunter = frappe.session.user
 
 	@frappe.whitelist()
 	def reply(self, content: str):
