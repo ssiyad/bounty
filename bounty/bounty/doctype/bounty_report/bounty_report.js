@@ -15,6 +15,7 @@ frappe.ui.form.on("Bounty Report", {
 				doc.target = frm.doc.target;
 				doc.title = frm.doc.title;
 				doc.content = frm.doc.content;
+				doc.severity = frm.doc.severity;
 				doc.published = 0;
 			});
 		});
