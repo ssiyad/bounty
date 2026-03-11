@@ -39,10 +39,13 @@ def get_advisories(target: str | None = None, severity: str | None = None, my_re
 def get_advisory(name: str):
 	Advisory = frappe.qb.DocType("Bounty Advisory")
 	Report = frappe.qb.DocType("Bounty Report")
+	User = frappe.qb.DocType("User")
 	advisories = (
 		frappe.qb.from_(Advisory)
 		.left_join(Report)
 		.on(Report.name == Advisory.report)
+		.left_join(User)
+		.on(User.name == Report.owner)
 		.where(Advisory.published == 1)
 		.where(Advisory.name == name)
 		.select(
@@ -55,7 +58,7 @@ def get_advisory(name: str):
 			Advisory.github_reference,
 			Advisory.cve,
 			Advisory.modified.as_("published_on"),
-			Report.owner.as_("reported_by"),
+			User.full_name.as_("reported_by"),
 		)
 		.limit(1)
 		.orderby(Advisory.modified, order=Order.desc)
