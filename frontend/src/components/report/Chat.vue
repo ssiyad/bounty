@@ -1,27 +1,26 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { Button } from "frappe-ui";
+import { Button, createResource } from "frappe-ui";
 import ChatReply from "./ChatReply.vue";
 
-withDefaults(
+const props = withDefaults(
 	defineProps<{
-		messages?: {
-			id: string;
-			content: string;
-			sent_or_received: "Sent" | "Received";
-			date: string;
-		}[];
+		report?: string;
 	}>(),
 	{
-		messages: () => [],
+		report: "",
 	},
 );
 
-defineEmits<{
-	(e: "reply", content: string): void;
-}>();
-
 const isReplyOpen = ref(false);
+
+const messages = createResource({
+	url: "bounty.api.chat.get_messages",
+	auto: !!props.report,
+	makeParams: () => ({
+		report: props.report,
+	}),
+});
 </script>
 
 <template>
@@ -39,7 +38,7 @@ const isReplyOpen = ref(false);
 				</div>
 				<Button label="Reply" variant="outline" @click="isReplyOpen = true" />
 			</div>
-			<div v-for="message in messages" :key="message.id">
+			<div v-for="message in messages.data" :key="message.id">
 				<div
 					:class="{
 						'bg-surface-gray-2': message.sent_or_received === 'Received',
@@ -51,6 +50,15 @@ const isReplyOpen = ref(false);
 				</div>
 			</div>
 		</div>
-		<ChatReply v-model="isReplyOpen" @send="$emit('reply', $event)" />
+		<ChatReply
+			v-model="isReplyOpen"
+			:report="props.report"
+			@sent="
+				(messages_: typeof messages.data) => {
+					isReplyOpen = false;
+					messages.setData(messages_);
+				}
+			"
+		/>
 	</div>
 </template>

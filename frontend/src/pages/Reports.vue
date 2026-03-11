@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { formatDate } from "date-fns";
-import { Badge, Button, createListResource } from "frappe-ui";
+import { Badge, Button, createResource } from "frappe-ui";
 import { statusTheme } from "@/utils/badgeThemes";
 import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
 import Target from "@/components/Target.vue";
@@ -9,12 +9,9 @@ import ReportCreateDialog from "@/components/report/ReportCreateDialog.vue";
 
 useBreadcrumbs().set([{ label: "Reports" }]);
 
-const reports = createListResource({
-	doctype: "Bounty Report",
-	cache: ["Reports"],
-	fields: ["name", "title", "creation", "status", "target"],
-	orderBy: "creation desc",
-	pageLength: 99999,
+const reports = createResource({
+	url: "bounty.api.report.get_reports",
+	cache: ["reports"],
 	auto: true,
 });
 
@@ -43,18 +40,16 @@ const isReportDialogOpen = ref(false);
 			:key="report.name"
 			:to="{
 				name: 'Report',
-				params: { id: report.name },
+				params: {
+					id: report.name,
+				},
 			}"
 			class="block"
 		>
 			<div class="flex h-12 px-5 py-4 cursor-pointer">
 				<div class="grow">{{ report.title }}</div>
 				<div class="w-[180px] text-end">
-					<Target
-						v-if="report.target"
-						:target="report.target"
-						class="ml-auto mr-0"
-					/>
+					<Target v-if="report.target" :target="report.target" class="ml-auto mr-0" />
 					<span v-else>&mdash;</span>
 				</div>
 				<div class="w-[200px] text-end">

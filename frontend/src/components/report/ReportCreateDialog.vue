@@ -21,21 +21,18 @@ defineEmits<{
 
 const submit = () => {
 	createResource({
-		url: "frappe.client.insert",
+		url: "bounty.api.report.create_report",
 		method: "POST",
 		auto: true,
-		makeParams: () => ({
-			doc: {
-				doctype: "Bounty Report",
-				title: title.value,
-				content: content.value,
-			},
-		}),
-		onSuccess: (report: any) => {
+		params: {
+			title: title.value,
+			content: content.value,
+		},
+		onSuccess: (name: string) => {
 			router.push({
 				name: "Report",
 				params: {
-					id: report.name,
+					id: name,
 				},
 			});
 		},

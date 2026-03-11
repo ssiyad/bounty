@@ -1,26 +1,44 @@
 <script setup lang="ts">
 import { onUnmounted, ref } from "vue";
-import { Dialog, Textarea, Button } from "frappe-ui";
+import { Dialog, Textarea, Button, createResource } from "frappe-ui";
 
-defineProps<{
-	modelValue: boolean;
-}>();
+const props = withDefaults(
+	defineProps<{
+		modelValue: boolean;
+		report?: string;
+	}>(),
+	{
+		report: "",
+	},
+);
 
 const emit = defineEmits<{
 	(e: "update:modelValue", value: boolean): void;
-	(e: "send", content: string): void;
+	(e: "sent", messages: any): void;
 }>();
 
 const content = ref("");
 
+const send = () => {
+	createResource({
+		url: "bounty.api.chat.send_message",
+		method: "POST",
+		auto: true,
+		params: {
+			report: props.report,
+			content: content.value,
+		},
+		onSuccess: (messages: any) => {
+			emit("sent", messages);
+			emit("update:modelValue", false);
+			content.value = "";
+		},
+	});
+};
+
 onUnmounted(() => {
 	content.value = "";
 });
-
-const send = () => {
-	emit("send", content.value);
-	emit("update:modelValue", false);
-};
 </script>
 
 <template>

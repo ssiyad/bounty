@@ -6,7 +6,6 @@ import frappe.utils
 from frappe import _
 from frappe.core.doctype.communication.communication import Communication
 from frappe.model.document import Document
-from frappe.query_builder import Order
 
 
 class BountyReport(Document):
@@ -15,21 +14,6 @@ class BountyReport(Document):
 
 	def ensure_hunter(self):
 		self.hunter = frappe.session.user
-
-	@frappe.whitelist()
-	def chat(self):
-		Chat = frappe.qb.DocType("Communication")
-		return (
-			frappe.qb.from_(Chat)
-			.select(Chat.name.as_("id"))
-			.select(Chat.content)
-			.select(Chat.communication_date.as_("date"))
-			.select(Chat.sent_or_received)
-			.where(Chat.reference_doctype == self.doctype)
-			.where(Chat.reference_name == self.name)
-			.orderby(Chat.communication_date, order=Order.desc)
-			.run(as_dict=True)
-		)
 
 	@frappe.whitelist()
 	def reply(self, content: str):
@@ -48,7 +32,6 @@ class BountyReport(Document):
 		doc.sender_full_name = user.full_name
 		doc.user = from_user
 		doc.insert(ignore_permissions=True)
-		return self.chat()
 
 	@frappe.whitelist()
 	def create_advisory(self):
@@ -69,13 +52,3 @@ class BountyReport(Document):
 		url = frappe.utils.get_url_to_form(doctype, doc.name)
 		msg = "Bounty Advisory <a href='{0}'>{1}</a> created successfully.".format(url, doc.name)
 		frappe.msgprint(msg)
-
-
-def permission_query(user: str | None = None):
-	user = user or frappe.session.user
-	return "(`tabBounty Report`.hunter = {0})".format(frappe.db.escape(user))
-
-
-def has_permission(doc, user=None, permission_type=None):
-	user = user or frappe.session.user
-	return doc.hunter == user

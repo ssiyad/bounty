@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, watchEffect } from "vue";
+import { watchEffect } from "vue";
 import { useRoute } from "vue-router";
-import { Badge, createDocumentResource } from "frappe-ui";
+import { Badge, createResource } from "frappe-ui";
 import { statusTheme, categoryTheme, severityTheme } from "@/utils/badgeThemes";
 import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
 import Chat from "@/components/report/Chat.vue";
@@ -10,27 +10,14 @@ import Target from "@/components/Target.vue";
 const route = useRoute();
 const id = route.params.id as string;
 
-const reportResource = createDocumentResource({
-	doctype: "Bounty Report",
-	name: id,
-	cache: ["Report", id],
+const report = createResource({
+	url: "bounty.api.report.get_report",
 	auto: !!id,
-	whitelistedMethods: {
-		chat: {
-			method: "chat",
-			auto: true,
-			initialData: [],
-		},
-		reply: {
-			method: "reply",
-			onSuccess: (messages: any[]) => {
-				reportResource.chat.setData(messages);
-			},
-		},
-	},
+	cache: ["report", id],
+	makeParams: () => ({
+		name: id,
+	}),
 });
-
-const report = computed(() => reportResource.doc);
 
 const { set } = useBreadcrumbs();
 
@@ -41,52 +28,51 @@ watchEffect(() => {
 			route: { name: "Reports" },
 		},
 		{
-			label: reportResource.doc?.title ?? id,
+			label: report.data?.title ?? id,
 		},
 	]);
 });
 </script>
 
 <template>
-	<div v-if="report" class="flex divide-x size-full">
+	<div v-if="report.data" class="flex divide-x size-full">
 		<div class="grow px-5 py-8 overflow-y-auto">
 			<div class="text-3xl font-semibold mb-4">
-				{{ report.title }}
+				{{ report.data.title }}
 			</div>
 			<p class="leading-relaxed mb-8">
-				{{ report.content }}
+				{{ report.data.content }}
 			</p>
-			<Chat
-				:messages="reportResource.chat.data"
-				@reply="
-					reportResource.reply.submit({
-						content: $event,
-					})
-				"
-			/>
+			<Chat :report="id" />
 		</div>
 		<div class="w-72 shrink-0 px-4 py-4 space-y-4">
-			<div v-if="report.target" class="flex items-center justify-between">
+			<div v-if="report.data.target" class="flex items-center justify-between">
 				<p class="text-sm">Target</p>
-				<Target :target="report.target" />
+				<Target :target="report.data.target" />
 			</div>
-			<hr v-if="report.target" />
+			<hr v-if="report.data.target" />
 			<div class="flex items-center justify-between">
 				<p class="text-sm">Status</p>
 				<div>
-					<Badge :label="report.status" :theme="statusTheme(report.status)" />
+					<Badge :label="report.data.status" :theme="statusTheme(report.data.status)" />
 				</div>
 			</div>
 			<div class="flex items-center justify-between">
 				<p class="text-sm">Category</p>
 				<div>
-					<Badge :label="report.category" :theme="categoryTheme(report.category)" />
+					<Badge
+						:label="report.data.category"
+						:theme="categoryTheme(report.data.category)"
+					/>
 				</div>
 			</div>
 			<div class="flex items-center justify-between">
 				<p class="text-sm">Severity</p>
 				<div>
-					<Badge :label="report.severity" :theme="severityTheme(report.severity)" />
+					<Badge
+						:label="report.data.severity"
+						:theme="severityTheme(report.data.severity)"
+					/>
 				</div>
 			</div>
 		</div>
