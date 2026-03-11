@@ -4,7 +4,7 @@ from frappe.query_builder import Order
 from frappe.query_builder.functions import Count
 
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def get_leaderboard():
 	"""
 	Returns the leaderboard data with minimal information for each user. Limited to last 30 days
