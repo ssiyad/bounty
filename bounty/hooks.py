@@ -24,6 +24,6 @@ has_permission = {
 
 doc_events = {
 	"User": {
-		"after_insert": "bounty.bounty.doctype.bounty_hunter.bounty_hunter.from_user",
+		"after_insert": "bounty.bounty.doctype.bounty_hunter.bounty_hunter.create_hunter",
 	}
 }
