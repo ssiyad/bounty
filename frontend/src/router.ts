@@ -14,7 +14,9 @@ const routes = [
       {
         path: "advisories",
         name: "AdvisoriesRoot",
-        meta: { public: true },
+        meta: {
+          public: true,
+        },
         children: [
           {
             path: "",
@@ -32,6 +34,9 @@ const routes = [
         path: "leaderboard",
         name: "Leaderboard",
         component: () => import("@/pages/Leaderboard.vue"),
+        meta: {
+          public: true,
+        },
       },
       {
         path: "reports",
