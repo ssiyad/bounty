@@ -21,7 +21,6 @@ const user = createDocumentResource({
 	auto: true,
 });
 
-
 const isActiveRoute = (name: string) => {
 	return route.matched.some((record) => record.name === name);
 };
@@ -35,7 +34,7 @@ const isSettingsDialogOpen = ref(false);
 		disable-collapse
 		:header="{
 			title: 'Bounty',
-			subtitle: user?.doc?.full_name,
+			subtitle: user?.doc?.full_name || 'Guest',
 			menuItems: [
 				{
 					label: 'Logout',
