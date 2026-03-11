@@ -23,7 +23,7 @@ const isReportDialogOpen = ref(false);
 
 <template>
 	<ReportCreateDialog v-model="isReportDialogOpen" />
-	<Teleport to="#topbar-actions">
+	<Teleport defer to="#topbar-actions">
 		<Button
 			label="Report"
 			icon-left="plus"
