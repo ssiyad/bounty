@@ -63,7 +63,7 @@ const isSettingsDialogOpen = ref(false);
 						to: {
 							name: 'Advisories',
 						},
-						isActive: isActiveRoute('Advisories'),
+						isActive: isActiveRoute('AdvisoriesRoot'),
 					},
 				],
 			},
@@ -97,7 +97,7 @@ const isSettingsDialogOpen = ref(false);
 						to: {
 							name: 'Reports',
 						},
-						isActive: isActiveRoute('Reports'),
+						isActive: isActiveRoute('ReportsRoot'),
 						condition: () => session.isLoggedIn,
 					},
 					{
