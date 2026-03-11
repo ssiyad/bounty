@@ -17,6 +17,15 @@ const advisory = createResource({
 	makeParams: () => ({
 		name: id,
 	}),
+	onSuccess: () => target.fetch(),
+});
+
+const target = createResource({
+	url: "bounty.api.target.get_target",
+	cache: ["target", advisory.data?.target],
+	makeParams: () => ({
+		name: advisory.data?.target,
+	}),
 });
 
 const { set } = useBreadcrumbs();
@@ -31,6 +40,14 @@ watchEffect(() => {
 			label: advisory.data?.frappe_reference ?? id,
 		},
 	]);
+});
+
+const gitHubUrl = computed(() => {
+	const repository = target.data?.repository;
+	const reference = advisory.data?.github_reference;
+	if (repository && reference) {
+		return `${repository}/security/advisories/${reference}`;
+	}
 });
 </script>
 
@@ -49,16 +66,14 @@ watchEffect(() => {
 					:theme="severityTheme(advisory.data.severity)"
 				/>
 				<span class="text-ink-gray-4">&middot;</span>
-				<span class="font-medium text-ink-gray-7">{{
-					advisory.data.reported_by
-				}}</span>
+				<span class="font-medium text-ink-gray-7">{{ advisory.data.reported_by }}</span>
 				<span class="text-ink-gray-4">&middot;</span>
 				<Target :target="advisory.data.target" />
 				<span class="text-ink-gray-4">&middot;</span>
 				<span>{{ formatDate(advisory.data.published_on, "PPP") }}</span>
 			</div>
 			<div
-				v-if="advisory.data.cve || advisory.data.github_reference"
+				v-if="advisory.data.cve || gitHubUrl"
 				class="mt-4 flex flex-wrap items-center gap-4 text-sm"
 			>
 				<a
@@ -82,8 +97,8 @@ watchEffect(() => {
 					{{ advisory.data.cve }}
 				</a>
 				<a
-					v-if="advisory.data.github_reference"
-					:href="advisory.data.github_reference"
+					v-if="gitHubUrl"
+					:href="gitHubUrl"
 					target="_blank"
 					rel="noopener"
 					class="inline-flex items-center gap-1.5 text-ink-gray-7 hover:text-ink-gray-9 transition-colors"
