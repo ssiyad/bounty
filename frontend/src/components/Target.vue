@@ -35,7 +35,7 @@ const target = createResource({
 				:src="target.data.logo"
 				:alt="target.data.title"
 			/>
-			<Avatar v-else :label="target.wtitle" shape="square" size="xs" />
+			<Avatar v-else :label="target.data.title" shape="square" size="xs" />
 			<div>
 				{{ target.data.title }}
 			</div>
