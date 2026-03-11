@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import Upcoming from "../components/Upcoming.vue";
-import PageLayout from "../layouts/PageLayout.vue";
+import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
+import UpcomingPlaceholder from "@/components/UpcomingPlaceholder.vue";
+
+useBreadcrumbs().reset();
 </script>
 
 <template>
-	<PageLayout class="size-full">
-		<Upcoming />
-	</PageLayout>
+	<UpcomingPlaceholder />
 </template>

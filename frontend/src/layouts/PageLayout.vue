@@ -1,26 +1,18 @@
 <script setup lang="ts">
-import { type BreadcrumbsProps, Button } from "frappe-ui";
-import Banner from "../components/Banner.vue";
-import Sidebar from "../components/Sidebar.vue";
-import Topbar from "../components/Topbar.vue";
+import { Button } from "frappe-ui";
+import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
+import Banner from "@/components/Banner.vue";
+import Sidebar from "@/components/Sidebar.vue";
+import Topbar from "@/components/Topbar.vue";
 
-withDefaults(
-	defineProps<{
-		breadcrumbs?: BreadcrumbsProps["items"];
-	}>(),
-	{
-		breadcrumbs: () => [],
-	},
-);
+const { breadcrumbs } = useBreadcrumbs();
 </script>
 
 <template>
 	<div class="size-full flex overflow-hidden">
 		<Sidebar />
 		<div class="flex flex-col overflow-hidden grow">
-			<Topbar v-if="breadcrumbs.length" :breadcrumbs="breadcrumbs">
-				<slot name="actions" />
-			</Topbar>
+			<Topbar v-if="breadcrumbs.length" :breadcrumbs="breadcrumbs" />
 			<Banner
 				message="This is a work in progress. You may encounter rough edges."
 				variant="warning"
@@ -29,7 +21,7 @@ withDefaults(
 					<Button label="Report an Issue" variant="ghost" icon-right="external-link" />
 				</a>
 			</Banner>
-			<slot />
+			<RouterView />
 		</div>
 	</div>
 </template>

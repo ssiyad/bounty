@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { session } from "../data/session";
+import { session } from "@/data/session";
 import { Button, Password, FormControl } from "frappe-ui";
 
-const submit = (e) => {
-	const formData = new FormData(e.target);
-	console.log(formData.get("password"), "bruh");
+const submit = (e: Event) => {
+	const formData = new FormData(e.target as HTMLFormElement);
 
 	session.login.submit({
 		email: formData.get("email"),

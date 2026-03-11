@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Button, Textarea, TextInput, createDocumentResource } from "frappe-ui";
-import { session } from "../../data/session";
+import { session } from "@/data/session";
 
 const hunter = createDocumentResource({
 	doctype: "Bounty Hunter",

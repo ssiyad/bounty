@@ -4,9 +4,9 @@ import { Dialog, Sidebar } from "frappe-ui";
 import UserIcon from "~icons/lucide/user";
 import AppearanceIcon from "~icons/lucide/eye";
 import PaymentIcon from "~icons/lucide/credit-card";
-import SettingsProfile from "./SettingsProfile.vue";
-import SettingsPreferences from "./SettingsPreferences.vue";
-import Upcoming from "../Upcoming.vue";
+import SettingsProfile from "@/components/settings/SettingsProfile.vue";
+import SettingsPreferences from "@/components/settings/SettingsPreferences.vue";
+import UpcomingPlaceholder from "@/components/UpcomingPlaceholder.vue";
 
 withDefaults(
 	defineProps<{
@@ -30,9 +30,9 @@ const activeComponent = computed(() => {
 		case "preferences":
 			return SettingsPreferences;
 		case "banking":
-			return Upcoming;
+			return UpcomingPlaceholder;
 		default:
-			return Upcoming;
+			return UpcomingPlaceholder;
 	}
 });
 </script>

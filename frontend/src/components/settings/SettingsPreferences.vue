@@ -3,7 +3,7 @@ import { TabButtons } from "frappe-ui";
 import SunIcon from "~icons/lucide/sun";
 import MoonIcon from "~icons/lucide/moon";
 import MonitorIcon from "~icons/lucide/monitor";
-import { useTheme, type Theme } from "../../composables/useTheme";
+import { useTheme, type Theme } from "@/composables/useTheme";
 
 const { current, setTheme } = useTheme();
 

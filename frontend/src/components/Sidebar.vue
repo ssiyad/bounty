@@ -9,8 +9,8 @@ import InboxIcon from "~icons/lucide/inbox";
 import LogoutIcon from "~icons/lucide/log-out";
 import MoneyIcon from "~icons/lucide/hand-coins";
 import SettingsIcon from "~icons/lucide/settings";
-import { session } from "../data/session";
-import SettingsDialog from "./settings/SettingsDialog.vue";
+import { session } from "@/data/session";
+import SettingsDialog from "@/components/settings/SettingsDialog.vue";
 
 const route = useRoute();
 
