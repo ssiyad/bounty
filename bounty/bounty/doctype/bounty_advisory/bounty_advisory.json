@@ -9,6 +9,7 @@
   "target",
   "severity",
   "report",
+  "patched_version",
   "title",
   "content",
   "identifiers_tab",
@@ -80,12 +81,18 @@
    "label": "Severity",
    "options": "Informational\nLow\nMedium\nHigh\nCritical",
    "reqd": 1
+  },
+  {
+   "fieldname": "patched_version",
+   "fieldtype": "Data",
+   "label": "Patched Version",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-03-05 23:37:03.825236",
+ "modified": "2026-03-11 17:41:06.107507",
  "modified_by": "Administrator",
  "module": "Bounty",
  "name": "Bounty Advisory",

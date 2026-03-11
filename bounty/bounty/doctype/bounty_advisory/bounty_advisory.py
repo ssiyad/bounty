@@ -32,7 +32,6 @@ class BountyAdvisory(Document):
 
 	@frappe.whitelist()
 	def publish_to_github(self):
-		"""Create and publish a security advisory on GitHub."""
 		if not frappe.has_permission("Bounty Advisory", ptype="write", doc=self.name):
 			message = _("Insufficient permissions to publish advisory.")
 			frappe.throw(message, frappe.PermissionError)
@@ -48,7 +47,8 @@ class BountyAdvisory(Document):
 
 		repository = frappe.db.get_value("Bounty Target", self.target, "repository")
 		if not repository:
-			frappe.throw(_("Repository is not set on the Bounty Target {0}.").format(self.target))
+			message = _("Repository is not set on the Bounty Target {0}.").format(self.target)
+			frappe.throw(message)
 
 		g = None
 		try:
@@ -57,9 +57,11 @@ class BountyAdvisory(Document):
 			advisory = repo.create_repository_advisory(
 				summary=self.title,
 				description=self.content,
-				severity_or_cvss_vector_string=self.get_github_severity(self.severity),
+				severity_or_cvss_vector_string=self.get_github_severity(),
 				cve_id=self.cve,
+				vulnerabilities=self.get_vulenerablities(),
 			)
+			advisory.publish()
 			self.github_reference = advisory.ghsa_id
 			self.published = 1
 			self.save()
@@ -74,8 +76,8 @@ class BountyAdvisory(Document):
 			if g:
 				g.close()
 
-	def get_github_severity(self, severity: str):
-		match severity:
+	def get_github_severity(self):
+		match self.severity:
 			case "Informational":
 				return "low"
 			case "Low":
@@ -88,3 +90,24 @@ class BountyAdvisory(Document):
 				return "critical"
 			case _:
 				return "low"
+
+	def get_vulenerablities(self):
+		return [
+			{
+				"package": {
+					"ecosystem": "other",
+					"name": self._target.title,
+				},
+				"vulnerable_version_range": "<" + version,
+				"patched_versions": version,
+				"vulnerable_functions": [],
+			}
+			for version in self.get_patched_versions()
+		]
+
+	def get_patched_versions(self) -> list[str]:
+		return [v.strip() for v in self.patched_version.split(",")]
+
+	@property
+	def _target(self):
+		return frappe.get_doc("Bounty Target", self.target)
