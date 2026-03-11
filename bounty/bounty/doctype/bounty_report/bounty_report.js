@@ -4,8 +4,18 @@
 frappe.ui.form.on("Bounty Report", {
 	refresh(frm) {
 		frm.add_custom_button("Create Advisory", () => {
-			frm.call("create_advisory").then(() => {
-				frm.refresh();
+			if (!frm.doc.target) {
+				frappe.throw(__("Target is required to create an advisory."));
+			}
+			if (frm.doc.status !== "Accepted") {
+				frappe.throw(__("Report must be accepted to create an advisory."));
+			}
+			frappe.new_doc("Bounty Advisory", {}, (doc) => {
+				doc.report = frm.doc.name;
+				doc.target = frm.doc.target;
+				doc.title = frm.doc.title;
+				doc.content = frm.doc.content;
+				doc.published = 0;
 			});
 		});
 

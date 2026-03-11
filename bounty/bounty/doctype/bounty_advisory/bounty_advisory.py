@@ -21,7 +21,15 @@ class BountyAdvisory(Document):
 		return "{}-{}-{}".format(prefix, year, str(self.name).upper())
 
 	def validate(self):
+		self.validate_report()
 		self.validate_target()
+
+	def validate_report(self):
+		if not self._report:
+			return
+		if self._report.status != "Accepted":
+			message = _("Report must be accepted to create an advisory.")
+			frappe.throw(message)
 
 	def validate_target(self):
 		if self.report:
@@ -111,3 +119,7 @@ class BountyAdvisory(Document):
 	@property
 	def _target(self):
 		return frappe.get_doc("Bounty Target", self.target)
+
+	@property
+	def _report(self):
+		return frappe.get_doc("Bounty Report", self.report) if self.report else None

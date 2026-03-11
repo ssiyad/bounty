@@ -33,23 +33,3 @@ class BountyReport(Document):
 		doc.sender_full_name = user.full_name
 		doc.user = from_user
 		doc.insert(ignore_permissions=True)
-
-	@frappe.whitelist()
-	def create_advisory(self):
-		if not self.target:
-			msg = _("Target is required to create an advisory.")
-			frappe.throw(msg)
-		if self.status != "Accepted":
-			msg = _("Report must be accepted to create an advisory.")
-			frappe.throw(msg)
-		doctype = "Bounty Advisory"
-		doc = frappe.new_doc(doctype)
-		doc.report = self.name
-		doc.target = self.target
-		doc.title = self.title
-		doc.content = self.content
-		doc.published = False
-		doc = doc.insert()
-		url = frappe.utils.get_url_to_form(doctype, doc.name)
-		msg = "Bounty Advisory <a href='{0}'>{1}</a> created successfully.".format(url, doc.name)
-		frappe.msgprint(msg)
