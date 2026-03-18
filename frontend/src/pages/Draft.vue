@@ -1,13 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch, watchEffect } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import {
-	Button,
-	TextEditor,
-	TextEditorFixedMenu,
-	createDocumentResource,
-	createResource,
-} from "frappe-ui";
+import { Button, TextEditor, createDocumentResource, createResource } from "frappe-ui";
 import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
 
 const debounce = (fn: () => void, delay: number) => {
@@ -29,20 +23,6 @@ const isNew = computed(() => id === "new-report");
 
 const title = ref("");
 const content = ref("");
-
-const buttons = [
-	"Paragraph",
-	["Heading 2", "Heading 3", "Heading 4"],
-	"Separator",
-	"Bold",
-	"Italic",
-	"Separator",
-	"Bullet List",
-	"Numbered List",
-	"Separator",
-	"Link",
-	"Image",
-];
 
 const draft = createDocumentResource({
 	doctype: "Bounty Draft",
