@@ -53,7 +53,7 @@ const draft = createDocumentResource({
 			method: "submit_draft",
 			onSuccess: () => {
 				router.replace({
-					name: "Drafts",
+					name: "Reports",
 				});
 			},
 		},
