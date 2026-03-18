@@ -35,13 +35,18 @@ watchEffect(() => {
 </script>
 
 <template>
-	<div v-if="report.data" class="flex divide-x size-full">
-		<div class="grow px-5 py-6 overflow-y-auto">
-			<div class="text-3xl font-semibold mb-4 pb-6 border-b">
-				{{ report.data.title }}
+	<div v-if="report.data" class="flex divide-x min-h-0">
+		<div class="grow overflow-y-auto">
+			<div class="py-14 max-w-[840px] mx-auto">
+				<div class="text-3xl font-semibold mb-4 pb-6 border-b">
+					{{ report.data.title }}
+				</div>
+				<div
+					v-html="report.data.content"
+					class="prose prose-sm max-w-none leading-relaxed mb-8"
+				/>
+				<Chat :report="id" />
 			</div>
-			<div v-html="report.data.content" class="prose prose-sm leading-relaxed mb-8" />
-			<Chat :report="id" />
 		</div>
 		<div class="w-72 shrink-0 px-4 py-4 space-y-4">
 			<div v-if="report.data.target" class="flex items-center justify-between">
