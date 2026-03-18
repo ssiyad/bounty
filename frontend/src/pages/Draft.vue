@@ -131,8 +131,8 @@ watchEffect(() => {
 		<Button v-if="unsaved" label="Save" variant="solid" @click="createDraft()" />
 		<Button v-else label="Submit" variant="solid" @click="draft.submit.submit()" />
 	</Teleport>
-	<div class="size-full container">
-		<div class="grow px-5 py-8">
+	<div class="grow overflow-y-auto">
+		<div class="py-14 max-w-[840px] mx-auto">
 			<div class="mb-4 pb-6 border-b">
 				<input
 					class="bg-transparent text-3xl border-none p-0 font-semibold focus:ring-0"
@@ -143,16 +143,11 @@ watchEffect(() => {
 			</div>
 			<TextEditor
 				editor-class="prose-sm max-w-none leading-relaxed"
-				placeholder="Describe the problem..."
+				placeholder="Type '/' for commands"
 				:content="content"
 				@change="content = $event"
-			>
-				<template #top>
-					<div class="mb-4 flex flex-col justify-between">
-						<TextEditorFixedMenu class="-ml-1 overflow-x-auto" :buttons="buttons" />
-					</div>
-				</template>
-			</TextEditor>
+				bubble-menu
+			/>
 		</div>
 	</div>
 </template>
