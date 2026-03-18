@@ -4,6 +4,7 @@ import { useRoute } from "vue-router";
 import { createDocumentResource, Sidebar as USidebar } from "frappe-ui";
 import BugIcon from "~icons/lucide/bug";
 import ChartIcon from "~icons/lucide/trending-up";
+import DraftIcon from "~icons/lucide/scroll-text";
 import GlobeIcon from "~icons/lucide/globe";
 import InboxIcon from "~icons/lucide/inbox";
 import LogoutIcon from "~icons/lucide/log-out";
@@ -97,6 +98,15 @@ const isSettingsDialogOpen = ref(false);
 							name: 'Reports',
 						},
 						isActive: isActiveRoute('ReportsRoot'),
+						condition: () => session.isLoggedIn,
+					},
+					{
+						label: 'Drafts',
+						icon: DraftIcon,
+						to: {
+							name: 'Drafts',
+						},
+						isActive: isActiveRoute('DraftsRoot'),
 						condition: () => session.isLoggedIn,
 					},
 					{

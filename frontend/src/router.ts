@@ -39,6 +39,22 @@ const routes = [
         },
       },
       {
+        path: "drafts",
+        name: "DraftsRoot",
+        children: [
+          {
+            path: "",
+            name: "Drafts",
+            component: () => import("@/pages/Upcoming.vue"),
+          },
+          {
+            path: ":id",
+            name: "Draft",
+            component: () => import("@/pages/Draft.vue"),
+          },
+        ],
+      },
+      {
         path: "reports",
         name: "ReportsRoot",
         children: [

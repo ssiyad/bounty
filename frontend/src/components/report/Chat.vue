@@ -61,7 +61,7 @@ const send = () => {
 		<div class="space-y-4 py-4">
 			<TextEditor
 				class="border px-3 py-2 rounded-md"
-				editor-class="prose-sm max-w-none overflow-y-auto min-h-14 max-h-60 resize-y"
+				editor-class="prose-sm leading-relaxed max-w-none overflow-y-auto min-h-14 max-h-60 resize-y"
 				placeholder="What do you want to tell the team?"
 				:content="message"
 				@change="message = $event"
