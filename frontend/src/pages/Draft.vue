@@ -148,7 +148,7 @@ watchEffect(() => {
 				@change="content = $event"
 			>
 				<template #top>
-					<div class="mb-4 flex flex-col justify-between sm:flex-row sm:items-center">
+					<div class="mb-4 flex flex-col justify-between">
 						<TextEditorFixedMenu class="-ml-1 overflow-x-auto" :buttons="buttons" />
 					</div>
 				</template>

@@ -33,7 +33,7 @@
   },
   {
    "fieldname": "content",
-   "fieldtype": "Long Text",
+   "fieldtype": "Text Editor",
    "label": "Content",
    "reqd": 1
   },
@@ -134,7 +134,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-03-12 01:14:30.976901",
+ "modified": "2026-03-18 23:34:29.992630",
  "modified_by": "Administrator",
  "module": "Bounty",
  "name": "Bounty Report",

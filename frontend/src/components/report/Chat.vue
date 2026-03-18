@@ -93,7 +93,7 @@ const send = () => {
 						'bg-surface-gray-2': message.sent_or_received === 'Received',
 						'bg-surface-blue-1 ml-auto mr-0': message.sent_or_received === 'Sent',
 					}"
-					class="max-w-2xl w-max leading-relaxed space-y-2 px-4 py-2 rounded-lg text-ink-gray-8"
+					class="max-w-2xl w-max prose prose-sm leading-relaxed px-4 py-2 rounded-lg text-ink-gray-8"
 				/>
 			</div>
 		</div>

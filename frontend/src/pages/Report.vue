@@ -36,13 +36,11 @@ watchEffect(() => {
 
 <template>
 	<div v-if="report.data" class="flex divide-x size-full">
-		<div class="grow px-5 py-8 overflow-y-auto">
-			<div class="text-3xl font-semibold mb-4">
+		<div class="grow px-5 py-6 overflow-y-auto">
+			<div class="text-3xl font-semibold mb-4 pb-6 border-b">
 				{{ report.data.title }}
 			</div>
-			<p class="leading-relaxed mb-8">
-				{{ report.data.content }}
-			</p>
+			<div v-html="report.data.content" class="prose prose-sm leading-relaxed mb-8" />
 			<Chat :report="id" />
 		</div>
 		<div class="w-72 shrink-0 px-4 py-4 space-y-4">
