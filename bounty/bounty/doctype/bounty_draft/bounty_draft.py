@@ -37,5 +37,7 @@ def permission_query(user: str | None = None):
 
 
 def has_permission(doc, ptype=None, user=None):
+	if doc.is_new():
+		return True
 	user = user or frappe.session.user
 	return doc.hunter == user
