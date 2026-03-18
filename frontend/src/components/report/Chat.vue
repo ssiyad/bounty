@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { Button, createResource } from "frappe-ui";
-import ChatReply from "./ChatReply.vue";
+import { Button, TextEditor, TextEditorFixedMenu, createResource } from "frappe-ui";
 
 const props = withDefaults(
 	defineProps<{
@@ -12,7 +11,19 @@ const props = withDefaults(
 	},
 );
 
-const isReplyOpen = ref(false);
+const buttons = [
+	"Paragraph",
+	["Heading 2", "Heading 3", "Heading 4"],
+	"Separator",
+	"Bold",
+	"Italic",
+	"Separator",
+	"Bullet List",
+	"Numbered List",
+	"Separator",
+	"Link",
+	"Image",
+];
 
 const messages = createResource({
 	url: "bounty.api.chat.get_messages",
@@ -20,14 +31,52 @@ const messages = createResource({
 	makeParams: () => ({
 		report: props.report,
 	}),
+	initialData: [],
 });
+
+const message = ref("");
+
+const cancel = () => (message.value = "");
+
+const send = () => {
+	createResource({
+		url: "bounty.api.chat.send_message",
+		method: "POST",
+		auto: true,
+		params: {
+			report: props.report,
+			content: message.value,
+		},
+		onSuccess: (messages_: any) => {
+			message.value = "";
+			messages.setData(messages_);
+		},
+	});
+};
 </script>
 
 <template>
 	<div>
 		<hr />
 		<div class="space-y-4 py-4">
-			<div class="w-max ml-auto mr-0 flex gap-4 text-sm text-center">
+			<TextEditor
+				class="border px-3 py-2 rounded-md"
+				editor-class="prose-sm max-w-none overflow-y-auto min-h-14 max-h-60 resize-y"
+				placeholder="What do you want to tell the team?"
+				:content="message"
+				@change="message = $event"
+			>
+				<template #bottom>
+					<div class="mt-2 flex flex-col justify-between sm:flex-row sm:items-center">
+						<TextEditorFixedMenu class="-ml-1 overflow-x-auto" :buttons="buttons" />
+						<div class="mt-2 flex items-center justify-end space-x-2 sm:mt-0">
+							<Button variant="ghost" @click="cancel">Cancel</Button>
+							<Button variant="subtle" @click="send">Send</Button>
+						</div>
+					</div>
+				</template>
+			</TextEditor>
+			<div v-if="messages.data.length" class="w-max flex gap-4 text-sm text-center">
 				<div class="flex items-center gap-2">
 					<div class="bg-surface-gray-2 size-4 border rounded-full"></div>
 					<p>Frappe</p>
@@ -36,29 +85,17 @@ const messages = createResource({
 					<div class="bg-surface-blue-1 size-4 border rounded-full"></div>
 					<p>You</p>
 				</div>
-				<Button label="Reply" variant="outline" @click="isReplyOpen = true" />
 			</div>
 			<div v-for="message in messages.data" :key="message.id">
 				<div
+					v-html="message.content"
 					:class="{
 						'bg-surface-gray-2': message.sent_or_received === 'Received',
 						'bg-surface-blue-1 ml-auto mr-0': message.sent_or_received === 'Sent',
 					}"
-					class="max-w-2xl w-max leading-relaxed px-4 py-2 rounded-lg text-ink-gray-8"
-				>
-					{{ message.content }}
-				</div>
+					class="max-w-2xl w-max leading-relaxed space-y-2 px-4 py-2 rounded-lg text-ink-gray-8"
+				/>
 			</div>
 		</div>
-		<ChatReply
-			v-model="isReplyOpen"
-			:report="props.report"
-			@sent="
-				(messages_: typeof messages.data) => {
-					isReplyOpen = false;
-					messages.setData(messages_);
-				}
-			"
-		/>
 	</div>
 </template>
