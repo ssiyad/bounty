@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import { formatDate } from "date-fns";
 import { Badge, Button, createResource } from "frappe-ui";
 import { statusTheme } from "@/utils/badgeThemes";
 import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
 import Target from "@/components/Target.vue";
-import ReportCreateDialog from "@/components/report/ReportCreateDialog.vue";
 
 useBreadcrumbs().set([{ label: "Reports" }]);
 
@@ -14,19 +12,20 @@ const reports = createResource({
 	cache: ["reports"],
 	auto: true,
 });
-
-const isReportDialogOpen = ref(false);
 </script>
 
 <template>
-	<ReportCreateDialog v-model="isReportDialogOpen" />
 	<Teleport defer to="#topbar-actions">
-		<Button
-			label="Report"
-			icon-left="plus"
-			variant="solid"
-			@click="isReportDialogOpen = true"
-		/>
+		<RouterLink
+			:to="{
+				name: 'Draft',
+				params: {
+					id: 'new-report',
+				},
+			}"
+		>
+			<Button label="Report" icon-left="plus" variant="solid" />
+		</RouterLink>
 	</Teleport>
 	<div class="divide-y">
 		<div class="flex h-12 px-5 py-4 font-medium">

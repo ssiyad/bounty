@@ -45,7 +45,7 @@ const routes = [
           {
             path: "",
             name: "Drafts",
-            component: () => import("@/pages/Upcoming.vue"),
+            component: () => import("@/pages/Drafts.vue"),
           },
           {
             path: ":id",
