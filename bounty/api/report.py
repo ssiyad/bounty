@@ -22,6 +22,7 @@ def get_reports():
 			Report.title,
 			Report.content,
 			Report.status,
+			Report.target,
 			Report.category,
 			Report.severity,
 			Report.creation,
@@ -41,6 +42,7 @@ def get_report(name: str):
 			Report.title,
 			Report.content,
 			Report.status,
+			Report.target,
 			Report.category,
 			Report.severity,
 		)
