@@ -27,3 +27,15 @@ class BountyDraft(Document):
 	def submit_draft(self):
 		"""Proxy to `self.submit`."""
 		return self.submit()
+
+
+def permission_query(user: str | None = None):
+	user = user or frappe.session.user
+	return "(`tabBounty Draft`.hunter = {0} AND `tabBounty Draft`.docstatus = 0)".format(
+		frappe.db.escape(user)
+	)
+
+
+def has_permission(doc, ptype=None, user=None):
+	user = user or frappe.session.user
+	return doc.hunter == user

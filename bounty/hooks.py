@@ -13,10 +13,12 @@ website_route_rules = [
 ]
 
 permission_query_conditions = {
+	"Bounty Draft": "bounty.bounty.doctype.bounty_draft.bounty_draft.permission_query",
 	"Bounty Hunter": "bounty.bounty.doctype.bounty_hunter.bounty_hunter.permission_query",
 }
 
 has_permission = {
+	"Bounty Draft": "bounty.bounty.doctype.bounty_draft.bounty_draft.has_permission",
 	"Bounty Hunter": "bounty.bounty.doctype.bounty_hunter.bounty_hunter.has_permission",
 }
 
