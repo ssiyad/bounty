@@ -62,10 +62,10 @@ const gitHubUrl = computed(() => {
 	</Teleport>
 	<div class="overflow-y-auto">
 		<div v-if="advisory.data" class="py-14 max-w-[840px] mx-auto">
-			<h1 class="mt-2 text-3xl font-semibold text-ink-gray-9 leading-relaxed">
+			<h1 class="mb-4 text-3xl font-semibold text-ink-gray-9 leading-relaxed">
 				{{ advisory.data.title }}
 			</h1>
-			<div class="mt-4 flex flex-wrap items-center gap-2 text-sm text-ink-gray-5">
+			<div class="flex flex-wrap items-center gap-2 text-sm text-ink-gray-5">
 				<div class="flex items-center gap-1">
 					<ReferenceIcon class="size-4" />
 					<div class="font-mono text-xs text-ink-gray-7">
