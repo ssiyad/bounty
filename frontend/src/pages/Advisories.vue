@@ -41,7 +41,7 @@ watch([target, severity, myReports], () => advisories.fetch());
 </script>
 
 <template>
-	<div class="mx-auto max-w-[840px] py-14">
+	<div class="mx-auto max-w-[840px] py-14 w-full">
 		<h1 class="text-3xl font-semibold mb-6">Advisories</h1>
 		<div class="mb-4 flex items-center justify-between">
 			<div class="space-x-2">
