@@ -41,7 +41,7 @@ watch([target, severity, myReports], () => advisories.fetch());
 </script>
 
 <template>
-	<div class="mx-auto max-w-[840] py-14">
+	<div class="mx-auto max-w-[840px] py-14">
 		<div class="text-3xl font-semibold mb-6">Advisories</div>
 		<div class="mb-4 flex items-center justify-between">
 			<div class="space-x-2">
@@ -107,7 +107,9 @@ watch([target, severity, myReports], () => advisories.fetch());
 							'bg-surface-green-2': advisory.severity === 'Low',
 						}"
 					/>
-					<div class="grow border-y border-r rounded-r px-5 flex items-center gap-2">
+					<div
+						class="grow min-w-0 border-y border-r rounded-r px-5 flex items-center gap-2"
+					>
 						<div class="flex flex-col gap-3 min-w-0 grow">
 							<div class="truncate">{{ advisory.title }}</div>
 							<div class="flex gap-2 items-center">
