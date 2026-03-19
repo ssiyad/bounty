@@ -60,44 +60,47 @@ const gitHubUrl = computed(() => {
 			<Button label="GitHub" icon-left="github" />
 		</a>
 	</Teleport>
-	<div v-if="advisory.data" class="py-14 max-w-[840px] mx-auto">
-		<h1 class="mt-2 text-3xl font-semibold text-ink-gray-9 leading-relaxed">
-			{{ advisory.data.title }}
-		</h1>
-		<div class="mt-4 flex flex-wrap items-center gap-2 text-sm text-ink-gray-5">
-			<div class="flex items-center gap-1">
-				<ReferenceIcon class="size-4" />
-				<div class="font-mono text-xs text-ink-gray-7">
-					{{ advisory.data.frappe_reference }}
-				</div>
-			</div>
-			<div class="text-ink-gray-4">&mdash;</div>
-			<Badge
-				:label="advisory.data.severity"
-				:theme="severityTheme(advisory.data.severity)"
-			/>
-			<div class="text-ink-gray-4">&mdash;</div>
-			<Target :target="advisory.data.target" />
-			<div class="text-ink-gray-4">&mdash;</div>
-			<div class="flex items-center gap-1">
-				<DateIcon class="size-4" />
-				<div class="text-ink-gray-7">
-					{{ formatDate(advisory.data.published_on, "PPP") }}
-				</div>
-			</div>
-			<template v-if="advisory.data.reported_by">
-				<div class="text-ink-gray-4">&mdash;</div>
+	<div class="overflow-y-auto">
+		<div v-if="advisory.data" class="py-14 max-w-[840px] mx-auto">
+			<h1 class="mt-2 text-3xl font-semibold text-ink-gray-9 leading-relaxed">
+				{{ advisory.data.title }}
+			</h1>
+			<div class="mt-4 flex flex-wrap items-center gap-2 text-sm text-ink-gray-5">
 				<div class="flex items-center gap-1">
-					<UserIcon class="size-4" />
-					<div class="font-medium text-ink-gray-7">
-						{{ advisory.data.reported_by }}
+					<ReferenceIcon class="size-4" />
+					<div class="font-mono text-xs text-ink-gray-7">
+						{{ advisory.data.frappe_reference }}
 					</div>
 				</div>
-			</template>
-		</div>
-		<hr class="mt-6 mb-6" />
-		<div class="text-base leading-relaxed text-ink-gray-8 whitespace-pre-line">
-			{{ advisory.data.content }}
+				<div class="text-ink-gray-4">&mdash;</div>
+				<Badge
+					:label="advisory.data.severity"
+					:theme="severityTheme(advisory.data.severity)"
+				/>
+				<div class="text-ink-gray-4">&mdash;</div>
+				<Target class="text-ink-gray-7" :target="advisory.data.target" />
+				<div class="text-ink-gray-4">&mdash;</div>
+				<div class="flex items-center gap-1">
+					<DateIcon class="size-4" />
+					<div class="text-ink-gray-7">
+						{{ formatDate(advisory.data.published_on, "PPP") }}
+					</div>
+				</div>
+				<template v-if="advisory.data.reported_by">
+					<div class="text-ink-gray-4">&mdash;</div>
+					<div class="flex items-center gap-1">
+						<UserIcon class="size-4" />
+						<div class="font-medium text-ink-gray-7">
+							{{ advisory.data.reported_by }}
+						</div>
+					</div>
+				</template>
+			</div>
+			<hr class="mt-6 mb-6" />
+			<div
+				v-html="advisory.data.content"
+				class="prose prose-sm max-w-none leading-relaxed mb-8"
+			/>
 		</div>
 	</div>
 </template>

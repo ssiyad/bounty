@@ -41,7 +41,7 @@
   },
   {
    "fieldname": "content",
-   "fieldtype": "Long Text",
+   "fieldtype": "Text Editor",
    "in_list_view": 1,
    "label": "Content",
    "reqd": 1
@@ -92,8 +92,8 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-03-11 17:41:06.107507",
- "modified_by": "Administrator",
+ "modified": "2026-03-20 00:02:36.372615",
+ "modified_by": "hello@ssiyad.com",
  "module": "Bounty",
  "name": "Bounty Advisory",
  "naming_rule": "Random",
