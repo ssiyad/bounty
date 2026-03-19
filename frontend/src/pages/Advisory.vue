@@ -67,7 +67,7 @@ const gitHubUrl = computed(() => {
 		<div class="mt-4 flex flex-wrap items-center gap-2 text-sm text-ink-gray-5">
 			<div class="flex items-center gap-1">
 				<ReferenceIcon class="size-4" />
-				<div class="font-mono text-xs text-ink-gray-4">
+				<div class="font-mono text-xs text-ink-gray-7">
 					{{ advisory.data.frappe_reference }}
 				</div>
 			</div>
@@ -81,7 +81,9 @@ const gitHubUrl = computed(() => {
 			<div class="text-ink-gray-4">&mdash;</div>
 			<div class="flex items-center gap-1">
 				<DateIcon class="size-4" />
-				<div>{{ formatDate(advisory.data.published_on, "PPP") }}</div>
+				<div class="text-ink-gray-7">
+					{{ formatDate(advisory.data.published_on, "PPP") }}
+				</div>
 			</div>
 			<template v-if="advisory.data.reported_by">
 				<div class="text-ink-gray-4">&mdash;</div>
