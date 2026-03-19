@@ -33,7 +33,15 @@ export default defineConfig({
 		},
 	},
 	optimizeDeps: {
-		include: ["debug", "feather-icons", "showdown", "highlight.js/lib/core", "interactjs"],
+		include: [
+			"debug",
+			"feather-icons",
+			"showdown",
+			"highlight.js/lib/core",
+			"interactjs",
+			"@codemirror/state",
+			"@codemirror/view",
+		],
 	},
 	server: {
 		allowedHosts: true,
