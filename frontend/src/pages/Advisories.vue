@@ -13,7 +13,6 @@ useBreadcrumbs().set([{ label: "Advisories" }]);
 
 const target = ref("");
 const severity = ref("");
-const myReports = ref(false);
 
 const targets = createResource({
 	url: "bounty.api.target.get_targets",
@@ -33,17 +32,16 @@ const advisories = createResource({
 	makeParams: () => ({
 		target: target.value,
 		severity: severity.value,
-		my_reports: myReports.value,
 	}),
 });
 
-watch([target, severity, myReports], () => advisories.fetch());
+watch([target, severity], () => advisories.fetch());
 </script>
 
 <template>
 	<div class="mx-auto max-w-[840px] py-14 w-full">
 		<h1 class="text-3xl font-semibold mb-6">Advisories</h1>
-		<div class="mb-4 flex items-center justify-between">
+		<div class="mb-4 flex items-center">
 			<div class="space-x-2">
 				<Select
 					v-model="target"
@@ -83,7 +81,6 @@ watch([target, severity, myReports], () => advisories.fetch());
 					</template>
 				</Select>
 			</div>
-			<Switch v-model="myReports" label="My Reports" class="border" />
 		</div>
 		<div class="flex flex-col gap-4">
 			<RouterLink
