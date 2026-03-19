@@ -112,28 +112,29 @@ watch([target, severity, myReports], () => advisories.fetch());
 					>
 						<div class="flex flex-col gap-3 min-w-0 grow">
 							<div class="truncate">{{ advisory.title }}</div>
-							<div class="flex gap-2 items-center">
-								<div
-									class="flex gap-1 items-center font-mono text-xs text-ink-gray-5"
-								>
+							<div class="flex gap-2 items-center text-xs text-ink-gray-7">
+								<div class="flex gap-1 items-center">
 									<ReferenceIcon class="size-4" />
-									{{ advisory.frappe_reference }}
+									<div class="font-mono">
+										{{ advisory.frappe_reference }}
+									</div>
 								</div>
-								<div class="text-ink-gray-2">&mdash;</div>
-								<div class="flex gap-1 items-center text-xs text-ink-gray-5">
+								<div class="text-ink-gray-4">&mdash;</div>
+								<div class="flex gap-1 items-center">
 									<DateIcon class="size-4" />
-									<div>{{ formatDate(advisory.published_on, "PPP") }}</div>
+									<div>
+										{{ formatDate(advisory.published_on, "PPP") }}
+									</div>
 								</div>
-								<div v-if="advisory.reported_by" class="text-ink-gray-2">
-									&mdash;
-								</div>
-								<div
-									v-if="advisory.reported_by"
-									class="flex gap-1 items-center text-xs text-ink-gray-5"
-								>
-									<UserIcon class="size-4" />
-									<div>{{ advisory.reported_by }}</div>
-								</div>
+								<template v-if="advisory.reported_by">
+									<div class="text-ink-gray-4">&mdash;</div>
+									<div class="flex gap-1 items-center">
+										<UserIcon class="size-4" />
+										<div>
+											{{ advisory.reported_by }}
+										</div>
+									</div>
+								</template>
 							</div>
 						</div>
 						<div>
@@ -142,8 +143,10 @@ watch([target, severity, myReports], () => advisories.fetch());
 								:theme="severityTheme(advisory.severity)"
 							/>
 						</div>
-						<div class="text-ink-gray-2">&mdash;</div>
-						<div><Target :target="advisory.target" /></div>
+						<div class="text-ink-gray-4">&mdash;</div>
+						<div>
+							<Target class="text-ink-gray-7" :target="advisory.target" />
+						</div>
 					</div>
 				</div>
 			</RouterLink>
