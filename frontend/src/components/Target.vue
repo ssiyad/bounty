@@ -28,7 +28,7 @@ const target = createResource({
 
 <template>
 	<div class="w-max">
-		<div class="flex items-center gap-2">
+		<div class="flex items-center gap-1">
 			<img
 				v-if="target.data.logo"
 				class="flex size-4 items-center justify-center rounded-[5px]"
