@@ -115,7 +115,7 @@ watchEffect(() => {
 		<div class="py-14 max-w-[840px] mx-auto">
 			<div class="mb-4 pb-6 border-b">
 				<input
-					class="bg-transparent text-3xl border-none p-0 font-semibold focus:ring-0"
+					class="bg-transparent text-3xl border-none p-0 font-semibold focus:ring-0 w-full"
 					placeholder="Title"
 					:value="title"
 					@input="title = $event.target.value"
