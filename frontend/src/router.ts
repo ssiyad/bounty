@@ -90,7 +90,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory("/b"),
+  history: createWebHistory("/s"),
   routes,
 });
 
