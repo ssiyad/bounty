@@ -1,16 +1,17 @@
 import frappe
 from frappe import _
 from frappe.query_builder.builder import Order
+from frappe.query_builder.functions import Count
 from frappe.utils.caching import redis_cache
 from pypika import Not
 
 
 @frappe.whitelist(allow_guest=True)
-def get_advisories(target: str | None = None, severity: str | None = None):
+def get_advisories(start=0, limit=20, target: str | None = None, severity: str | None = None):
 	Advisory = frappe.qb.DocType("Bounty Advisory")
 	Report = frappe.qb.DocType("Bounty Report")
 	User = frappe.qb.DocType("User")
-	return (
+	query = (
 		frappe.qb.from_(Advisory)
 		.left_join(Report)
 		.on(Report.name == Advisory.report)
@@ -29,8 +30,11 @@ def get_advisories(target: str | None = None, severity: str | None = None):
 			User.full_name.as_("reported_by"),
 		)
 		.orderby(Advisory.modified, order=Order.desc)
-		.run(as_dict=True)
 	)
+	count = query.select(Count(Advisory.name).as_("count")).run(as_dict=True).pop().get("count")
+	data = query.offset(start).limit(limit).run(as_dict=True)
+	has_next_page = (start + limit) < count
+	return data, count, has_next_page
 
 
 @frappe.whitelist(allow_guest=True)
