@@ -13,17 +13,17 @@ website_route_rules = [
 ]
 
 permission_query_conditions = {
-	"FS Draft": "security.frappe_security.doctype.bounty_draft.bounty_draft.permission_query",
-	"FS Hunter": "security.frappe_security.doctype.bounty_hunter.bounty_hunter.permission_query",
+	"FS Draft": "security.frappe_security.doctype.fs_draft.fs_draft.permission_query",
+	"FS Hunter": "security.frappe_security.doctype.fs_hunter.fs_hunter.permission_query",
 }
 
 has_permission = {
-	"FS Draft": "security.frappe_security.doctype.bounty_draft.bounty_draft.has_permission",
-	"FS Hunter": "security.frappe_security.doctype.bounty_hunter.bounty_hunter.has_permission",
+	"FS Draft": "security.frappe_security.doctype.fs_draft.fs_draft.has_permission",
+	"FS Hunter": "security.frappe_security.doctype.fs_hunter.fs_hunter.has_permission",
 }
 
 doc_events = {
 	"User": {
-		"after_insert": "security.frappe_security.doctype.bounty_hunter.bounty_hunter.create_hunter",
+		"after_insert": "security.frappe_security.doctype.fs_hunter.fs_hunter.create_hunter",
 	}
 }
