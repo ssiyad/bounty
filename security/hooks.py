@@ -1,7 +1,7 @@
 app_name = "security"
 app_title = "Security"
 app_publisher = "Sabu Siyad"
-app_description = "Manage confidential reports, issues and rewards"
+app_description = "Comprehensive system to manage security related affairs."
 app_email = "hello@ssiyad.com"
 app_license = "gpl-3.0"
 
