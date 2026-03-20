@@ -25,7 +25,7 @@ const title = ref("");
 const content = ref("");
 
 const draft = createDocumentResource({
-	doctype: "Bounty Draft",
+	doctype: "FS Draft",
 	name: id,
 	auto: !!id && !isNew.value,
 	whitelistedMethods: {
@@ -58,7 +58,7 @@ const createDraft = () => {
 		auto: true,
 		makeParams: () => ({
 			doc: {
-				doctype: "Bounty Draft",
+				doctype: "FS Draft",
 				title: title.value,
 				content: content.value,
 			},

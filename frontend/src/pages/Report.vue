@@ -11,7 +11,7 @@ const route = useRoute();
 const id = route.params.id as string;
 
 const report = createResource({
-	url: "bounty.api.report.get_report",
+	url: "security.api.report.get_report",
 	auto: !!id,
 	cache: ["report", id],
 	makeParams: () => ({

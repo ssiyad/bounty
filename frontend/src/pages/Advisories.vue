@@ -17,13 +17,13 @@ const start = ref(0);
 const limit = 10;
 
 const targets = createResource({
-	url: "bounty.api.target.get_targets",
+	url: "security.api.target.get_targets",
 	auto: true,
 	cache: ["targets"],
 });
 
 const severities = createResource({
-	url: "bounty.api.severity.get_severities",
+	url: "security.api.severity.get_severities",
 	auto: true,
 	cache: ["severities"],
 });
@@ -32,7 +32,7 @@ const a_: Ref<any[]> = ref([]);
 const count = ref(0);
 const hasNextPage = ref(false);
 const advisories = createResource({
-	url: "bounty.api.advisory.get_advisories",
+	url: "security.api.advisory.get_advisories",
 	auto: true,
 	makeParams: () => ({
 		start: start.value,

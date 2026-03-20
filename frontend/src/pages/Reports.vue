@@ -8,7 +8,7 @@ import Target from "@/components/Target.vue";
 useBreadcrumbs().set([{ label: "Reports" }]);
 
 const reports = createResource({
-	url: "bounty.api.report.get_reports",
+	url: "security.api.report.get_reports",
 	cache: ["reports"],
 	auto: true,
 });
