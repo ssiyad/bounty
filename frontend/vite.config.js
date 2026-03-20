@@ -11,8 +11,8 @@ export default defineConfig({
 			jinjaBootData: true,
 			lucideIcons: true,
 			buildConfig: {
-				outDir: "../security/public/b",
-				indexHtmlPath: "../security/www/b.html",
+				outDir: "../security/public/s",
+				indexHtmlPath: "../security/www/s.html",
 				emptyOutDir: true,
 				sourcemap: true,
 			},
