@@ -42,6 +42,7 @@ export default defineConfig({
 			"@codemirror/state",
 			"@codemirror/view",
 		],
+		exclude: ["~icons"],
 	},
 	server: {
 		allowedHosts: true,
