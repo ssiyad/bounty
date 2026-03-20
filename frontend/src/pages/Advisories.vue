@@ -113,7 +113,7 @@ watch([target, severity], () => advisories.fetch());
 				>
 					<div class="h-20 flex">
 						<div
-							class="w-1 shrink-0 rounded-l h-full"
+							class="w-1 shrink-0 border-l border-y rounded-l h-full"
 							:class="{
 								'bg-surface-gray-2 ': advisory.severity === 'Informational',
 								'bg-surface-red-2': advisory.severity === 'Critical',
