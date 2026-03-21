@@ -57,6 +57,7 @@ def get_advisory(name: str):
 			Advisory.content,
 			Advisory.severity,
 			Advisory.target,
+			Advisory.patched_version,
 			Advisory.frappe_reference,
 			Advisory.github_reference,
 			Advisory.cve,

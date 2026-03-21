@@ -5,6 +5,7 @@ import { Badge, Button, createResource } from "frappe-ui";
 import { formatDate } from "date-fns";
 import { severityTheme } from "@/utils/badgeThemes";
 import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
+import Banner from "@/components/Banner.vue";
 import Target from "@/components/Target.vue";
 import DateIcon from "~icons/lucide/calendar";
 import ReferenceIcon from "~icons/lucide/globe";
@@ -52,6 +53,27 @@ const gitHubUrl = computed(() => {
 		return `${repository}/security/advisories/${reference}`;
 	}
 });
+
+const bannerMessage = computed(() => {
+	return "Fixed in version: " + advisory.data?.patched_version;
+});
+
+const bannerVariant = computed(() => {
+	switch (advisory.data?.severity) {
+		case "Informational":
+			return "default";
+		case "Low":
+			return "success";
+		case "Medium":
+			return "info";
+		case "High":
+			return "warning";
+		case "Critical":
+			return "error";
+		default:
+			return "default";
+	}
+});
 </script>
 
 <template>
@@ -97,6 +119,7 @@ const gitHubUrl = computed(() => {
 				</template>
 			</div>
 			<hr class="mt-6 mb-6" />
+			<Banner class="mb-4 rounded" :message="bannerMessage" :variant="bannerVariant" />
 			<div
 				v-html="advisory.data.content"
 				class="prose prose-sm max-w-none leading-relaxed mb-8"
