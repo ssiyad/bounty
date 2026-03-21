@@ -34,7 +34,7 @@ const isSettingsDialogOpen = ref(false);
 	<USidebar
 		disable-collapse
 		:header="{
-			title: 'Bounty',
+			title: 'Security',
 			subtitle: user?.doc?.full_name || 'Guest',
 			menuItems: [
 				{

@@ -3,7 +3,7 @@ import { Button, Textarea, TextInput, createDocumentResource } from "frappe-ui";
 import { session } from "@/data/session";
 
 const hunter = createDocumentResource({
-	doctype: "Bounty Hunter",
+	doctype: "FS Hunter",
 	name: session.user!,
 	auto: true,
 });

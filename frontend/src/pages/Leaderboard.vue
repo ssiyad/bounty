@@ -5,7 +5,7 @@ import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
 useBreadcrumbs().set([{ label: "Leaderboard" }]);
 
 const leaderboard = createResource({
-	url: "bounty.api.leaderboard.get_leaderboard",
+	url: "security.api.leaderboard.get_leaderboard",
 	auto: true,
 });
 </script>

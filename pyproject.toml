@@ -1,9 +1,9 @@
 [project]
-name = "bounty"
+name = "security"
 authors = [
     { name = "Sabu Siyad", email = "hello@ssiyad.com"}
 ]
-description = "Manage confidential reports, issues and rewards"
+description = "Comprehensive system to manage security related affairs."
 requires-python = ">=3.14"
 readme = "README.md"
 dynamic = ["version"]

@@ -11,7 +11,7 @@ const props = withDefaults(
 );
 
 const target = createResource({
-	url: "bounty.api.target.get_target",
+	url: "security.api.target.get_target",
 	auto: !!props.target,
 	cache: ["target", props.target],
 	initialData: {

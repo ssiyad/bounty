@@ -14,7 +14,7 @@ const route = useRoute();
 const id = route.params.id as string;
 
 const advisory = createResource({
-	url: "bounty.api.advisory.get_advisory",
+	url: "security.api.advisory.get_advisory",
 	auto: true,
 	cache: ["advisory", id],
 	makeParams: () => ({
@@ -24,7 +24,7 @@ const advisory = createResource({
 });
 
 const target = createResource({
-	url: "bounty.api.target.get_target",
+	url: "security.api.target.get_target",
 	cache: ["target", advisory.data?.target],
 	makeParams: () => ({
 		name: advisory.data?.target,

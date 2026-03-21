@@ -11,8 +11,8 @@ export default defineConfig({
 			jinjaBootData: true,
 			lucideIcons: true,
 			buildConfig: {
-				outDir: "../bounty/public/b",
-				indexHtmlPath: "../bounty/www/b.html",
+				outDir: "../security/public/s",
+				indexHtmlPath: "../security/www/s.html",
 				emptyOutDir: true,
 				sourcemap: true,
 			},
@@ -21,7 +21,7 @@ export default defineConfig({
 	],
 	build: {
 		chunkSizeWarningLimit: 1500,
-		outDir: "../bounty/public/b",
+		outDir: "../security/public/b",
 		emptyOutDir: true,
 		target: "es2015",
 		sourcemap: true,
@@ -42,6 +42,7 @@ export default defineConfig({
 			"@codemirror/state",
 			"@codemirror/view",
 		],
+		exclude: ["~icons"],
 	},
 	server: {
 		allowedHosts: true,

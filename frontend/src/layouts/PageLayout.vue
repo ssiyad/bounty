@@ -17,7 +17,7 @@ const { breadcrumbs } = useBreadcrumbs();
 				message="This is a work in progress. You may encounter rough edges."
 				variant="warning"
 			>
-				<a href="https://github.com/ssiyad/bounty/issues" target="_blank" rel="noopener">
+				<a href="https://github.com/ssiyad/security/issues" target="_blank" rel="noopener">
 					<Button label="Report an Issue" variant="ghost" icon-right="external-link" />
 				</a>
 			</Banner>

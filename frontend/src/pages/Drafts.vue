@@ -6,7 +6,7 @@ import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
 useBreadcrumbs().set([{ label: "Drafts" }]);
 
 const drafts = createListResource({
-	doctype: "Bounty Draft",
+	doctype: "FS Draft",
 	auto: true,
 	fields: ["name", "title", "modified"],
 	orderBy: "modified desc",

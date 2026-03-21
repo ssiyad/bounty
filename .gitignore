@@ -54,6 +54,6 @@ jspm_packages/
 # Aider AI Chat
 .aider*
 
-bounty/public/
-bounty/www/b.html
+security/public/
+security/www/s.html
 yarn.lock

@@ -26,7 +26,7 @@ const buttons = [
 ];
 
 const messages = createResource({
-	url: "bounty.api.chat.get_messages",
+	url: "security.api.chat.get_messages",
 	auto: !!props.report,
 	makeParams: () => ({
 		report: props.report,
@@ -40,7 +40,7 @@ const cancel = () => (message.value = "");
 
 const send = () => {
 	createResource({
-		url: "bounty.api.chat.send_message",
+		url: "security.api.chat.send_message",
 		method: "POST",
 		auto: true,
 		params: {
