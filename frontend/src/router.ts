@@ -73,7 +73,7 @@ const routes = [
       {
         path: "inbox",
         name: "Inbox",
-        component: () => import("@/pages/Upcoming.vue"),
+        component: () => import("@/pages/Inbox.vue"),
       },
       {
         path: "rewards",

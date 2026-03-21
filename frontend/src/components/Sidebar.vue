@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRoute } from "vue-router";
-import { createDocumentResource, Sidebar as USidebar } from "frappe-ui";
+import { createDocumentResource, createResource, Sidebar as USidebar } from "frappe-ui";
 import BugIcon from "~icons/lucide/bug";
 import ChartIcon from "~icons/lucide/trending-up";
 import DraftIcon from "~icons/lucide/scroll-text";
@@ -19,6 +19,11 @@ const user = createDocumentResource({
 	doctype: "User",
 	name: session.user!,
 	cache: ["User", session.user!],
+	auto: true,
+});
+
+const unreadNotificationCount = createResource({
+	url: "security.api.inbox.unread_count",
 	auto: true,
 });
 
@@ -73,6 +78,7 @@ const isSettingsDialogOpen = ref(false);
 					{
 						label: 'Inbox',
 						icon: InboxIcon,
+						suffix: unreadNotificationCount.data || undefined,
 						to: {
 							name: 'Inbox',
 						},

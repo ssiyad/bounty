@@ -7,6 +7,8 @@ from frappe import _
 from frappe.model.document import Document
 from github import Auth, Github, GithubException
 
+from security.utils.notification import create_notification, create_reference_anchor
+
 
 class FSAdvisory(Document):
 	def before_validate(self):
@@ -37,6 +39,16 @@ class FSAdvisory(Document):
 			if target != self.target:
 				message = _("Target does not match the target in the report.")
 				frappe.throw(message)
+
+	def on_update(self):
+		self.notify_publish()
+
+	def notify_publish(self):
+		if self.has_value_changed("published") and self.published and self._report:
+			anchor_advisory = create_reference_anchor(self.doctype, self.name)
+			anchor_report = create_reference_anchor(self._report.doctype, self._report.name)
+			content = ("An", anchor_advisory, "has been published against your", anchor_report)
+			create_notification(self._report.hunter, self._report.doctype, self._report.name, *content)
 
 	@frappe.whitelist()
 	def publish_to_github(self):

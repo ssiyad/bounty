@@ -7,6 +7,8 @@ from frappe import _
 from frappe.core.doctype.communication.communication import Communication
 from frappe.model.document import Document
 
+from security.utils.notification import create_notification, create_reference_anchor
+
 
 class FSReport(Document):
 	def before_validate(self):
@@ -15,6 +17,15 @@ class FSReport(Document):
 	def ensure_hunter(self):
 		if self.is_new():
 			self.hunter = frappe.session.user
+
+	def on_update(self):
+		self.notify_status_change()
+
+	def notify_status_change(self):
+		if not self.is_new() and self.has_value_changed("status"):
+			anchor = create_reference_anchor(self.doctype, self.name)
+			content = ("Your", anchor, "has been", self.status.lower())
+			create_notification(self.hunter, self.doctype, self.name, *content)
 
 	@frappe.whitelist()
 	def reply(self, content: str):
@@ -33,3 +44,11 @@ class FSReport(Document):
 		doc.sender_full_name = user.full_name
 		doc.user = from_user
 		doc.insert(ignore_permissions=True)
+		self.notify_reply()
+
+	def notify_reply(self):
+		if self.hunter == frappe.session.user:
+			return
+		anchor = create_reference_anchor(self.doctype, self.name)
+		content = ("There is a new message on your", anchor)
+		create_notification(self.hunter, self.doctype, self.name, *content)
