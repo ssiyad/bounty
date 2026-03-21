@@ -119,7 +119,11 @@ const bannerVariant = computed(() => {
 				</template>
 			</div>
 			<hr class="mt-6 mb-6" />
-			<Banner class="mb-4 rounded" :message="bannerMessage" :variant="bannerVariant" />
+			<Banner
+				class="mb-4 rounded border-none"
+				:message="bannerMessage"
+				:variant="bannerVariant"
+			/>
 			<div
 				v-html="advisory.data.content"
 				class="prose prose-sm max-w-none leading-relaxed mb-8"
