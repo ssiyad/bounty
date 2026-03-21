@@ -42,7 +42,6 @@
   {
    "fieldname": "content",
    "fieldtype": "Text Editor",
-   "in_list_view": 1,
    "label": "Content",
    "reqd": 1
   },
@@ -72,12 +71,14 @@
    "default": "0",
    "fieldname": "published",
    "fieldtype": "Check",
+   "in_list_view": 1,
    "label": "Published"
   },
   {
    "default": "Informational",
    "fieldname": "severity",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Severity",
    "options": "Informational\nLow\nMedium\nHigh\nCritical",
    "reqd": 1
@@ -85,6 +86,7 @@
   {
    "fieldname": "patched_version",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Patched Version",
    "reqd": 1
   }
@@ -92,7 +94,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-03-20 21:15:17.056005",
+ "modified": "2026-03-21 14:56:51.011629",
  "modified_by": "Administrator",
  "module": "Frappe Security",
  "name": "FS Advisory",
