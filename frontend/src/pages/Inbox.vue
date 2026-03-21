@@ -12,6 +12,12 @@ const notifications = createListResource({
 	auto: true,
 	fields: ["name", "creation", "is_read", "reference_doctype", "reference_docname", "content"],
 	orderBy: "creation desc",
+	onSuccess: () => {
+		createResource({
+			url: "security.api.inbox.mark_read",
+			auto: true,
+		});
+	},
 });
 
 const transform = (content: string) => {
@@ -35,11 +41,6 @@ const transform = (content: string) => {
 	// Return transformed content.
 	return content;
 };
-
-createResource({
-	url: "security.api.inbox.mark_read",
-	auto: true,
-});
 </script>
 
 <template>
