@@ -55,7 +55,7 @@ const gitHubUrl = computed(() => {
 });
 
 const bannerMessage = computed(() => {
-	return "Fixed in version: " + advisory.data?.patched_version;
+	return "Patched in version: " + advisory.data?.patched_version;
 });
 
 const bannerVariant = computed(() => {
