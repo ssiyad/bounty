@@ -21,7 +21,7 @@ export default defineConfig({
 	],
 	build: {
 		chunkSizeWarningLimit: 1500,
-		outDir: "../security/public/b",
+		outDir: "../security/public/s",
 		emptyOutDir: true,
 		target: "es2015",
 		sourcemap: true,
