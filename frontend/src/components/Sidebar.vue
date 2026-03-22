@@ -24,7 +24,7 @@ const user = createDocumentResource({
 
 const unreadNotificationCount = createResource({
 	url: "security.api.inbox.unread_count",
-	auto: true,
+	auto: session.isLoggedIn,
 });
 
 const isActiveRoute = (name: string) => {
