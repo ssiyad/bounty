@@ -5,27 +5,27 @@ import frappe
 def get_severities():
 	return [
 		{
-			"value": "informational",
+			"value": "Informational",
 			"label": "Informational",
 			"color": "gray",
 		},
 		{
-			"value": "low",
+			"value": "Low",
 			"label": "Low",
 			"color": "green",
 		},
 		{
-			"value": "medium",
+			"value": "Medium",
 			"label": "Medium",
 			"color": "blue",
 		},
 		{
-			"value": "high",
+			"value": "High",
 			"label": "High",
 			"color": "orange",
 		},
 		{
-			"value": "critical",
+			"value": "Critical",
 			"label": "Critical",
 			"color": "red",
 		},

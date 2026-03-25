@@ -6,6 +6,8 @@
  "engine": "InnoDB",
  "field_order": [
   "hunter",
+  "target",
+  "severity",
   "title",
   "content",
   "amended_from"
@@ -42,13 +44,25 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "target",
+   "fieldtype": "Link",
+   "label": "Target",
+   "options": "FS Target"
+  },
+  {
+   "fieldname": "severity",
+   "fieldtype": "Select",
+   "label": "Severity",
+   "options": "Informational\nLow\nMedium\nHigh\nCritical"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-03-20 21:16:10.472167",
+ "modified": "2026-03-25 23:19:22.788321",
  "modified_by": "Administrator",
  "module": "Frappe Security",
  "name": "FS Draft",

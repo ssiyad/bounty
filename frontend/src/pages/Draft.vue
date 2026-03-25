@@ -3,6 +3,8 @@ import { computed, ref, watch, watchEffect } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { Button, TextEditor, createDocumentResource, createResource } from "frappe-ui";
 import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
+import SeveritySelector from "@/components/selects/SeveritySelector.vue";
+import TargetSelector from "@/components/selects/TargetSelector.vue";
 
 const debounce = (fn: () => void, delay: number) => {
 	let timeout: ReturnType<typeof setTimeout> | null = null;
@@ -23,6 +25,8 @@ const isNew = computed(() => id === "new-report");
 
 const title = ref("");
 const content = ref("");
+const target = ref("");
+const severity = ref("");
 
 const draft = createDocumentResource({
 	doctype: "FS Draft",
@@ -61,6 +65,8 @@ const createDraft = () => {
 				doctype: "FS Draft",
 				title: title.value,
 				content: content.value,
+				target: target.value,
+				severity: severity.value,
 			},
 		}),
 		onSuccess: (draft_: any) => {
@@ -111,23 +117,35 @@ watchEffect(() => {
 		<Button v-if="unsaved" label="Save" variant="solid" @click="createDraft()" />
 		<Button v-else label="Submit" variant="solid" @click="draft.submit.submit()" />
 	</Teleport>
-	<div class="grow overflow-y-auto">
-		<div class="py-14 max-w-[840px] mx-auto">
-			<div class="mb-4 pb-6 border-b">
-				<input
-					class="bg-transparent text-3xl border-none p-0 font-semibold focus:ring-0 w-full"
-					placeholder="Title"
-					:value="title"
-					@input="title = $event.target.value"
+	<div class="flex grow overflow-hidden divide-x">
+		<div class="grow overflow-y-auto">
+			<div class="py-14 max-w-[840px] mx-auto">
+				<div class="mb-4 pb-6 border-b">
+					<input
+						class="bg-transparent text-3xl border-none p-0 font-semibold focus:ring-0 w-full"
+						placeholder="Title"
+						:value="title"
+						@input="title = $event.target.value"
+					/>
+				</div>
+				<TextEditor
+					editor-class="prose-sm max-w-none leading-relaxed"
+					placeholder="Type '/' for commands"
+					:content="content"
+					@change="content = $event"
+					bubble-menu
 				/>
 			</div>
-			<TextEditor
-				editor-class="prose-sm max-w-none leading-relaxed"
-				placeholder="Type '/' for commands"
-				:content="content"
-				@change="content = $event"
-				bubble-menu
-			/>
+		</div>
+		<div class="w-72 shrink-0 px-5 py-4 space-y-3">
+			<div class="flex items-center justify-between">
+				<div class="text-sm">Target</div>
+				<TargetSelector v-model="target" variant="outline" />
+			</div>
+			<div class="flex items-center justify-between">
+				<div class="text-sm">Severity</div>
+				<SeveritySelector v-model="severity" variant="outline" />
+			</div>
 		</div>
 	</div>
 </template>

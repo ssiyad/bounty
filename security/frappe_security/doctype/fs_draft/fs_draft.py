@@ -19,6 +19,8 @@ class FSDraft(Document):
 		"""Create a report from this draft."""
 		report = frappe.new_doc("FS Report")
 		report.hunter = self.hunter
+		report.target = self.target
+		report.severity = self.severity
 		report.title = self.title
 		report.content = self.content
 		report.save()

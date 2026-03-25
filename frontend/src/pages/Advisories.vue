@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { Ref, ref, watch } from "vue";
-import { Badge, Button, Select, createResource } from "frappe-ui";
+import { Badge, Button, createResource } from "frappe-ui";
 import { formatDate } from "date-fns";
 import { severityTheme } from "@/utils/badgeThemes";
 import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
 import Target from "@/components/Target.vue";
+import SeveritySelector from "@/components/selects/SeveritySelector.vue";
+import TargetSelector from "@/components/selects/TargetSelector.vue";
 import DateIcon from "~icons/lucide/calendar";
 import ReferenceIcon from "~icons/lucide/globe";
 import UserIcon from "~icons/lucide/user";
@@ -15,18 +17,6 @@ const target = ref("");
 const severity = ref("");
 const start = ref(0);
 const limit = 10;
-
-const targets = createResource({
-	url: "security.api.target.get_targets",
-	auto: true,
-	cache: ["targets"],
-});
-
-const severities = createResource({
-	url: "security.api.severity.get_severities",
-	auto: true,
-	cache: ["severities"],
-});
 
 const a_: Ref<any[]> = ref([]);
 const count = ref(0);
@@ -52,7 +42,10 @@ const load = () => {
 	advisories.reload();
 };
 
-watch([target, severity], () => advisories.fetch());
+watch([target, severity], () => {
+	a_.value = [];
+	advisories.fetch();
+});
 </script>
 
 <template>
@@ -61,43 +54,8 @@ watch([target, severity], () => advisories.fetch());
 			<h1 class="text-3xl font-semibold mb-6">Advisories</h1>
 			<div class="mb-4 flex items-center">
 				<div class="space-x-2">
-					<Select
-						v-model="target"
-						class="w-max"
-						placeholder="Target"
-						:options="
-							targets.data?.map((target) => ({
-								label: target.title,
-								value: target.name,
-							}))
-						"
-					>
-						<template #option="{ option }">
-							<Target :target="option.value" />
-						</template>
-					</Select>
-					<Select
-						v-model="severity"
-						class="w-max"
-						placeholder="Severity"
-						:options="severities.data"
-					>
-						<template #option="{ option }">
-							<div class="inline-flex gap-2 items-center">
-								<div
-									class="size-2 rounded-full"
-									:class="{
-										'bg-surface-gray-5': option.color == 'gray',
-										'bg-surface-red-5': option.color == 'red',
-										'bg-red-400': option.color == 'orange',
-										'bg-surface-green-3': option.color == 'green',
-										'bg-surface-blue-3': option.color == 'blue',
-									}"
-								></div>
-								{{ option.label }}
-							</div>
-						</template>
-					</Select>
+					<TargetSelector v-model="target" />
+					<SeveritySelector v-model="severity" />
 				</div>
 			</div>
 			<div class="flex flex-col gap-4">

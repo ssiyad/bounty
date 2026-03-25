@@ -2,10 +2,12 @@
 import { watchEffect } from "vue";
 import { useRoute } from "vue-router";
 import { Badge, createResource } from "frappe-ui";
-import { statusTheme, categoryTheme, severityTheme } from "@/utils/badgeThemes";
+import { categoryTheme } from "@/utils/badgeThemes";
 import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
 import Chat from "@/components/report/Chat.vue";
 import Target from "@/components/Target.vue";
+import SeverityBadge from "@/components/badges/SeverityBadge.vue";
+import StatusBadge from "@/components/badges/StatusBadge.vue";
 
 const route = useRoute();
 const id = route.params.id as string;
@@ -56,9 +58,7 @@ watchEffect(() => {
 			<hr v-if="report.data.target" />
 			<div class="flex items-center justify-between">
 				<p class="text-sm">Status</p>
-				<div>
-					<Badge :label="report.data.status" :theme="statusTheme(report.data.status)" />
-				</div>
+				<StatusBadge :status="report.data.status" />
 			</div>
 			<div class="flex items-center justify-between">
 				<p class="text-sm">Category</p>
@@ -71,12 +71,7 @@ watchEffect(() => {
 			</div>
 			<div class="flex items-center justify-between">
 				<p class="text-sm">Severity</p>
-				<div>
-					<Badge
-						:label="report.data.severity"
-						:theme="severityTheme(report.data.severity)"
-					/>
-				</div>
+				<SeverityBadge :severity="report.data.severity" />
 			</div>
 		</div>
 	</div>
