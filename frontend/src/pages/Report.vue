@@ -37,7 +37,7 @@ watchEffect(() => {
 </script>
 
 <template>
-	<div v-if="report.data" class="flex divide-x min-h-0">
+	<div v-if="report.data" class="flex divide-x min-h-0 grow">
 		<div class="grow overflow-y-auto">
 			<div class="py-14 max-w-[840px] mx-auto">
 				<div class="text-3xl font-semibold mb-4 pb-6 border-b">
@@ -50,7 +50,7 @@ watchEffect(() => {
 				<Chat :report="id" />
 			</div>
 		</div>
-		<div class="w-72 shrink-0 px-4 py-4 space-y-4">
+		<div class="w-72 shrink-0 px-5 py-4 space-y-3">
 			<div v-if="report.data.target" class="flex items-center justify-between">
 				<p class="text-sm">Target</p>
 				<Target :target="report.data.target" />
