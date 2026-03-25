@@ -1,8 +1,14 @@
 <script setup lang="ts">
 import { computed, ref, watch, watchEffect } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { Button, TextEditor, createDocumentResource, createResource } from "frappe-ui";
+import {
+	Button,
+	TextEditor,
+	createDocumentResource,
+	createResource,
+} from "frappe-ui";
 import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
+import Attachments from "@/components/Attachments.vue";
 import SeveritySelector from "@/components/selects/SeveritySelector.vue";
 import TargetSelector from "@/components/selects/TargetSelector.vue";
 
@@ -139,13 +145,14 @@ watchEffect(() => {
 		</div>
 		<div class="w-72 shrink-0 px-5 py-4 space-y-3">
 			<div class="flex items-center justify-between">
-				<div class="text-sm">Target</div>
-				<TargetSelector v-model="target" variant="outline" />
+				<div class="text-sm font-medium">Target</div>
+				<TargetSelector v-model="target" />
 			</div>
 			<div class="flex items-center justify-between">
-				<div class="text-sm">Severity</div>
-				<SeveritySelector v-model="severity" variant="outline" />
+				<div class="text-sm font-medium">Severity</div>
+				<SeveritySelector v-model="severity" />
 			</div>
+			<Attachments class="border-t pt-3" doctype="FS Draft" :docname="id" />
 		</div>
 	</div>
 </template>
