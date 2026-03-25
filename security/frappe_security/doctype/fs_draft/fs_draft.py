@@ -23,7 +23,19 @@ class FSDraft(Document):
 		report.severity = self.severity
 		report.title = self.title
 		report.content = self.content
-		report.save()
+		report = report.save()
+		self.move_attachments(report.name)
+
+	def move_attachments(self, docname: str):
+		File = frappe.qb.DocType("File")
+		return bool(
+			frappe.qb.update(File)
+			.set(File.attached_to_doctype, "FS Report")
+			.set(File.attached_to_name, docname)
+			.where(File.attached_to_doctype == "FS Draft")
+			.where(File.attached_to_name == self.name)
+			.run()
+		)
 
 	@frappe.whitelist()
 	def submit_draft(self):

@@ -1,12 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch, watchEffect } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import {
-	Button,
-	TextEditor,
-	createDocumentResource,
-	createResource,
-} from "frappe-ui";
+import { Button, TextEditor, createDocumentResource, createResource } from "frappe-ui";
 import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
 import Attachments from "@/components/Attachments.vue";
 import SeveritySelector from "@/components/selects/SeveritySelector.vue";

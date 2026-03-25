@@ -4,6 +4,7 @@ import { useRoute } from "vue-router";
 import { Badge, createResource } from "frappe-ui";
 import { categoryTheme } from "@/utils/badgeThemes";
 import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
+import Attachments from "@/components/Attachments.vue";
 import Chat from "@/components/report/Chat.vue";
 import Target from "@/components/Target.vue";
 import SeverityBadge from "@/components/badges/SeverityBadge.vue";
@@ -73,6 +74,7 @@ watchEffect(() => {
 				<p class="text-sm">Severity</p>
 				<SeverityBadge :severity="report.data.severity" />
 			</div>
+			<Attachments class="pt-3 border-t" readonly doctype="FS Report" :docname="id" />
 		</div>
 	</div>
 </template>

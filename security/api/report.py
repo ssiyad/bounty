@@ -1,5 +1,6 @@
 import frappe
 from frappe import _
+from frappe.query_builder import Order
 
 
 @frappe.whitelist(methods=["POST"])
@@ -28,6 +29,7 @@ def get_reports():
 			Report.creation,
 		)
 		.where(Report.hunter == frappe.session.user)
+		.orderby(Report.modified, order=Order.desc)
 		.run(as_dict=True)
 	)
 
