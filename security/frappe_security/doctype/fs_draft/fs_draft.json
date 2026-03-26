@@ -32,8 +32,7 @@
    "fieldname": "content",
    "fieldtype": "Text Editor",
    "in_list_view": 1,
-   "label": "Content",
-   "reqd": 1
+   "label": "Content"
   },
   {
    "fieldname": "amended_from",
@@ -62,7 +61,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-03-25 23:19:22.788321",
+ "modified": "2026-03-26 18:04:01.313150",
  "modified_by": "Administrator",
  "module": "Frappe Security",
  "name": "FS Draft",

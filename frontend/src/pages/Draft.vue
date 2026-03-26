@@ -7,73 +7,52 @@ import Attachments from "@/components/Attachments.vue";
 import SeveritySelector from "@/components/selects/SeveritySelector.vue";
 import TargetSelector from "@/components/selects/TargetSelector.vue";
 
-const debounce = (fn: () => void, delay: number) => {
-	let timeout: ReturnType<typeof setTimeout> | null = null;
-	return () => {
-		if (timeout) {
-			clearTimeout(timeout);
-		}
-		timeout = setTimeout(() => {
-			fn();
-		}, delay);
-	};
-};
-
 const route = useRoute();
 const router = useRouter();
-const id = route.params.id as string;
-const isNew = computed(() => id === "new-report");
-
-const title = ref("");
-const content = ref("");
-const target = ref("");
-const severity = ref("");
+const id = route.query.id as string;
 
 const draft = createDocumentResource({
 	doctype: "FS Draft",
-	name: id,
-	auto: !!id && !isNew.value,
+	name: id || "draft",
+	auto: !!id,
 	whitelistedMethods: {
 		submit: {
 			method: "submit_draft",
-			onSuccess: () => {
-				router.replace({
-					name: "Reports",
-				});
-			},
+			onSuccess: () => router.replace({ name: "Reports" }),
 		},
-	},
-	onSuccess: (draft: any) => {
-		title.value = draft.title;
-		content.value = draft.content;
 	},
 });
 
-const unsaved = computed(() => !draft.doc);
+if (!draft.doc) {
+	draft.setDoc({
+		doctype: "FS Draft",
+		title: "",
+		content: "",
+		target: "",
+		severity: "",
+	});
+}
 
-const debouncedSave = debounce(() => {
-	draft.doc.title = title.value;
-	draft.doc.content = content.value;
-	draft.save.submit();
-}, 500);
-
-const createDraft = () => {
+const save = () => {
+	// if (!draft.isDirty) return;
+	if (!draft.doc.title) return;
+	if (draft.doc.name) return draft.save.submit();
 	createResource({
 		url: "frappe.client.insert",
 		auto: true,
 		makeParams: () => ({
 			doc: {
 				doctype: "FS Draft",
-				title: title.value,
-				content: content.value,
-				target: target.value,
-				severity: severity.value,
+				title: draft.doc.title,
+				content: draft.doc.content,
+				target: draft.doc.target,
+				severity: draft.doc.severity,
 			},
 		}),
 		onSuccess: (draft_: any) => {
 			router.replace({
 				name: "Draft",
-				params: {
+				query: {
 					id: draft_.name,
 				},
 			});
@@ -82,21 +61,6 @@ const createDraft = () => {
 		},
 	});
 };
-
-let hasLoadedDraft = false;
-
-watch(
-	[title, content],
-	() => {
-		if (unsaved.value) return;
-		if (!hasLoadedDraft) {
-			hasLoadedDraft = true;
-			return;
-		}
-		debouncedSave();
-	},
-	{ deep: false },
-);
 
 const { set } = useBreadcrumbs();
 
@@ -107,7 +71,7 @@ watchEffect(() => {
 			route: { name: "Drafts" },
 		},
 		{
-			label: title.value || "New",
+			label: draft.doc?.title || "New",
 		},
 	]);
 });
@@ -115,39 +79,51 @@ watchEffect(() => {
 
 <template>
 	<Teleport defer to="#topbar-actions">
-		<Button v-if="unsaved" label="Save" variant="solid" @click="createDraft()" />
-		<Button v-else label="Submit" variant="solid" @click="draft.submit.submit()" />
+		<Button
+			v-if="draft.doc?.name"
+			label="Submit"
+			icon-right="arrow-right"
+			variant="solid"
+			@click="draft.submit.submit()"
+		/>
 	</Teleport>
 	<div class="flex grow overflow-hidden divide-x">
 		<div class="grow overflow-y-auto">
-			<div class="py-14 max-w-[840px] mx-auto">
+			<div v-if="!id || draft.doc" class="py-14 max-w-[840px] mx-auto">
 				<div class="mb-4 pb-6 border-b">
 					<input
 						class="bg-transparent text-3xl border-none p-0 font-semibold focus:ring-0 w-full"
 						placeholder="Title"
-						:value="title"
-						@input="title = $event.target.value"
+						:value="draft.doc.title"
+						@input="draft.doc.title = $event.target.value"
+						@blur="save()"
 					/>
 				</div>
 				<TextEditor
+					bubble-menu
 					editor-class="prose-sm max-w-none leading-relaxed"
 					placeholder="Type '/' for commands"
-					:content="content"
-					@change="content = $event"
-					bubble-menu
+					:content="draft.doc.content"
+					@change="draft.doc.content = $event"
+					@blur="save()"
 				/>
 			</div>
 		</div>
 		<div class="w-72 shrink-0 px-5 py-4 space-y-3">
-			<div class="flex items-center justify-between">
+			<div v-if="!id || draft.doc" class="flex items-center justify-between">
 				<div class="text-sm font-medium">Target</div>
-				<TargetSelector v-model="target" />
+				<TargetSelector v-model="draft.doc.target" @update:model-value="save()" />
 			</div>
-			<div class="flex items-center justify-between">
+			<div v-if="!id || draft.doc" class="flex items-center justify-between">
 				<div class="text-sm font-medium">Severity</div>
-				<SeveritySelector v-model="severity" />
+				<SeveritySelector v-model="draft.doc.severity" @update:model-value="save()" />
 			</div>
-			<Attachments class="border-t pt-3" doctype="FS Draft" :docname="id" />
+			<Attachments
+				v-if="draft.doc?.name"
+				class="border-t pt-3"
+				doctype="FS Draft"
+				:docname="draft.doc.name"
+			/>
 		</div>
 	</div>
 </template>

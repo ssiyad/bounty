@@ -18,9 +18,6 @@ const drafts = createListResource({
 		<RouterLink
 			:to="{
 				name: 'Draft',
-				params: {
-					id: 'new-report',
-				},
 			}"
 		>
 			<Button label="Draft" icon-left="plus" variant="solid" />
@@ -36,7 +33,7 @@ const drafts = createListResource({
 			:key="draft.name"
 			:to="{
 				name: 'Draft',
-				params: {
+				query: {
 					id: draft.name,
 				},
 			}"
