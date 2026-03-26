@@ -12,7 +12,7 @@ withDefaults(
 
 <template>
 	<div
-		class="h-12 px-5 border-b flex items-center justify-between"
+		class="h-12 shrink-0 px-5 border-b flex items-center justify-between"
 		:class="{
 			'bg-surface-gray-1 text-ink-gray-9': variant === 'default',
 			'bg-surface-blue-1 text-ink-blue-3': variant === 'info',
