@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { Select, SelectProps, SelectableOption, createResource } from "frappe-ui";
+import { Select, SelectProps, createResource } from "frappe-ui";
 
 const model = defineModel<string>();
 
@@ -11,22 +10,32 @@ const targets = createResource({
 	auto: true,
 	cache: ["targets"],
 	initialData: [],
-});
-
-const options = computed(() => {
-	const _: SelectableOption[] = targets.data.map((target: any) => ({
-		label: target.title,
-		value: target.name,
-	}));
-	_.unshift({ label: "", value: "" });
-	return _;
+	transform: (data: any[]) => {
+		const d = data.map((t) => ({
+			value: t.name,
+			label: t.title,
+		}));
+		d.unshift({ value: "_", label: "Any" });
+		return d;
+	},
 });
 </script>
 
 <template>
-	<Select v-model="model" v-bind="props" class="w-max" placeholder="Target" :options="options">
+	<Select
+		:model-value="model"
+		@update:model-value="$emit('update:modelValue', $event === '_' ? '' : $event)"
+		v-bind="props"
+		class="w-max"
+		placeholder="Target"
+		:options="targets.data"
+	>
+		<template v-if="model" #prefix>
+			<Target v-if="model !== '_'" :target="model" variant="logo" />
+		</template>
 		<template #option="{ option }">
-			<Target :target="option.value" />
+			<div v-if="option.value === '_'" class="ml-5">{{ option.label }}</div>
+			<Target v-else :target="option.value" />
 		</template>
 	</Select>
 </template>

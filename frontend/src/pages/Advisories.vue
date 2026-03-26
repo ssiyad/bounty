@@ -52,11 +52,9 @@ watch([target, severity], () => {
 	<div class="overflow-y-auto">
 		<div class="mx-auto max-w-[840px] py-14 w-full">
 			<h1 class="text-3xl font-semibold mb-6">Advisories</h1>
-			<div class="mb-4 flex items-center">
-				<div class="space-x-2">
-					<TargetSelector v-model="target" />
-					<SeveritySelector v-model="severity" />
-				</div>
+			<div class="mb-4 flex items-center gap-2">
+				<TargetSelector v-model="target" />
+				<SeveritySelector v-model="severity" />
 			</div>
 			<div class="flex flex-col gap-4">
 				<RouterLink

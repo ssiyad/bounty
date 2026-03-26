@@ -4,9 +4,11 @@ import { Avatar, createResource } from "frappe-ui";
 const props = withDefaults(
 	defineProps<{
 		target?: string;
+		variant?: "default" | "logo";
 	}>(),
 	{
 		target: "",
+		variant: "default",
 	},
 );
 
@@ -36,7 +38,7 @@ const target = createResource({
 				:alt="target.data.title"
 			/>
 			<Avatar v-else :label="target.data.title" shape="square" size="xs" />
-			<div>
+			<div v-if="variant !== 'logo'">
 				{{ target.data.title }}
 			</div>
 		</div>
