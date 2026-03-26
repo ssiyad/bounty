@@ -22,7 +22,7 @@ class FSReport(Document):
 		self.notify_status_change()
 
 	def notify_status_change(self):
-		if not self.is_new() and self.has_value_changed("status"):
+		if self.has_value_changed("status") and self.status != "Pending":
 			anchor = create_reference_anchor(self.doctype, self.name)
 			content = ("Your", anchor, "has been", self.status.lower())
 			create_notification(self.hunter, self.doctype, self.name, *content)
