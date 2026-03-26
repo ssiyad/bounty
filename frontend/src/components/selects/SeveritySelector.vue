@@ -11,6 +11,10 @@ const severities = createResource({
 	auto: true,
 	cache: ["severities"],
 	initialData: [],
+	transform: (data: any[]) => {
+		data.unshift({ value: "_", label: "Any" });
+		return data;
+	},
 });
 
 const current = computed(() => severities.data.find((s: any) => s.value === model.value));
@@ -18,7 +22,8 @@ const current = computed(() => severities.data.find((s: any) => s.value === mode
 
 <template>
 	<Select
-		v-model="model"
+		:model-value="model"
+		@update:model-value="$emit('update:modelValue', $event === '_' ? '' : $event)"
 		v-bind="props"
 		class="w-max"
 		placeholder="Severity"
