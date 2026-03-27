@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { formatDate } from "date-fns";
-import { Badge, Button, createListResource} from "frappe-ui";
+import { Badge, Button, createListResource } from "frappe-ui";
 import { statusTheme } from "@/utils/badgeThemes";
 import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
 import Target from "@/components/Target.vue";
@@ -12,6 +12,7 @@ const reports = createListResource({
 	cache: ["reports"],
 	auto: true,
 	fields: ["name", "title", "target", "creation", "status"],
+	orderBy: "modified desc",
 });
 </script>
 
