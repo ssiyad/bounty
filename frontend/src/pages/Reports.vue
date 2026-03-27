@@ -29,8 +29,8 @@ const reports = createListResource({
 			<Button label="Report" icon-left="plus" variant="solid" />
 		</RouterLink>
 	</Teleport>
-	<div class="divide-y">
-		<div class="flex h-12 px-5 py-4 font-medium">
+	<div class="divide-y grow min-h-0 overflow-y-auto">
+		<div class="flex h-12 px-5 py-4 font-medium bg-surface-gray-1">
 			<div class="grow">Title</div>
 			<div class="w-[180px] text-end">Target</div>
 			<div class="w-[200px] text-end">Date</div>
@@ -61,5 +61,13 @@ const reports = createListResource({
 				</div>
 			</div>
 		</RouterLink>
+	</div>
+	<div class="h-12 shrink-0 flex items-center justify-end px-5 border-t">
+		<Button
+			label="Load More"
+			:loading="reports.loading"
+			:disabled="!reports.hasNextPage"
+			@click="reports.next()"
+		/>
 	</div>
 </template>
