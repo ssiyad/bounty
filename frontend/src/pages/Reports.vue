@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import { formatDate } from "date-fns";
-import { Badge, Button, createResource } from "frappe-ui";
+import { Badge, Button, createListResource} from "frappe-ui";
 import { statusTheme } from "@/utils/badgeThemes";
 import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
 import Target from "@/components/Target.vue";
 
 useBreadcrumbs().set([{ label: "Reports" }]);
 
-const reports = createResource({
-	url: "security.api.report.get_reports",
+const reports = createListResource({
+	doctype: "FS Report",
 	cache: ["reports"],
 	auto: true,
+	fields: ["name", "title", "target", "creation", "status"],
 });
 </script>
 
