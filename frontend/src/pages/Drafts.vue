@@ -23,7 +23,7 @@ const drafts = createListResource({
 			<Button label="Draft" icon-left="plus" variant="solid" />
 		</RouterLink>
 	</Teleport>
-	<div class="divide-y">
+	<div class="divide-y grow min-h-0 overflow-y-auto">
 		<div class="flex h-12 px-5 py-4 font-medium bg-surface-gray-1">
 			<div class="grow">Title</div>
 			<div class="w-[150px] text-end">Updated</div>
@@ -46,5 +46,13 @@ const drafts = createListResource({
 				</div>
 			</div>
 		</RouterLink>
+	</div>
+	<div class="h-12 shrink-0 flex items-center justify-end px-5 border-t">
+		<Button
+			label="Load More"
+			:loading="drafts.loading"
+			:disabled="!drafts.hasNextPage"
+			@click="drafts.next()"
+		/>
 	</div>
 </template>
