@@ -16,12 +16,14 @@ permission_query_conditions = {
 	"FS Draft": "security.frappe_security.doctype.fs_draft.fs_draft.permission_query",
 	"FS Hunter": "security.frappe_security.doctype.fs_hunter.fs_hunter.permission_query",
 	"FS Notification": "security.frappe_security.doctype.fs_notification.fs_notification.permission_query",
+	"FS Report": "security.frappe_security.doctype.fs_report.fs_report.permission_query",
 }
 
 has_permission = {
 	"FS Draft": "security.frappe_security.doctype.fs_draft.fs_draft.has_permission",
 	"FS Hunter": "security.frappe_security.doctype.fs_hunter.fs_hunter.has_permission",
 	"FS Notification": "security.frappe_security.doctype.fs_notification.fs_notification.has_permission",
+	"FS Report": "security.frappe_security.doctype.fs_report.fs_report.has_permission",
 }
 
 doc_events = {

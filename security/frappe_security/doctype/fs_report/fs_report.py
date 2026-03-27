@@ -52,3 +52,15 @@ class FSReport(Document):
 		anchor = create_reference_anchor(self.doctype, self.name)
 		content = ("There is a new message on your", anchor)
 		create_notification(self.hunter, self.doctype, self.name, *content)
+
+
+def permission_query(user: str | None = None):
+	user = user or frappe.session.user
+	return "(`tabFS Report`.hunter = {0}".format(frappe.db.escape(user))
+
+
+def has_permission(doc, ptype=None, user=None):
+	if doc.is_new():
+		return True
+	user = user or frappe.session.user
+	return doc.hunter == user
