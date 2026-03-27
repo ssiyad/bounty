@@ -15,7 +15,7 @@ const { breadcrumbs } = useBreadcrumbs();
 			<Topbar v-if="breadcrumbs.length" :breadcrumbs="breadcrumbs" />
 			<Banner
 				message="This is a work in progress. You may encounter rough edges."
-				variant="warning"
+				variant="info"
 			>
 				<a href="https://github.com/ssiyad/security/issues" target="_blank" rel="noopener">
 					<Button label="Report an Issue" variant="ghost" icon-right="external-link" />
