@@ -56,7 +56,7 @@ class FSReport(Document):
 
 def permission_query(user: str | None = None):
 	user = user or frappe.session.user
-	return "(`tabFS Report`.hunter = {0}".format(frappe.db.escape(user))
+	return "(`tabFS Report`.hunter = {0})".format(frappe.db.escape(user))
 
 
 def has_permission(doc, ptype=None, user=None):
