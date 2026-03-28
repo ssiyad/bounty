@@ -10,7 +10,7 @@ defineProps<{
 const open = ref(false);
 const iframeRef = ref<HTMLIFrameElement | null>(null);
 
-function resizeIframe() {
+function setFrameSize() {
 	const iframe = iframeRef.value;
 	if (iframe && iframe.contentWindow && iframe.contentDocument) {
 		const body = iframe.contentDocument.body;
@@ -35,7 +35,7 @@ function resizeIframe() {
 					<Button label="Close" @click="open = false" />
 				</div>
 			</div>
-			<iframe ref="iframeRef" class="w-full" :src="url" @load="resizeIframe" />
+			<iframe ref="iframeRef" class="w-full" :src="url" @load="setFrameSize()" />
 		</template>
 	</Dialog>
 </template>
