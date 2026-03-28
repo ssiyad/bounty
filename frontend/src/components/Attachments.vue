@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Button, FileUploader, createListResource, createResource } from "frappe-ui";
+import Attachment from "./Attachment.vue";
 import UploadIcon from "~icons/lucide/upload";
 
 const props = withDefaults(
@@ -49,7 +50,6 @@ const remove = (docname: string) => {
 			<div class="text-sm font-medium">Attachments</div>
 			<FileUploader
 				v-if="!readonly"
-				:fileTypes="['image/*']"
 				:upload-args="{
 					doctype: doctype,
 					docname: docname,
@@ -72,11 +72,7 @@ const remove = (docname: string) => {
 			v-for="attachment in attachments.data"
 			class="group h-7 flex items-center justify-between"
 		>
-			<a :href="attachment.file_url" target="_blank">
-				<div class="text-sm text-ink-gray-8 hover:text-ink-gray-9">
-					{{ attachment.file_name }}
-				</div>
-			</a>
+			<Attachment :name="attachment.file_name" :url="attachment.file_url" />
 			<Button
 				v-if="!readonly"
 				class="opacity-0 group-hover:opacity-100"
