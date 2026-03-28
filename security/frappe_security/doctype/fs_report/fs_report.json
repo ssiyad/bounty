@@ -13,15 +13,12 @@
   "target",
   "category",
   "severity",
-  "pub_comments",
   "solution_tab",
   "solution_pr",
   "solution_rca",
   "solution_post",
   "rewards_tab",
-  "is_eligible_for_rewards",
-  "publish_tab",
-  "publish_github"
+  "is_eligible_for_rewards"
  ],
  "fields": [
   {
@@ -70,11 +67,6 @@
    "reqd": 1
   },
   {
-   "fieldname": "pub_comments",
-   "fieldtype": "Small Text",
-   "label": "Comments"
-  },
-  {
    "fieldname": "rewards_tab",
    "fieldtype": "Tab Break",
    "label": "Rewards"
@@ -84,16 +76,6 @@
    "fieldname": "is_eligible_for_rewards",
    "fieldtype": "Check",
    "label": "Eligible for Rewards"
-  },
-  {
-   "fieldname": "publish_tab",
-   "fieldtype": "Tab Break",
-   "label": "Publish"
-  },
-  {
-   "fieldname": "publish_github",
-   "fieldtype": "Data",
-   "label": "GitHub"
   },
   {
    "fieldname": "hunter",
@@ -117,12 +99,14 @@
   {
    "fieldname": "solution_rca",
    "fieldtype": "Data",
-   "label": "Root Cause Analysis"
+   "label": "Root Cause Analysis",
+   "permlevel": 1
   },
   {
    "fieldname": "solution_post",
    "fieldtype": "Data",
-   "label": "Post"
+   "label": "Post",
+   "permlevel": 1
   },
   {
    "fieldname": "target",
@@ -134,7 +118,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-03-26 23:31:45.475981",
+ "modified": "2026-03-28 01:26:06.749362",
  "modified_by": "Administrator",
  "module": "Frappe Security",
  "name": "FS Report",
@@ -158,6 +142,17 @@
    "delete": 1,
    "email": 1,
    "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Security Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "permlevel": 1,
    "print": 1,
    "read": 1,
    "report": 1,
