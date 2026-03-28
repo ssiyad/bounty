@@ -5,16 +5,20 @@ import frappe
 from frappe import _
 from frappe.model.document import Document
 
+from security.utils.decorators import skip_admin
+
 
 class FSHunter(Document):
 	pass
 
 
+@skip_admin
 def permission_query(user: str | None = None):
 	user = user or frappe.session.user
 	return "(`tabFS Hunter`.user = {0})".format(frappe.db.escape(user))
 
 
+@skip_admin
 def has_permission(doc: FSHunter, ptype="read", user: str | None = None):
 	user = user or frappe.session.user
 	return doc.user == user

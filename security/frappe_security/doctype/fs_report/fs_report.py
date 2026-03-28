@@ -7,6 +7,7 @@ from frappe import _
 from frappe.core.doctype.communication.communication import Communication
 from frappe.model.document import Document
 
+from security.utils.decorators import skip_admin
 from security.utils.notification import create_notification, create_reference_anchor
 
 
@@ -54,11 +55,13 @@ class FSReport(Document):
 		create_notification(self.hunter, self.doctype, self.name, *content)
 
 
+@skip_admin
 def permission_query(user: str | None = None):
 	user = user or frappe.session.user
 	return "(`tabFS Report`.hunter = {0})".format(frappe.db.escape(user))
 
 
+@skip_admin
 def has_permission(doc, ptype=None, user=None):
 	if doc.is_new():
 		return True
