@@ -17,7 +17,9 @@ const severities = createResource({
 	},
 });
 
-const current = computed(() => severities.data.find((s: any) => s.value === model.value));
+const current = computed(() =>
+	severities.data.find((s: any) => s.value === model.value),
+);
 </script>
 
 <template>

@@ -10,8 +10,7 @@
 		"ignore": ["dist/**", "coverage/**", "node_modules/**", "../<app-name>/**"]
 	},
 	"formatter": {
-		"enabled": true,
-		"indentStyle": "tab"
+		"enabled": true
 	},
 	"organizeImports": {
 		"enabled": true
@@ -20,12 +19,6 @@
 		"enabled": true,
 		"rules": {
 			"recommended": true
-		}
-	},
-	"javascript": {
-		"formatter": {
-			"quoteStyle": "double",
-			"semicolons": "asNeeded"
 		}
 	}
 }

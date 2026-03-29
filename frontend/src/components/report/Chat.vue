@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { Button, TextEditor, TextEditorFixedMenu, createResource } from "frappe-ui";
+import {
+	Button,
+	TextEditor,
+	TextEditorFixedMenu,
+	createResource,
+} from "frappe-ui";
 
 const props = withDefaults(
 	defineProps<{

@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRoute } from "vue-router";
-import { createDocumentResource, createResource, Sidebar as USidebar } from "frappe-ui";
+import {
+	createDocumentResource,
+	createResource,
+	Sidebar as USidebar,
+} from "frappe-ui";
 import BugIcon from "~icons/lucide/bug";
 import ChartIcon from "~icons/lucide/trending-up";
 import DraftIcon from "~icons/lucide/scroll-text";

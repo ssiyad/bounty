@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import { Button, FileUploader, createListResource, createResource } from "frappe-ui";
+import {
+	Button,
+	FileUploader,
+	createListResource,
+	createResource,
+} from "frappe-ui";
 import Attachment from "./Attachment.vue";
 import UploadIcon from "~icons/lucide/upload";
 
@@ -34,7 +39,8 @@ const remove = (docname: string) => {
 			name: docname,
 		},
 		onSuccess: () => {
-			attachments.data = attachments.data?.filter((a: any) => a.name !== docname) ?? [];
+			attachments.data =
+				attachments.data?.filter((a: any) => a.name !== docname) ?? [];
 		},
 	});
 };

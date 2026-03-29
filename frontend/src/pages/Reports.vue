@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import Target from "@/components/Target.vue";
 import { formatDate } from "date-fns";
 import { Badge, Button, createListResource } from "frappe-ui";
-import { statusTheme } from "@/utils/badgeThemes";
 import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
-import Target from "@/components/Target.vue";
+import { statusTheme } from "@/utils/badgeThemes";
 
 useBreadcrumbs().set([{ label: "Reports" }]);
 

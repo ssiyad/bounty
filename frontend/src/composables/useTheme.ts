@@ -6,8 +6,13 @@ const current = ref<Theme>("system");
 
 const resolveAndApply = (theme: Theme) => {
 	if (theme === "system") {
-		const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-		document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+		const prefersDark = window.matchMedia(
+			"(prefers-color-scheme: dark)",
+		).matches;
+		document.documentElement.setAttribute(
+			"data-theme",
+			prefersDark ? "dark" : "light",
+		);
 	} else {
 		document.documentElement.setAttribute("data-theme", theme);
 	}

@@ -42,7 +42,7 @@ export default defineConfig({
 			"@codemirror/state",
 			"@codemirror/view",
 		],
-		exclude: ["~icons"],
+		exclude: ["~icons", "frappe-ui"],
 	},
 	server: {
 		allowedHosts: true,

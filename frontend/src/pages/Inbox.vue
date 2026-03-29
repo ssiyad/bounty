@@ -10,7 +10,14 @@ useBreadcrumbs().set([{ label: "Inbox" }]);
 const notifications = createListResource({
 	doctype: "FS Notification",
 	auto: true,
-	fields: ["name", "creation", "is_read", "reference_doctype", "reference_docname", "content"],
+	fields: [
+		"name",
+		"creation",
+		"is_read",
+		"reference_doctype",
+		"reference_docname",
+		"content",
+	],
 	orderBy: "creation desc",
 	onSuccess: () => {
 		createResource({
