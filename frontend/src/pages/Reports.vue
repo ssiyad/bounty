@@ -22,7 +22,7 @@ const reports = createListResource({
 			:to="{
 				name: 'Draft',
 				params: {
-					id: 'new-report',
+					id: 'draft',
 				},
 			}"
 		>
