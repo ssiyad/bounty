@@ -109,6 +109,9 @@ watchEffect(() => {
 					editor-class="prose-sm max-w-none leading-relaxed"
 					placeholder="Type '/' for commands"
 					:content="draft.doc.content"
+					:upload-args="{
+						private: true,
+					}"
 					@change="draft.doc.content = $event"
 					@blur="save()"
 				/>
