@@ -5,8 +5,8 @@ import {
 	createListResource,
 	createResource,
 } from "frappe-ui";
-import Attachment from "./Attachment.vue";
 import UploadIcon from "~icons/lucide/upload";
+import Attachment from "./Attachment.vue";
 
 const props = withDefaults(
 	defineProps<{
@@ -26,7 +26,7 @@ const attachments = createListResource({
 		attached_to_doctype: props.doctype,
 		attached_to_name: props.docname,
 	},
-	fields: ["name", "file_name", "file_url"],
+	fields: ["name", "file_name", "file_url", "file_type"],
 });
 
 const remove = (docname: string) => {
@@ -40,7 +40,7 @@ const remove = (docname: string) => {
 		},
 		onSuccess: () => {
 			attachments.data =
-				attachments.data?.filter((a: any) => a.name !== docname) ?? [];
+				attachments.data?.filter((a) => a.name !== docname) ?? [];
 		},
 	});
 };
@@ -78,7 +78,11 @@ const remove = (docname: string) => {
 			v-for="attachment in attachments.data"
 			class="group h-7 flex items-center justify-between"
 		>
-			<Attachment :name="attachment.file_name" :url="attachment.file_url" />
+			<Attachment
+				:name="attachment.file_name"
+				:url="attachment.file_url"
+				:filetype="attachment.file_type"
+			/>
 			<Button
 				v-if="!readonly"
 				class="opacity-0 group-hover:opacity-100"
