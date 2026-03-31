@@ -10,7 +10,7 @@ const props = defineProps<{
 
 const open = ref(false);
 const imageFileTypes = ["jpg", "jpeg", "png", "gif", "bmp", "webp"];
-const isImage = imageFileTypes.includes(props.filetype.toLowerCase());
+const isImage = imageFileTypes.includes((props.filetype || "").toLowerCase());
 </script>
 
 <template>
@@ -31,7 +31,7 @@ const isImage = imageFileTypes.includes(props.filetype.toLowerCase());
 					<Button label="Close" @click="open = false" />
 				</div>
 			</div>
-			<img :src="url" />
+			<img class="object-cover w-full" :src="url" />
 		</template>
 	</Dialog>
 </template>
