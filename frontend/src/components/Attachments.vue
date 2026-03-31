@@ -60,7 +60,6 @@ const remove = (docname: string) => {
 					doctype: doctype,
 					docname: docname,
 					private: true,
-					optimize: true,
 				}"
 				@success="attachments.data.push($event)"
 			>

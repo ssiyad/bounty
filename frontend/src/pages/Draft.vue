@@ -113,7 +113,6 @@ watchEffect(() => {
 						doctype: draft.doc?.doctype,
 						docname: draft.doc?.name,
 						private: true,
-						optimize: true,
 					}"
 					@change="draft.doc.content = $event"
 					@blur="save()"

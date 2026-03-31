@@ -8,7 +8,7 @@ const props = defineProps<{
 	filetype: string;
 }>();
 
-const open = ref(true);
+const open = ref(false);
 const imageFileTypes = ["jpg", "jpeg", "png", "gif", "bmp", "webp"];
 const isImage = imageFileTypes.includes(props.filetype.toLowerCase());
 </script>
@@ -20,7 +20,7 @@ const isImage = imageFileTypes.includes(props.filetype.toLowerCase());
 			<a :href="url" target="_blank" rel="noopener noreferrer">{{ name }}</a>
 		</div>
 	</div>
-	<Dialog v-if="isImage" v-model="open" :options="{ size: '4xl' }">
+	<Dialog v-if="isImage" v-model="open" :options="{ size: '7xl' }">
 		<template #body>
 			<div class="h-12 px-5 flex items-center justify-between gap-2">
 				<div class="font-medium">{{ name }}</div>
