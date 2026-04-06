@@ -32,7 +32,7 @@ class FSDraft(Document):
 			frappe.qb.update(File)
 			.set(File.attached_to_doctype, "FS Report")
 			.set(File.attached_to_name, docname)
-			.where(File.attached_to_doctype == "FS Draft")
+			.where(File.attached_to_doctype == self.doctype)
 			.where(File.attached_to_name == self.name)
 			.run()
 		)

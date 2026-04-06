@@ -47,12 +47,12 @@ const remove = (docname: string) => {
 };
 
 // Listen for attachment pushes from anywhere in the app.
-bus.on("attachments:push", (d: any) => {
+bus.on("attachments:push", (a: any) => {
 	if (
-		d.attached_to_doctype === props.doctype &&
-		d.attached_to_name === props.docname
+		a.attached_to_doctype === props.doctype &&
+		a.attached_to_name === props.docname
 	) {
-		attachments.data?.push(d);
+		attachments.data?.push(a);
 	}
 });
 </script>
