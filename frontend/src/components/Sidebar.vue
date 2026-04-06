@@ -49,7 +49,7 @@ const isSettingsDialogOpen = ref(false);
 				{
 					label: 'Logout',
 					icon: LogoutIcon,
-					onClick: () => session.logout.submit(),
+					onClick: () => session.logout.submit().then(() => user.setDoc(null)),
 					condition: () => session.isLoggedIn,
 				},
 			].filter((item) => item.condition()),
