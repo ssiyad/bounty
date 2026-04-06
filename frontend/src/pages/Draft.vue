@@ -127,7 +127,7 @@ watchEffect(() => {
 				/>
 			</div>
 		</div>
-		<div class="w-72 shrink-0 px-5 py-4 space-y-3">
+		<div class="w-72 shrink-0 px-5 py-4 space-y-3 overflow-y-auto">
 			<div v-if="!id || draft.doc" class="flex items-center justify-between">
 				<div class="text-sm font-medium">Target</div>
 				<TargetSelector v-model="draft.doc.target" @update:model-value="save()" />
