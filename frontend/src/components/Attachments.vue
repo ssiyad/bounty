@@ -7,6 +7,7 @@ import {
 } from "frappe-ui";
 import UploadIcon from "~icons/lucide/upload";
 import Attachment from "./Attachment.vue";
+import { bus } from "@/bus";
 
 const props = withDefaults(
 	defineProps<{
@@ -44,6 +45,16 @@ const remove = (docname: string) => {
 		},
 	});
 };
+
+// Listen for attachment pushes from anywhere in the app.
+bus.on("attachments:push", (d: any) => {
+	if (
+		d.attached_to_doctype === props.doctype &&
+		d.attached_to_name === props.docname
+	) {
+		attachments.data?.push(d);
+	}
+});
 </script>
 
 <template>

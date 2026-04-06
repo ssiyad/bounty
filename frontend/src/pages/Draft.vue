@@ -6,11 +6,13 @@ import {
 	TextEditor,
 	createDocumentResource,
 	createResource,
+	useFileUpload,
 } from "frappe-ui";
 import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
 import Attachments from "@/components/Attachments.vue";
 import SeveritySelector from "@/components/selects/SeveritySelector.vue";
 import TargetSelector from "@/components/selects/TargetSelector.vue";
+import { bus } from "@/bus";
 
 const route = useRoute();
 const router = useRouter();
@@ -109,10 +111,16 @@ watchEffect(() => {
 					editor-class="prose-sm max-w-none leading-relaxed"
 					placeholder="Type '/' for commands"
 					:content="draft.doc.content"
-					:upload-args="{
-						doctype: draft.doc?.doctype,
-						docname: draft.doc?.name,
-						private: true,
+					:upload-function="async (f: File) => {
+						const u = useFileUpload()
+						return u.upload(f, {
+							doctype: draft.doc?.doctype,
+							docname: draft.doc?.name,
+							private: true,
+						}).then((d) => {
+							bus.emit('attachments:push', d)
+							return d;
+						})
 					}"
 					@change="draft.doc.content = $event"
 					@blur="save()"
