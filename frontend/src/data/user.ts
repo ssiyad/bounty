@@ -1,5 +1,5 @@
-import { createResource } from "frappe-ui";
 import router from "@/router";
+import { createResource } from "frappe-ui";
 
 export const userResource = createResource({
 	url: "/api/method/frappe.auth.get_logged_user",

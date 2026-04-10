@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { computed, watchEffect } from "vue";
-import { useRoute } from "vue-router";
-import { Badge, Button, createResource } from "frappe-ui";
-import { formatDate } from "date-fns";
-import { severityTheme } from "@/utils/badgeThemes";
-import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
 import Banner from "@/components/Banner.vue";
 import Target from "@/components/Target.vue";
+import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
+import { severityTheme } from "@/utils/badgeThemes";
+import { formatDate } from "date-fns";
+import { Badge, Button, createResource } from "frappe-ui";
+import { computed, watchEffect } from "vue";
+import { useRoute } from "vue-router";
 import DateIcon from "~icons/lucide/calendar";
 import ReferenceIcon from "~icons/lucide/globe";
 import UserIcon from "~icons/lucide/user";
@@ -83,8 +83,8 @@ const bannerVariant = computed(() => {
 		</a>
 	</Teleport>
 	<div class="overflow-y-auto">
-		<div v-if="advisory.data" class="py-14 max-w-[840px] mx-auto">
-			<h1 class="mb-4 text-3xl font-semibold text-ink-gray-9 leading-relaxed">
+		<div v-if="advisory.data" class="py-6 md:py-14 max-w-[840px] mx-auto px-4 md:px-0">
+			<h1 class="mb-4 text-2xl md:text-3xl font-semibold text-ink-gray-9 leading-relaxed">
 				{{ advisory.data.title }}
 			</h1>
 			<div class="flex flex-wrap items-center gap-2 text-sm text-ink-gray-5">

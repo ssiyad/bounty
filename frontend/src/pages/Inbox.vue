@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useRouter } from "vue-router";
-import { createListResource, createResource } from "frappe-ui";
 import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
 import { formatDistanceToNow } from "date-fns";
+import { createListResource, createResource } from "frappe-ui";
+import { useRouter } from "vue-router";
 
 const router = useRouter();
 useBreadcrumbs().set([{ label: "Inbox" }]);
@@ -52,8 +52,8 @@ const transform = (content: string) => {
 
 <template>
 	<div class="overflow-y-auto">
-		<div class="mx-auto max-w-[840px] py-14 w-full">
-			<h1 class="text-3xl font-semibold mb-6">Inbox</h1>
+		<div class="mx-auto max-w-[840px] py-6 md:py-14 px-4 md:px-0 w-full">
+			<h1 class="text-2xl md:text-3xl font-semibold mb-4 md:mb-6">Inbox</h1>
 			<div class="divide-y">
 				<div
 					v-for="notification in notifications.data"

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { bus } from "@/bus";
 import {
 	Button,
 	FileUploader,
@@ -7,7 +8,6 @@ import {
 } from "frappe-ui";
 import UploadIcon from "~icons/lucide/upload";
 import Attachment from "./Attachment.vue";
-import { bus } from "@/bus";
 
 const props = withDefaults(
 	defineProps<{

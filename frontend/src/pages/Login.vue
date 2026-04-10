@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { session } from "@/data/session";
-import { Button, Password, FormControl } from "frappe-ui";
+import { Button, FormControl, Password } from "frappe-ui";
 
 const submit = (e: Event) => {
 	const formData = new FormData(e.target as HTMLFormElement);

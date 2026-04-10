@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
 import UpcomingPlaceholder from "@/components/UpcomingPlaceholder.vue";
+import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
 
 useBreadcrumbs().reset();
 </script>

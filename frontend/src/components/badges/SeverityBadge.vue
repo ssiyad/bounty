@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Badge, BadgeProps } from "frappe-ui";
+import { Badge, type BadgeProps } from "frappe-ui";
 import { computed } from "vue";
 
 const props = defineProps<

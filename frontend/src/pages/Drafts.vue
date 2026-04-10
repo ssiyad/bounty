@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { formatDate } from "date-fns";
-import { Button, createListResource } from "frappe-ui";
+import DraftCard from "@/components/DraftCard.vue";
 import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
+import { Button, createListResource } from "frappe-ui";
 
 useBreadcrumbs().set([{ label: "Drafts" }]);
 
@@ -24,30 +24,18 @@ const drafts = createListResource({
 		</RouterLink>
 	</Teleport>
 	<div class="divide-y grow min-h-0 overflow-y-auto">
-		<div class="flex h-12 px-5 py-4 font-medium bg-surface-gray-1">
+		<!-- Desktop table header -->
+		<div class="hidden md:flex h-12 px-5 py-4 font-medium bg-surface-gray-1">
 			<div class="grow">Title</div>
 			<div class="w-[150px] text-end">Updated</div>
 		</div>
-		<RouterLink
+		<DraftCard
 			v-for="draft in drafts.data"
 			:key="draft.name"
-			:to="{
-				name: 'Draft',
-				query: {
-					id: draft.name,
-				},
-			}"
-			class="block"
-		>
-			<div class="flex h-12 px-5 py-4 cursor-pointer">
-				<div class="grow">{{ draft.title }}</div>
-				<div class="w-[150px] text-end">
-					{{ formatDate(draft.modified, "PPP") }}
-				</div>
-			</div>
-		</RouterLink>
+			:draft="draft"
+		/>
 	</div>
-	<div class="h-12 shrink-0 flex items-center justify-end px-5 border-t">
+	<div class="h-12 shrink-0 flex items-center justify-end px-4 md:px-5 border-t">
 		<Button
 			label="Load More"
 			:loading="drafts.loading"

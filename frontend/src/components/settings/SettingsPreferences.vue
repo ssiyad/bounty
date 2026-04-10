@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { type Theme, useTheme } from "@/composables/useTheme";
 import { TabButtons } from "frappe-ui";
-import SunIcon from "~icons/lucide/sun";
-import MoonIcon from "~icons/lucide/moon";
 import MonitorIcon from "~icons/lucide/monitor";
-import { useTheme, type Theme } from "@/composables/useTheme";
+import MoonIcon from "~icons/lucide/moon";
+import SunIcon from "~icons/lucide/sun";
 
 const { current, setTheme } = useTheme();
 

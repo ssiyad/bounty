@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { useRoute } from "vue-router";
+import SettingsDialog from "@/components/settings/SettingsDialog.vue";
+import { session } from "@/data/session";
 import {
+	Sidebar as USidebar,
 	createDocumentResource,
 	createResource,
-	Sidebar as USidebar,
 } from "frappe-ui";
+import { ref } from "vue";
+import { useRoute } from "vue-router";
 import BugIcon from "~icons/lucide/bug";
-import ChartIcon from "~icons/lucide/trending-up";
-import DraftIcon from "~icons/lucide/scroll-text";
 import GlobeIcon from "~icons/lucide/globe";
+import MoneyIcon from "~icons/lucide/hand-coins";
 import InboxIcon from "~icons/lucide/inbox";
 import LogoutIcon from "~icons/lucide/log-out";
-import MoneyIcon from "~icons/lucide/hand-coins";
+import DraftIcon from "~icons/lucide/scroll-text";
 import SettingsIcon from "~icons/lucide/settings";
-import { session } from "@/data/session";
-import SettingsDialog from "@/components/settings/SettingsDialog.vue";
+import ChartIcon from "~icons/lucide/trending-up";
 
 const route = useRoute();
 

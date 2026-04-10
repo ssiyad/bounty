@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Select, SelectProps, createResource } from "frappe-ui";
+import { Select, type SelectProps, createResource } from "frappe-ui";
 
 const model = defineModel<string>();
 

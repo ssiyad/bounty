@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import { Dialog, Sidebar } from "frappe-ui";
-import UserIcon from "~icons/lucide/user";
-import AppearanceIcon from "~icons/lucide/eye";
-import PaymentIcon from "~icons/lucide/credit-card";
-import SettingsProfile from "@/components/settings/SettingsProfile.vue";
-import SettingsPreferences from "@/components/settings/SettingsPreferences.vue";
 import UpcomingPlaceholder from "@/components/UpcomingPlaceholder.vue";
+import SettingsPreferences from "@/components/settings/SettingsPreferences.vue";
+import SettingsProfile from "@/components/settings/SettingsProfile.vue";
+import { Dialog, Sidebar } from "frappe-ui";
+import { computed, ref } from "vue";
+import PaymentIcon from "~icons/lucide/credit-card";
+import AppearanceIcon from "~icons/lucide/eye";
+import UserIcon from "~icons/lucide/user";
 
 withDefaults(
 	defineProps<{
@@ -17,9 +17,7 @@ withDefaults(
 	},
 );
 
-defineEmits<{
-	(e: "update:modelValue", value: boolean): void;
-}>();
+defineEmits<(e: "update:modelValue", value: boolean) => void>();
 
 const active = ref("profile");
 
