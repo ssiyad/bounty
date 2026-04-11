@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ReportCard from "@/components/ReportCard.vue";
+import ReportListItem from "@/components/list/ReportListItem.vue";
 import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
 import { Button, createListResource } from "frappe-ui";
 
@@ -35,7 +35,7 @@ const reports = createListResource({
 			<div class="w-[200px] text-end">Date</div>
 			<div class="w-[150px] text-end">Status</div>
 		</div>
-		<ReportCard
+		<ReportListItem
 			v-for="report in reports.data"
 			:key="report.name"
 			:report="report"

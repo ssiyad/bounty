@@ -16,6 +16,19 @@ import { useRoute, useRouter } from "vue-router";
 import ChevronDownIcon from "~icons/lucide/chevron-down";
 import ChevronUpIcon from "~icons/lucide/chevron-up";
 
+interface DraftDoc {
+	doctype: string;
+	name?: string;
+	title: string;
+	content: string;
+	target: string;
+	severity: string;
+}
+
+interface CreatedDraft {
+	name: string;
+}
+
 const route = useRoute();
 const router = useRouter();
 const id = route.query.id as string;
@@ -43,7 +56,6 @@ if (!draft.doc) {
 }
 
 const save = () => {
-	// if (!draft.isDirty) return;
 	if (!draft.doc.title) return;
 	if (draft.doc.name) return draft.save.submit();
 	createResource({
@@ -58,15 +70,14 @@ const save = () => {
 				severity: draft.doc.severity,
 			},
 		}),
-		onSuccess: (draft_: any) => {
+		onSuccess: (newDraft: CreatedDraft) => {
 			router.replace({
 				name: "Draft",
 				query: {
-					id: draft_.name,
+					id: newDraft.name,
 				},
 			});
-			draft.name = draft_.name;
-			draft.setDoc(draft_);
+			draft.name = newDraft.name;
 		},
 	});
 };

@@ -106,11 +106,12 @@ router.beforeEach(async (to, _from, next) => {
 	if (!isLoggedIn && to.name !== "Login" && !to.meta.public) {
 		window.location.href = "/login";
 		return;
-	} else if (isLoggedIn && to.name === "Login") {
-		next({ name: "Advisories" });
-	} else {
-		next();
 	}
+	if (isLoggedIn && to.name === "Login") {
+		next({ name: "Advisories" });
+		return;
+	}
+	next();
 });
 
 export default router;

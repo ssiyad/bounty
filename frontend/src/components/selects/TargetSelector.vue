@@ -1,6 +1,16 @@
 <script setup lang="ts">
 import { Select, type SelectProps, createResource } from "frappe-ui";
 
+interface Target {
+	name: string;
+	title: string;
+}
+
+interface Option {
+	value: string;
+	label: string;
+}
+
 const model = defineModel<string>();
 
 const props = defineProps<Omit<SelectProps, "modelValue">>();
@@ -9,8 +19,8 @@ const targets = createResource({
 	url: "security.api.target.get_targets",
 	auto: true,
 	cache: ["targets"],
-	initialData: [],
-	transform: (data: any[]) => {
+	initialData: [] as Option[],
+	transform: (data: Target[]) => {
 		const d = data.map((t) => ({
 			value: t.name,
 			label: t.title,

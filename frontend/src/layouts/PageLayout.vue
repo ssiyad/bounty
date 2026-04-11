@@ -18,13 +18,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
 import Banner from "@/components/Banner.vue";
 import MobileNav from "@/components/MobileNav.vue";
 import Sidebar from "@/components/Sidebar.vue";
 import Topbar from "@/components/Topbar.vue";
 import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
 import { Button } from "frappe-ui";
+import { onMounted, onUnmounted, ref } from "vue";
 
 const { breadcrumbs } = useBreadcrumbs();
 

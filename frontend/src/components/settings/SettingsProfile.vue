@@ -4,8 +4,8 @@ import { Button, TextInput, Textarea, createDocumentResource } from "frappe-ui";
 
 const hunter = createDocumentResource({
 	doctype: "FS Hunter",
-	name: session.user!,
-	auto: true,
+	name: session.user ?? "",
+	auto: !!session.user,
 });
 </script>
 

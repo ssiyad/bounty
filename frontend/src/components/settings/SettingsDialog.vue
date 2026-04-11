@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import UpcomingPlaceholder from "@/components/UpcomingPlaceholder.vue";
 import SettingsPreferences from "@/components/settings/SettingsPreferences.vue";
 import SettingsProfile from "@/components/settings/SettingsProfile.vue";
+import ComingSoon from "@/components/ui/ComingSoon.vue";
 import { Dialog, Sidebar } from "frappe-ui";
 import { computed, ref } from "vue";
 import PaymentIcon from "~icons/lucide/credit-card";
@@ -28,9 +28,9 @@ const activeComponent = computed(() => {
 		case "preferences":
 			return SettingsPreferences;
 		case "banking":
-			return UpcomingPlaceholder;
+			return ComingSoon;
 		default:
-			return UpcomingPlaceholder;
+			return ComingSoon;
 	}
 });
 </script>

@@ -7,6 +7,12 @@ import {
 } from "frappe-ui";
 import { ref } from "vue";
 
+interface ChatMessage {
+	id: string;
+	content: string;
+	sent_or_received: string;
+}
+
 const props = withDefaults(
 	defineProps<{
 		report?: string;
@@ -36,12 +42,14 @@ const messages = createResource({
 	makeParams: () => ({
 		report: props.report,
 	}),
-	initialData: [],
+	initialData: [] as ChatMessage[],
 });
 
 const message = ref("");
 
-const cancel = () => (message.value = "");
+const cancel = () => {
+	message.value = "";
+};
 
 const send = () => {
 	createResource({
@@ -52,9 +60,9 @@ const send = () => {
 			report: props.report,
 			content: message.value,
 		},
-		onSuccess: (messages_: any) => {
+		onSuccess: (newMessages: ChatMessage[]) => {
 			message.value = "";
-			messages.setData(messages_);
+			messages.setData(newMessages);
 		},
 	});
 };

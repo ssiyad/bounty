@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AdvisoryCard from "@/components/AdvisoryCard.vue";
+import AdvisoryListItem from "@/components/list/AdvisoryListItem.vue";
 import SeveritySelector from "@/components/selects/SeveritySelector.vue";
 import TargetSelector from "@/components/selects/TargetSelector.vue";
 import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
@@ -62,7 +62,7 @@ watch([target, severity], () => {
 				<SeveritySelector v-model="severity" class="w-full md:w-auto" />
 			</div>
 			<div class="flex flex-col gap-4">
-				<AdvisoryCard
+				<AdvisoryListItem
 					v-for="advisory in a_"
 					:key="advisory.name"
 					:advisory="advisory"

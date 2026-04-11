@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DraftCard from "@/components/DraftCard.vue";
+import DraftListItem from "@/components/list/DraftListItem.vue";
 import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
 import { Button, createListResource } from "frappe-ui";
 
@@ -29,7 +29,7 @@ const drafts = createListResource({
 			<div class="grow">Title</div>
 			<div class="w-[150px] text-end">Updated</div>
 		</div>
-		<DraftCard
+		<DraftListItem
 			v-for="draft in drafts.data"
 			:key="draft.name"
 			:draft="draft"

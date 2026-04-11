@@ -28,6 +28,7 @@ const notifications = createListResource({
 });
 
 const transform = (content: string) => {
+	let result = content;
 	// Regex to test against.
 	const r =
 		/frappe-security:reference-doc:doctype=([a-zA-Z]+)&docname=([a-zA-Z\d]+)&text=([a-zA-Z]+)/gm;
@@ -37,16 +38,16 @@ const transform = (content: string) => {
 		const doctype = m.shift();
 		const docname = m.shift();
 		const text = m.shift();
-		if (!(match && doctype && docname && text)) return;
+		if (!(match && doctype && docname && text)) return result;
 		// Find actual route from router.
 		const route = router.resolve({ name: doctype, params: { id: docname } });
 		// Construct intended `a` tag.
 		const url = `<a href="${route.href}" rel=\"noopener noreferrer\">${text}</a>`;
 		// Replace original string with intended `a` tag.
-		content = content.replace(match, url);
+		result = result.replace(match, url);
 	}
 	// Return transformed content.
-	return content;
+	return result;
 };
 </script>
 

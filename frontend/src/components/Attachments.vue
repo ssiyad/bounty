@@ -9,6 +9,15 @@ import {
 import UploadIcon from "~icons/lucide/upload";
 import Attachment from "./Attachment.vue";
 
+interface AttachmentEvent {
+	attached_to_doctype: string;
+	attached_to_name: string;
+	name: string;
+	file_name: string;
+	file_url: string;
+	file_type: string;
+}
+
 const props = withDefaults(
 	defineProps<{
 		doctype: string;
@@ -47,7 +56,7 @@ const remove = (docname: string) => {
 };
 
 // Listen for attachment pushes from anywhere in the app.
-bus.on("attachments:push", (a: any) => {
+bus.on("attachments:push", (a: AttachmentEvent) => {
 	if (
 		a.attached_to_doctype === props.doctype &&
 		a.attached_to_name === props.docname

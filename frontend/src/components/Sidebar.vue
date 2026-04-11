@@ -21,9 +21,9 @@ const route = useRoute();
 
 const user = createDocumentResource({
 	doctype: "User",
-	name: session.user!,
-	cache: ["User", session.user!],
-	auto: true,
+	name: session.user ?? "",
+	cache: ["User", session.user ?? ""],
+	auto: !!session.user,
 });
 
 const unreadNotificationCount = createResource({

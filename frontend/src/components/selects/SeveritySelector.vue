@@ -2,6 +2,12 @@
 import { Select, type SelectProps, createResource } from "frappe-ui";
 import { computed } from "vue";
 
+interface Severity {
+	value: string;
+	label: string;
+	color: string;
+}
+
 const model = defineModel<string>();
 
 const props = defineProps<Omit<SelectProps, "modelValue">>();
@@ -10,15 +16,15 @@ const severities = createResource({
 	url: "security.api.severity.get_severities",
 	auto: true,
 	cache: ["severities"],
-	initialData: [],
-	transform: (data: any[]) => {
-		data.unshift({ value: "_", label: "Any" });
+	initialData: [] as Severity[],
+	transform: (data: Severity[]) => {
+		data.unshift({ value: "_", label: "Any", color: "gray" });
 		return data;
 	},
 });
 
 const current = computed(() =>
-	severities.data.find((s: any) => s.value === model.value),
+	severities.data.find((s) => s.value === model.value),
 );
 </script>
 
