@@ -4,7 +4,7 @@ import { FrappeUIProvider } from "frappe-ui";
 
 <template>
 	<FrappeUIProvider>
-		<div class="h-screen w-screen">
+		<div class="h-dvh w-dvw md:h-screen md:w-screen">
 			<RouterView />
 		</div>
 	</FrappeUIProvider>
