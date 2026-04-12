@@ -54,7 +54,7 @@ const transform = (content: string) => {
 <template>
 	<div class="overflow-y-auto">
 		<div class="mx-auto max-w-[840px] py-6 md:py-14 px-4 md:px-0 w-full">
-			<h1 class="text-2xl md:text-3xl font-semibold mb-4 md:mb-6">Inbox</h1>
+			<h1 class="text-2xl md:text-3xl font-medium md:font-semibold mb-4 md:mb-6">Inbox</h1>
 			<div class="divide-y">
 				<div
 					v-for="notification in notifications.data"

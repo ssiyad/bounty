@@ -4,8 +4,10 @@ import { computed, reactive } from "vue";
 import { userResource } from "./user";
 
 const sessionUser = () => {
-	const cookies = new URLSearchParams(document.cookie.split("; ").join("&"));
-	let _sessionUser = cookies.get("user_id");
+	const cookies = Object.fromEntries(
+		document.cookie.split(";").map((c) => c.trim().split("=")),
+	);
+	let _sessionUser = cookies.user_id ?? null;
 	if (_sessionUser === "Guest") {
 		_sessionUser = null;
 	}

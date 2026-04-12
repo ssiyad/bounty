@@ -95,6 +95,10 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, _from, next) => {
+	if (to.meta.public || to.name === "Login") {
+		return next();
+	}
+
 	let isLoggedIn = session.isLoggedIn;
 
 	try {
@@ -103,14 +107,11 @@ router.beforeEach(async (to, _from, next) => {
 		isLoggedIn = false;
 	}
 
-	if (!isLoggedIn && to.name !== "Login" && !to.meta.public) {
+	if (!isLoggedIn) {
 		window.location.href = "/login";
 		return;
 	}
-	if (isLoggedIn && to.name === "Login") {
-		next({ name: "Advisories" });
-		return;
-	}
+
 	next();
 });
 

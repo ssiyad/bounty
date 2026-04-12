@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { Advisory } from "@/types/advisory";
 import AdvisoryListItem from "@/components/list/AdvisoryListItem.vue";
 import SeveritySelector from "@/components/selects/SeveritySelector.vue";
 import TargetSelector from "@/components/selects/TargetSelector.vue";
@@ -12,16 +13,6 @@ const target = ref("");
 const severity = ref("");
 const start = ref(0);
 const limit = 10;
-
-interface Advisory {
-	name: string;
-	title: string;
-	frappe_reference: string;
-	severity: string;
-	target: string;
-	published_on: string;
-	reported_by?: string;
-}
 
 const a_: Ref<Advisory[]> = ref([]);
 const count = ref(0);
@@ -43,7 +34,7 @@ const advisories = createResource({
 });
 
 const load = () => {
-	start.value = start.value + 2;
+	start.value = start.value + limit;
 	advisories.reload();
 };
 

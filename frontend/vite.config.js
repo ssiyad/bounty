@@ -33,6 +33,7 @@ export default defineConfig({
 		},
 	},
 	optimizeDeps: {
+		include: ["debug", "feather-icons", "showdown", "highlight.js/lib/core", "interactjs", "@codemirror/state", "@codemirror/view"],
 		exclude: ["~icons", "frappe-ui"],
 	},
 	server: {

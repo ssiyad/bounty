@@ -1,14 +1,11 @@
 <script setup lang="ts">
-import Attachments from "@/components/Attachments.vue";
-import Target from "@/components/Target.vue";
-import SeverityBadge from "@/components/badges/SeverityBadge.vue";
-import StatusBadge from "@/components/badges/StatusBadge.vue";
+import ReportDetails from "@/components/report/ReportDetails.vue";
 import Chat from "@/components/report/Chat.vue";
 import { useBreadcrumbs } from "@/composables/useBreadcrumbs";
-import { categoryTheme } from "@/utils/badgeThemes";
-import { Badge, Button, createDocumentResource } from "frappe-ui";
-import { ref, watchEffect } from "vue";
+import { createDocumentResource } from "frappe-ui";
+import { computed, ref, watchEffect } from "vue";
 import { useRoute } from "vue-router";
+import DOMPurify from "dompurify";
 import ChevronDownIcon from "~icons/lucide/chevron-down";
 import ChevronUpIcon from "~icons/lucide/chevron-up";
 
@@ -25,6 +22,11 @@ const report = createDocumentResource({
 const { set } = useBreadcrumbs();
 
 const showDetails = ref(false);
+
+const sanitizedContent = computed(() => {
+	if (!report.doc?.content) return "";
+	return DOMPurify.sanitize(report.doc.content);
+});
 
 watchEffect(() => {
 	set([
@@ -47,7 +49,7 @@ watchEffect(() => {
 					{{ report.doc.title }}
 				</div>
 				<div
-					v-html="report.doc.content"
+					v-html="sanitizedContent"
 					class="prose prose-sm max-w-none leading-relaxed mb-8"
 				/>
 				<Chat :report="id" />
@@ -62,57 +64,13 @@ watchEffect(() => {
 				<span>Details</span>
 				<component :is="showDetails ? ChevronUpIcon : ChevronDownIcon" class="w-4 h-4" />
 			</button>
-			<div v-show="showDetails" class="px-4 pb-4 space-y-3">
-				<div v-if="report.doc.target" class="flex items-center justify-between">
-					<p class="text-sm">Target</p>
-					<Target :target="report.doc.target" />
-				</div>
-				<hr v-if="report.doc.target" />
-				<div class="flex items-center justify-between">
-					<p class="text-sm">Status</p>
-					<StatusBadge :status="report.doc.status" />
-				</div>
-				<div class="flex items-center justify-between">
-					<p class="text-sm">Category</p>
-					<div>
-						<Badge
-							:label="report.doc.category"
-							:theme="categoryTheme(report.doc.category)"
-						/>
-					</div>
-				</div>
-				<div class="flex items-center justify-between">
-					<p class="text-sm">Severity</p>
-					<SeverityBadge :severity="report.doc.severity" />
-				</div>
-				<Attachments class="pt-3 border-t" readonly doctype="FS Report" :docname="id" />
+			<div v-show="showDetails" class="px-4 pb-4">
+				<ReportDetails :id="id" :doc="report.doc" />
 			</div>
 		</div>
 		<!-- Desktop sidebar -->
-		<div class="hidden md:block md:w-72 shrink-0 px-5 py-4 space-y-3 border-l">
-			<div v-if="report.doc.target" class="flex items-center justify-between">
-				<p class="text-sm">Target</p>
-				<Target :target="report.doc.target" />
-			</div>
-			<hr v-if="report.doc.target" />
-			<div class="flex items-center justify-between">
-				<p class="text-sm">Status</p>
-				<StatusBadge :status="report.doc.status" />
-			</div>
-			<div class="flex items-center justify-between">
-				<p class="text-sm">Category</p>
-				<div>
-					<Badge
-						:label="report.doc.category"
-						:theme="categoryTheme(report.doc.category)"
-					/>
-				</div>
-			</div>
-			<div class="flex items-center justify-between">
-				<p class="text-sm">Severity</p>
-				<SeverityBadge :severity="report.doc.severity" />
-			</div>
-			<Attachments class="pt-3 border-t" readonly doctype="FS Report" :docname="id" />
+		<div class="hidden md:block md:w-72 shrink-0 px-5 py-4 border-l">
+			<ReportDetails :id="id" :doc="report.doc" />
 		</div>
 	</div>
 </template>

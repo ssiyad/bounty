@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { Advisory } from "@/types/advisory";
 import Target from "@/components/Target.vue";
 import { severityTheme } from "@/utils/badgeThemes";
 import { formatDate } from "date-fns";
@@ -8,15 +9,7 @@ import ReferenceIcon from "~icons/lucide/globe";
 import UserIcon from "~icons/lucide/user";
 
 defineProps<{
-	advisory: {
-		name: string;
-		title: string;
-		frappe_reference: string;
-		severity: string;
-		target: string;
-		published_on: string;
-		reported_by?: string;
-	};
+	advisory: Advisory;
 }>();
 </script>
 
