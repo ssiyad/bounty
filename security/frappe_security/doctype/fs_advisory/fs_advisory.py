@@ -1,6 +1,8 @@
 # Copyright (c) 2026, Sabu Siyad and contributors
 # For license information, please see license.txt
 
+import urllib.parse
+
 import frappe
 import frappe.utils
 from frappe import _
@@ -65,10 +67,11 @@ class FSAdvisory(Document):
 			message = _("GitHub token is not configured in Security Settings.")
 			frappe.throw(message, frappe.PermissionError)
 
-		repository = frappe.db.get_value("FS Target", self.target, "repository")
+		repository = self._target.repository
 		if not repository:
 			message = _("Repository is not set on the Target {0}.").format(self.target)
 			frappe.throw(message)
+		repository = urllib.parse.urlparse(repository).path.strip("/")
 
 		g = None
 		try:
