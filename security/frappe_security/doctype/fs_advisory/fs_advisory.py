@@ -85,6 +85,7 @@ class FSAdvisory(Document):
 				vulnerabilities=self.get_vulenerablities(),
 			)
 			advisory.publish()
+			advisory.request_cve()
 			self.github_reference = advisory.ghsa_id
 			self.published = 1
 			self.save()
