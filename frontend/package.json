@@ -10,7 +10,7 @@
 		"lint": "biome check --write ."
 	},
 	"dependencies": {
-		"dompurify": "^3.2.3",
+		"dompurify": "^3.4.9",
 		"date-fns": "^4.1.0",
 		"frappe-ui": "^0.1.261",
 		"mitt": "^3.0.1",
